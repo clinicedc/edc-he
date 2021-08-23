@@ -1,4 +1,4 @@
 [run]
-include = edc_ltfu/*
-omit = edc_ltfu/tests/*,edc_ltfu/migrations/*
+include = edc_he/*
+omit = edc_he/tests/*,edc_he/migrations/*
 branch = 1
