@@ -5,13 +5,13 @@ from edc_crf.modelform_mixins import CrfModelFormMixin
 from edc_form_validators import FormValidatorTestCaseMixin
 from edc_form_validators.form_validator import FormValidator
 
-from edc_he.form_validators import HealthEconomicsFormValidatorMixin
+from edc_he.form_validators import HeEducationFormValidatorMixin
 
 from ..forms import HealthEconomicsForm
 from ..models import HealthEconomics
 
 
-class HealthEconomicsFormValidator(HealthEconomicsFormValidatorMixin, FormValidator):
+class HealthEconomicsFormValidator(HeEducationFormValidatorMixin, FormValidator):
     @property
     def age_in_years(self) -> int:
         return 25

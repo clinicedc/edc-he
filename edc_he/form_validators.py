@@ -1,14 +1,23 @@
-import pdb
-
 from django import forms
-from edc_constants.constants import NEVER, TERTIARY, YES
-from edc_form_validators import FormValidator
+from edc_constants.constants import TERTIARY, YES
 
 
-class HealthEconomicsFormValidatorMixin(FormValidator):
-    def clean(self) -> None:
-        super().clean()
-        self.clean_education()
+class HeEducationFormValidatorMixin:
+    """A mixin to be declared with CrfFormValidatorMixin and FormValidator.
+
+    education_in_years
+
+    education_certificate
+    education_certificate_other
+    education_certificate_tertiary
+
+    primary_school
+    primary_education_in_years
+    secondary_school
+    secondary_education_in_years
+    higher_education
+    higher_education_in_years
+    """
 
     def clean_education(self):
         """Works with fields from the HealthEconomicsEducationModeMixin"""
@@ -16,7 +25,6 @@ class HealthEconomicsFormValidatorMixin(FormValidator):
             self.cleaned_data.get("education_in_years") is not None
             and self.cleaned_data.get("education_in_years") > 0
         )
-
         education_in_years = self.cleaned_data.get("education_in_years")
         if has_education_in_years and education_in_years > self.age_in_years:
             raise forms.ValidationError(
