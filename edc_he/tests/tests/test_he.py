@@ -1,13 +1,11 @@
-from django import forms
 from django.test import TestCase
 from edc_constants.constants import NOT_APPLICABLE, SECONDARY
-from edc_crf.modelform_mixins import CrfModelFormMixin
 from edc_form_validators import FormValidatorTestCaseMixin
 from edc_form_validators.form_validator import FormValidator
 
 from edc_he.form_validators import HeEducationFormValidatorMixin
 
-from ..forms import HealthEconomicsForm
+from ..forms import HealthEconomicsForm as BaseForm
 from ..models import HealthEconomics
 
 
@@ -20,7 +18,7 @@ class HealthEconomicsFormValidator(HeEducationFormValidatorMixin, FormValidator)
         return 25
 
 
-class HealthEconomicsForm(CrfModelFormMixin, forms.ModelForm):
+class HealthEconomicsForm(BaseForm):
 
     form_validator_cls = HealthEconomicsFormValidator
 
