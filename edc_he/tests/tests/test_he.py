@@ -12,12 +12,16 @@ from ..models import HealthEconomics
 
 
 class HealthEconomicsFormValidator(HeEducationFormValidatorMixin, FormValidator):
+    def clean(self) -> None:
+        self.clean_education()
+
     @property
     def age_in_years(self) -> int:
         return 25
 
 
 class HealthEconomicsForm(CrfModelFormMixin, forms.ModelForm):
+
     form_validator_cls = HealthEconomicsFormValidator
 
     def validate_visit_tracking(self):
@@ -35,6 +39,7 @@ class HealthEconomicsForm(CrfModelFormMixin, forms.ModelForm):
 
 
 class TestHe(FormValidatorTestCaseMixin, TestCase):
+
     form_validator_cls = HealthEconomicsFormValidator
 
     def test_form_validator_education(self):
