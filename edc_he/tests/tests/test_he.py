@@ -2,10 +2,11 @@ from django.test import TestCase
 from edc_constants.constants import NOT_APPLICABLE, SECONDARY
 from edc_form_validators import FormValidatorTestCaseMixin
 from edc_form_validators.form_validator import FormValidator
+from edc_utils import get_utcnow
 
 from edc_he.form_validators import HeEducationFormValidatorMixin
 
-from ..forms import HealthEconomicsForm as BaseForm
+from ..forms import HealthEconomicsForm as BaseHealthEconomicsForm
 from ..models import HealthEconomics
 
 
@@ -18,18 +19,9 @@ class HealthEconomicsFormValidator(HeEducationFormValidatorMixin, FormValidator)
         return 25
 
 
-class HealthEconomicsForm(BaseForm):
+class HealthEconomicsForm(BaseHealthEconomicsForm):
 
     form_validator_cls = HealthEconomicsFormValidator
-
-    def validate_visit_tracking(self):
-        return None
-
-    def validate_against_consent(self):
-        return None
-
-    def validate_subject_schedule(self):
-        return None
 
     class Meta:
         model = HealthEconomics
@@ -41,7 +33,18 @@ class TestHe(FormValidatorTestCaseMixin, TestCase):
     form_validator_cls = HealthEconomicsFormValidator
 
     def test_form_validator_education(self):
+        # subject_identifier = "1223"
+        # appointment = Appointment.objects.create(
+        #     subject_identifier=subject_identifier, appt_datetime=get_utcnow()
+        # )
+        # subject_visit = SubjectVisit.objects.create(
+        #     appointment=appointment,
+        #     report_datetime=get_utcnow(),
+        #     subject_identifier=subject_identifier,
+        # )
         cleaned_data = {
+            # "subject_visit": subject_visit,
+            "report_datetime": get_utcnow(),
             "education_in_years": 0,
             "education_certificate": NOT_APPLICABLE,
             "primary_school": NOT_APPLICABLE,
