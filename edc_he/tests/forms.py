@@ -1,6 +1,6 @@
 from django import forms
-from edc_crf.forms import CrfFormValidatorMixin
-from edc_crf.modelform_mixins import CrfModelFormMixin
+from edc_crf.form_validator_mixins import CrfFormValidatorMixin
+from edc_form_validators import FormValidatorMixin
 from edc_form_validators.form_validator import FormValidator
 
 from edc_he.form_validators import HeEducationFormValidatorMixin
@@ -15,7 +15,7 @@ class HealthEconomicsFormValidator(
         self.clean_education()
 
 
-class HealthEconomicsForm(CrfModelFormMixin, forms.ModelForm):
+class HealthEconomicsForm(FormValidatorMixin, forms.ModelForm):
     form_validator_cls = HealthEconomicsFormValidator
 
     class Meta:
