@@ -271,9 +271,9 @@ COOKING_FUEL_CHOICES = (
 )
 
 INCOME_TIME_ESTIMATE_CHOICES = (
-    (WEEKLY, "Weekly income"),
-    (MONTHLY, "Monthly income"),
-    (YEARLY, "Yearly income"),
+    (WEEKLY, "as weekly income"),
+    (MONTHLY, "as monthly income"),
+    (YEARLY, "as yearly income"),
     (DONT_KNOW, "Don’t know"),
     (DWTA, "Don’t want to answer"),
     (NOT_APPLICABLE, "Not applicable"),
@@ -285,6 +285,7 @@ STATUS = (
     ("3", "Moderate"),
     ("4", "Bad"),
     ("5", "Very bad"),
+    (DWTA, "Don’t want to answer"),
 )
 
 FINANCIAL_STATUS = (
@@ -293,6 +294,7 @@ FINANCIAL_STATUS = (
     ("3", "Average wealth"),
     ("4", "Below average"),
     ("5", "Among least wealthy"),
+    (DWTA, "Don’t want to answer"),
 )
 
 REMITTANCE_CURRENCY_CHOICES = (

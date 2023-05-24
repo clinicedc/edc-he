@@ -7,7 +7,7 @@ from edc_constants.constants import NOT_APPLICABLE
 from ...choices import INCOME_TIME_ESTIMATE_CHOICES
 
 default_field_data = {
-    "wages": "Wages, salary from job",
+    "wages": "Income from wages, salary from job",
     "selling": "Earnings from selling, trading or hawking products?",
     "rental_income": "Income from rental of property?",
     "pension": (
@@ -54,22 +54,18 @@ def income_model_mixin_factory(field_data: dict[str, str] | None = None):
                     help_text=help_text,
                 ),
                 f"{field_name}_value_known": models.CharField(
-                    verbose_name=(
-                        "Estimate the total amount of income from this source "
-                        "for the household over the last ..."
-                    ),
+                    verbose_name="Over which <u>time period</u> are you able to estimate?",
                     max_length=15,
                     choices=INCOME_TIME_ESTIMATE_CHOICES,
                     default=NOT_APPLICABLE,
                 ),
                 f"{field_name}_value": models.IntegerField(
-                    verbose_name="Estimate the total amount",
+                    verbose_name=(
+                        "Estimated <u>total amount of income</u> from this source over the "
+                        "time period from above"
+                    ),
                     null=True,
                     blank=True,
-                    help_text=(
-                        "Estimate the total amount of income from this source "
-                        "for the household over the time period indicated above"
-                    ),
                 ),
             }
         )
