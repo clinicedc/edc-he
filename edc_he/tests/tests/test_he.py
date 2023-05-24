@@ -20,7 +20,6 @@ class HealthEconomicsFormValidator(HeEducationFormValidatorMixin, FormValidator)
 
 
 class HealthEconomicsForm(BaseHealthEconomicsForm):
-
     form_validator_cls = HealthEconomicsFormValidator
 
     class Meta:
@@ -29,7 +28,6 @@ class HealthEconomicsForm(BaseHealthEconomicsForm):
 
 
 class TestHe(FormValidatorTestCaseMixin, TestCase):
-
     form_validator_cls = HealthEconomicsFormValidator
 
     def test_form_validator_education(self):
