@@ -3,7 +3,7 @@ from django.db import models
 from edc_constants.choices import YES_NO_NA
 from edc_model.models import OtherCharField
 
-from .choices import EDUCATION_CERTIFICATES_CHOICES
+from ..choices import EDUCATION_CERTIFICATES_CHOICES
 
 
 class HealthEconomicsEducationModelMixin(models.Model):
