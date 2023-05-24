@@ -1,10 +1,14 @@
 from edc_constants.constants import (
     DONT_KNOW,
+    DWTA,
+    MONTHLY,
     NOT_APPLICABLE,
     OTHER,
     PRIMARY,
     SECONDARY,
     TERTIARY,
+    WEEKLY,
+    YEARLY,
 )
 
 from .constants import (
@@ -80,7 +84,7 @@ EDUCATION_CHOICES = (
     (NOT_APPLICABLE, "Not applcable"),
 )
 
-EMPLOYEMENT_STATUS_CHOICES = (
+EMPLOYMENT_STATUS_CHOICES = (
     ("1", "Full time employed"),
     ("2", "Regular part time employed "),
     ("3", "Irregular/ occasional/ day worker employment"),
@@ -93,7 +97,7 @@ EMPLOYEMENT_STATUS_CHOICES = (
     (NOT_APPLICABLE, "Not applcable"),
 )
 
-EMPLOYEMENT_CHOICES = (
+EMPLOYMENT_CHOICES = (
     ("1", "Legislators, administrators, and managers"),
     ("2", "Professionals"),
     ("3", "Technicians and associate professionals"),
@@ -105,7 +109,7 @@ EMPLOYEMENT_CHOICES = (
     ("9", "Plant and machine operators and assemblers"),
     ("10", "Elementary occupations"),
     (DONT_KNOW, "Don’t know"),
-    (NOT_APPLICABLE, "NA"),
+    (NOT_APPLICABLE, "Not applicable"),
 )
 
 MARITAL_CHOICES = (
@@ -116,12 +120,12 @@ MARITAL_CHOICES = (
     ("5", "Widowed"),
     (OTHER, "Other, specify ..."),
     (DONT_KNOW, "Don’t know"),
-    (NOT_APPLICABLE, "NA"),
+    (NOT_APPLICABLE, "Not applicable"),
 )
 
 
 RESIDENCE_OWNERSHIP_CHOICES = (
-    ("renter", "Rent !Q13"),
+    ("renter", "Rent"),
     ("owner", "Own themselves"),
     ("family_owned", "Owned by someone else in family"),
     ("nonfamily_owned", "Owned by someone else other than family member"),
@@ -264,4 +268,36 @@ COOKING_FUEL_CHOICES = (
     ("6", "Coal/lignite, straw/shrubs/grass. agricultural crop, animal dung"),
     ("7", "No food cooked in the household"),
     (OTHER, "Other, specify ..."),
+)
+
+INCOME_TIME_ESTIMATE_CHOICES = (
+    (WEEKLY, "Weekly income"),
+    (MONTHLY, "Monthly income"),
+    (YEARLY, "Yearly income"),
+    (DONT_KNOW, "Don’t know"),
+    (DWTA, "Don’t want to answer"),
+    (NOT_APPLICABLE, "Not applicable"),
+)
+
+STATUS = (
+    ("1", "Very good"),
+    ("2", "Good"),
+    ("3", "Moderate"),
+    ("4", "Bad"),
+    ("5", "Very bad"),
+)
+
+FINANCIAL_STATUS = (
+    ("1", "Among most wealthy"),
+    ("2", "Above average "),
+    ("3", "Average wealth"),
+    ("4", "Below average"),
+    ("5", "Among least wealthy"),
+)
+
+REMITTANCE_CURRENCY_CHOICES = (
+    ("USD", "USD"),
+    ("GBP", "GBP"),
+    (OTHER, "Other, specify ..."),
+    (DONT_KNOW, "Dont' know"),
 )

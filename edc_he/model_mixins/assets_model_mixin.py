@@ -20,7 +20,7 @@ from ..choices import (
 )
 
 
-class AssetsIncomeModelMixin(models.Model):
+class AssetsModelMixin(models.Model):
     residence_ownership = models.CharField(
         verbose_name=(
             "Is the house you live in rented, owned by you (either on your own, or "
@@ -32,12 +32,12 @@ class AssetsIncomeModelMixin(models.Model):
 
     dwelling_value_known = models.CharField(
         verbose_name=(
-            "If the owner [you] were to sell this dwelling today, do you know the"
+            "If the owner [you] were to sell this dwelling today, do you know the "
             "approximate value?"
         ),
         max_length=25,
         choices=YES_NO_DONT_KNOW_DWTA,
-        help_text="in Tanzanian Shillings",
+        help_text="in local currency",
     )
 
     dwelling_value = models.IntegerField(
@@ -45,7 +45,7 @@ class AssetsIncomeModelMixin(models.Model):
         validators=[MinValueValidator(0), MaxValueValidator(9999999999)],
         null=True,
         blank=True,
-        help_text="in Tanzanian Shillings",
+        help_text="in local currency",
     )
 
     rooms = models.IntegerField(
@@ -70,8 +70,9 @@ class AssetsIncomeModelMixin(models.Model):
         verbose_name="What is the main source of drinking water for the household?",
         max_length=25,
         choices=WATER_SOURCE_CHOICES,
-        help_text="in Tanzanian Shillings",
     )
+
+    water_source_other = OtherCharField(verbose_name="If OTHER water source, specify")
 
     water_obtain_time = models.CharField(
         verbose_name="How long does it take to obtain drinking water?",
@@ -89,11 +90,15 @@ class AssetsIncomeModelMixin(models.Model):
         ),
     )
 
+    toilet_other = OtherCharField(verbose_name="If OTHER type of toilet, specify")
+
     roof_material = models.CharField(
         verbose_name="What is the major construction material of the roof?",
         max_length=25,
         choices=ROOF_MATERIAL_CHOICES,
     )
+
+    roof_material_other = OtherCharField(verbose_name="If OTHER roof material, specify")
 
     eaves = models.CharField(
         verbose_name="Are the eaves open, partially or fully closed?",
@@ -108,10 +113,7 @@ class AssetsIncomeModelMixin(models.Model):
     )
 
     external_wall_material_other = OtherCharField(
-        verbose_name="If OTHER construction material, specify",
-        max_length=50,
-        null=True,
-        blank=True,
+        verbose_name="If OTHER external wall material, specify",
     )
 
     external_window_material = models.CharField(
@@ -121,10 +123,7 @@ class AssetsIncomeModelMixin(models.Model):
     )
 
     external_window_material_other = OtherCharField(
-        verbose_name="If OTHER main material, specify",
-        max_length=50,
-        null=True,
-        blank=True,
+        verbose_name="If OTHER external window material, specify",
     )
 
     window_screens = models.CharField(
@@ -150,6 +149,10 @@ class AssetsIncomeModelMixin(models.Model):
         ),
     )
 
+    floor_material_other = OtherCharField(
+        verbose_name="If OTHER floor material, specify",
+    )
+
     electricity = models.CharField(
         verbose_name="Does your household have electricity?",
         max_length=25,
@@ -162,10 +165,18 @@ class AssetsIncomeModelMixin(models.Model):
         choices=LIGHTING_CHOICES,
     )
 
+    lighting_source_other = OtherCharField(
+        verbose_name="If OTHER lighting source, specify",
+    )
+
     cooking_fuel = models.CharField(
         verbose_name="What type of fuel do you primarily use for cooking?",
         max_length=25,
         choices=COOKING_FUEL_CHOICES,
+    )
+
+    cooking_fuel_other = OtherCharField(
+        verbose_name="If OTHER cooking fuel, specify",
     )
 
     class Meta:

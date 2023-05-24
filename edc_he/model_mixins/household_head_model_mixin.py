@@ -1,11 +1,12 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from edc_constants.choices import GENDER, YES_NO
+from edc_model_fields.fields import OtherCharField
 
 from ..choices import (
     EDUCATION_CHOICES,
-    EMPLOYEMENT_CHOICES,
-    EMPLOYEMENT_STATUS_CHOICES,
+    EMPLOYMENT_CHOICES,
+    EMPLOYMENT_STATUS_CHOICES,
     ETHNICITY_CHOICES,
     MARITAL_CHOICES,
     RELATIONSHIP_CHOICES,
@@ -20,35 +21,32 @@ class HouseholdHeadModelMixin(models.Model):
         verbose_name="Are you the household head?",
         max_length=15,
         choices=YES_NO,
-        help_text=(
-            "Note: By head of the household we mean the main decision maker "
-            "in the household. The head can be either male or female. If two "
-            "people are equal decision-makers, take the older person. [Q1]"
-        ),
     )
 
     relationship_to_hoh = models.CharField(
         verbose_name="What is your relationship to the household head?",
         max_length=25,
         choices=RELATIONSHIP_CHOICES,
-        help_text="[Q1A]",
+    )
+
+    relationship_to_hoh_other = OtherCharField(
+        verbose_name="If OTHER relationship, specify ...",
     )
 
     hoh_gender = models.CharField(
         verbose_name="Is the household head female or male?",
         max_length=15,
         choices=GENDER,
-        help_text="[Q1B]",
     )
 
     hoh_age = models.IntegerField(
         verbose_name="How old is the household head?",
         validators=[MinValueValidator(18), MaxValueValidator(110)],
-        help_text="In years. [Q1C]",
+        help_text="In years",
     )
 
     hoh_citizen = models.CharField(
-        verbose_name="Is the household head a Ugandan national?",
+        verbose_name="Is the household head a citizen of this country?",
         max_length=15,
         choices=YES_NO,
     )
@@ -59,10 +57,18 @@ class HouseholdHeadModelMixin(models.Model):
         choices=RELIGION_CHOICES,
     )
 
+    hoh_religion_other = OtherCharField(
+        verbose_name="If OTHER religious orientation, specify ...",
+    )
+
     hoh_ethnicity = models.CharField(
         verbose_name="What is the household head’s ethnic background?",
         max_length=25,
         choices=ETHNICITY_CHOICES,
+    )
+
+    hoh_ethnicity_other = OtherCharField(
+        verbose_name="If OTHER ethnic background, specify ...",
     )
 
     hoh_education = models.CharField(
@@ -71,16 +77,20 @@ class HouseholdHeadModelMixin(models.Model):
         choices=EDUCATION_CHOICES,
     )
 
+    hoh_education_other = OtherCharField(
+        verbose_name="If OTHER education, specify ...",
+    )
+
     hoh_employment = models.CharField(
         verbose_name="Household head’s employment status",
         max_length=25,
-        choices=EMPLOYEMENT_STATUS_CHOICES,
+        choices=EMPLOYMENT_STATUS_CHOICES,
     )
 
     hoh_employment_type = models.CharField(
         verbose_name="Household head’s type of employment",
         max_length=25,
-        choices=EMPLOYEMENT_CHOICES,
+        choices=EMPLOYMENT_CHOICES,
     )
 
     hoh_marital_status = models.CharField(
@@ -89,9 +99,18 @@ class HouseholdHeadModelMixin(models.Model):
         choices=MARITAL_CHOICES,
     )
 
+    hoh_marital_status_other = OtherCharField(
+        verbose_name="If OTHER marital status, specify ...",
+    )
+
     hoh_insurance = models.ManyToManyField(
         InsuranceTypes,
+        related_name="hohinsurancetypes",
         verbose_name="Household head’s health insurance and ‘club’ status ",
+    )
+
+    hoh_insurance_other = OtherCharField(
+        verbose_name="If OTHER, specify ...",
     )
 
     class Meta:
