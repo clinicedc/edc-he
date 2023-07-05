@@ -12,10 +12,12 @@ from edc_constants.constants import (
 )
 
 from .constants import (
+    ALL_WINDOWS_SCREENED,
     BROTHER_SISTER,
     GRANDCHILD,
     PARENT,
     PARENTINLAW,
+    SOME_WINDOWS_SCREENED,
     SON_DAUGHTER,
     SON_DAUGHTERINLAW,
     WIFE_HUSBAND,
@@ -229,9 +231,9 @@ WINDOW_MATERIAL_CHOICES = (
 )
 
 WINDOW_SCREENING_CHOICES = (
-    ("1", "All windows screened"),
+    (ALL_WINDOWS_SCREENED, "All windows screened"),
     ("2", "No windows screened"),
-    ("3", "Some windows screened"),
+    (SOME_WINDOWS_SCREENED, "Some windows screened"),
 )
 
 WINDOW_SCREENING_TYPE_CHOICES = (
@@ -239,6 +241,7 @@ WINDOW_SCREENING_TYPE_CHOICES = (
     ("2", "Old bednet"),
     ("3", "No windows screened"),
     ("4", "No windows"),
+    (NOT_APPLICABLE, "Not applicable"),
 )
 
 FLOOR_MATERIALS_CHOICES = (
