@@ -24,9 +24,7 @@ def get_income_fieldsets_tuple() -> list[tuple]:
             f"{fld}_value",
         ]
         if fld == "external_remittance":
-            fields.extend(
-                ["external_remittance_currency", "external_remittance_currency_other"]
-            )
+            fields.extend(["external_remit_currency", "external_remit_currency_other"])
         if fld == "more_sources":
             fields.insert(1, "more_sources_other")
 
@@ -100,7 +98,7 @@ class HealthEconomicsIncomeModelAdminMixin:
         "internal_remittance_value_known": admin.VERTICAL,
         "external_remittance": admin.VERTICAL,
         "external_remittance_value_known": admin.VERTICAL,
-        "external_remittance_currency": admin.VERTICAL,
+        "external_remit_currency": admin.VERTICAL,
         "more_sources": admin.VERTICAL,
         "more_sources_value_known": admin.VERTICAL,
         "income_enough": admin.VERTICAL,

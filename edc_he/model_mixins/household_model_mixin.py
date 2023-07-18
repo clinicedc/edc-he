@@ -6,6 +6,7 @@ class HouseholdModelMixin(models.Model):
     hh_count = models.IntegerField(
         verbose_name="What is the total number of people who live in your household?",
         validators=[MinValueValidator(1), MaxValueValidator(25)],
+        help_text="Persons",
     )
 
     hh_minors_count = models.IntegerField(
@@ -14,6 +15,7 @@ class HouseholdModelMixin(models.Model):
             "who live in your household?"
         ),
         validators=[MinValueValidator(0), MaxValueValidator(25)],
+        help_text="Persons",
     )
 
     class Meta:

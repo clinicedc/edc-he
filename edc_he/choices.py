@@ -114,6 +114,7 @@ EMPLOYMENT_CHOICES = (
     (NOT_APPLICABLE, "Not applicable"),
 )
 
+
 MARITAL_CHOICES = (
     ("1", "Never Married (but not co-habiting)"),
     ("2", "Co-habiting"),
