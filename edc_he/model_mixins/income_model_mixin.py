@@ -7,7 +7,7 @@ from .factory import income_model_mixin_factory
 
 
 class IncomeModelMixin(income_model_mixin_factory(), models.Model):
-    external_remittance_currency = models.CharField(
+    external_remit_currency = models.CharField(
         verbose_name="In what currency do you receive remittances?",
         max_length=50,
         choices=REMITTANCE_CURRENCY_CHOICES,
@@ -15,7 +15,7 @@ class IncomeModelMixin(income_model_mixin_factory(), models.Model):
         blank=True,
     )
 
-    external_remittance_currency_other = models.CharField(
+    external_remit_currency_other = models.CharField(
         verbose_name="If OTHER currency, specify ...",
         max_length=50,
         null=True,

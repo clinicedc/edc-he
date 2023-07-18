@@ -16,37 +16,6 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
     fieldsets = (
         (None, {"fields": ("subject_visit", "report_datetime")}),
         (
-            "Household head",
-            {
-                "description": format_html(
-                    "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
-                    "<p>By <B>HEAD OF THE HOUSEHOLD</B> we mean the main decision maker "
-                    "in the HOUSEHOLD. The HEAD can be either male or female. If two "
-                    "people are equal decision-makers, take the older person</p>"
-                ),
-                "fields": (
-                    "hoh",
-                    "relationship_to_hoh",
-                    "relationship_to_hoh_other",
-                    "hoh_gender",
-                    "hoh_age",
-                    "hoh_citizen",
-                    "hoh_religion",
-                    "hoh_religion_other",
-                    "hoh_ethnicity",
-                    "hoh_ethnicity_other",
-                    "hoh_education",
-                    "hoh_education_other",
-                    "hoh_employment",
-                    "hoh_employment_type",
-                    "hoh_marital_status",
-                    "hoh_marital_status_other",
-                    "hoh_insurance",
-                    "hoh_insurance_other",
-                ),
-            },
-        ),
-        (
             "Household",
             {
                 "description": format_html(
@@ -67,6 +36,37 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
                 ),
             },
         ),
+        (
+            "Household head",
+            {
+                "description": format_html(
+                    "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
+                    "<p>By <B>HEAD OF THE HOUSEHOLD</B> we mean the main decision maker "
+                    "in the HOUSEHOLD. The HEAD can be either male or female. If two "
+                    "people are equal decision-makers, take the older person</p>"
+                ),
+                "fields": (
+                    "hoh",
+                    "relationship_to_hoh",
+                    "relationship_to_hoh_other",
+                    "hoh_gender",
+                    "hoh_age",
+                    "hoh_religion",
+                    "hoh_religion_other",
+                    "hoh_ethnicity",
+                    "hoh_ethnicity_other",
+                    "hoh_education",
+                    "hoh_education_other",
+                    "hoh_employment",
+                    "hoh_employment_type",
+                    "hoh_employment_type_other",
+                    "hoh_marital_status",
+                    "hoh_marital_status_other",
+                    "hoh_insurance",
+                    "hoh_insurance_other",
+                ),
+            },
+        ),
         crf_status_fieldset_tuple,
         audit_fieldset_tuple,
     )
@@ -75,7 +75,6 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
         "hoh": admin.VERTICAL,
         "relationship_to_hoh": admin.VERTICAL,
         "hoh_gender": admin.VERTICAL,
-        "hoh_citizen": admin.VERTICAL,
         "hoh_religion": admin.VERTICAL,
         "hoh_ethnicity": admin.VERTICAL,
         "hoh_education": admin.VERTICAL,

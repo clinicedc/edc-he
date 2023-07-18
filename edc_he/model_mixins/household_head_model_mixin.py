@@ -1,6 +1,7 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from edc_constants.choices import GENDER, YES_NO
+from edc_constants.constants import NOT_APPLICABLE
 from edc_model_fields.fields import OtherCharField
 
 from ..choices import (
@@ -27,6 +28,8 @@ class HouseholdHeadModelMixin(models.Model):
         verbose_name="What is your relationship to the household head?",
         max_length=25,
         choices=RELATIONSHIP_CHOICES,
+        default=NOT_APPLICABLE,
+        help_text="Not applicable if patient is head of household",
     )
 
     relationship_to_hoh_other = OtherCharField(
@@ -43,12 +46,6 @@ class HouseholdHeadModelMixin(models.Model):
         verbose_name="How old is the household head?",
         validators=[MinValueValidator(18), MaxValueValidator(110)],
         help_text="In years",
-    )
-
-    hoh_citizen = models.CharField(
-        verbose_name="Is the household head a citizen of this country?",
-        max_length=15,
-        choices=YES_NO,
     )
 
     hoh_religion = models.CharField(
@@ -91,6 +88,12 @@ class HouseholdHeadModelMixin(models.Model):
         verbose_name="Household head’s type of employment",
         max_length=25,
         choices=EMPLOYMENT_CHOICES,
+    )
+
+    hoh_employment_type_other = OtherCharField(
+        verbose_name="Household head’s type of employment",
+        max_length=100,
+        help_text="... other type of employment",
     )
 
     hoh_marital_status = models.CharField(
