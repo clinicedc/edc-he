@@ -6,10 +6,6 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        (
-            "intecomm_subject",
-            "0088_healtheconomicspatient_pat_employment_type_other_and_more",
-        ),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ("edc_he", "0004_historicalemployment_historicaleducation_employment_and_more"),
     ]
