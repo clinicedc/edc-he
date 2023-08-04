@@ -65,16 +65,34 @@ class HealthEconomicsIncomeModelAdminMixin:
         (None, {"fields": ("subject_visit", "report_datetime")}),
         *get_income_fieldsets_tuple(),
         (
-            "Dependents, financial status and debt",
+            "Dependents, financial status",
             {
                 "fields": (
                     "external_dependents",
                     "income_enough",
                     "financial_status",
                     "financial_status_compare",
+                )
+            },
+        ),
+        (
+            "Debt / Loans",
+            {
+                "description": format_html(
+                    "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
+                    "<p>Now, I will ask about the total current debt/loans for the household. "
+                    "I know it may be difficult to calculate this, but please do try to "
+                    "give amounts as accurately as possible. Remember that all information "
+                    "will be kept strictly confidential. <B>It is not possible to offer "
+                    "any help for your debts through this project</B>, but this information "
+                    "will contribute to research and is important to assess the overall "
+                    "health and well-being of people in your household, compared to other "
+                    "similar households.</p>"
+                ),
+                "fields": (
                     "household_debt",
                     "household_debt_value",
-                )
+                ),
             },
         ),
         crf_status_fieldset_tuple,

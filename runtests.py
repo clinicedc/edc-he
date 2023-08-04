@@ -11,6 +11,7 @@ from edc_test_utils import DefaultTestSettings
 base_dir = dirname(abspath(__file__))
 app_name = "edc_he"
 
+
 DEFAULT_SETTINGS = DefaultTestSettings(
     calling_file=__file__,
     BASE_DIR=base_dir,
@@ -39,6 +40,7 @@ DEFAULT_SETTINGS = DefaultTestSettings(
         "edc_dashboard.apps.AppConfig",
         "edc_facility.apps.AppConfig",
         "edc_lab.apps.AppConfig",
+        "edc_list_data.apps.AppConfig",
         "edc_metadata.apps.AppConfig",
         "edc_offstudy.apps.AppConfig",
         "edc_reference.apps.AppConfig",
@@ -49,6 +51,7 @@ DEFAULT_SETTINGS = DefaultTestSettings(
         "edc_timepoint.apps.AppConfig",
         "edc_visit_schedule.apps.AppConfig",
         "edc_visit_tracking.apps.AppConfig",
+        "visit_schedule_app.apps.AppConfig",
         "edc_he.apps.AppConfig",
     ],
     RANDOMIZATION_LIST_PATH=join(base_dir, app_name, "tests", "test_randomization_list.csv"),
