@@ -11,7 +11,7 @@ default_field_data = {
     "telephone": "Non-mobile telephone",
     "fridge": "Fridge",
     "generator": "Generator",
-    "iron": "Iron",
+    "iron": "Flat iron",
     "bicycle": "Bicycle",
     "motorcycle": "Motorcycle/scooter (PikiPiki/Boda Boda)",
     "dala_dala": "Dala Dala",

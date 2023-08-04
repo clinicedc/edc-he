@@ -16,15 +16,15 @@ class HealthEconomicsPatientModelAdminMixin:
             "Patient characteristics",
             {
                 "fields": (
-                    "pat_citizen",
                     "pat_religion",
                     "pat_religion_other",
                     "pat_ethnicity",
                     "pat_ethnicity_other",
                     "pat_education",
                     "pat_education_other",
-                    "pat_employment",
+                    "pat_employment_status",
                     "pat_employment_type",
+                    "pat_employment_type_other",
                     "pat_marital_status",
                     "pat_marital_status_other",
                     "pat_insurance",
@@ -39,7 +39,7 @@ class HealthEconomicsPatientModelAdminMixin:
     radio_fields = {
         "pat_citizen": admin.VERTICAL,
         "pat_education": admin.VERTICAL,
-        "pat_employment": admin.VERTICAL,
+        "pat_employment_status": admin.VERTICAL,
         "pat_employment_type": admin.VERTICAL,
         "pat_ethnicity": admin.VERTICAL,
         "pat_marital_status": admin.VERTICAL,

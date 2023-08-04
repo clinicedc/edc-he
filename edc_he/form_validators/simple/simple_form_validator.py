@@ -2,7 +2,7 @@ from django import forms
 from edc_constants.constants import TERTIARY, YES
 
 
-class HeEducationFormValidatorMixin:
+class SimpleFormValidatorMixin:
     """A mixin to be declared with `CrfFormValidatorMixin` and `FormValidator`."""
 
     def clean_education(self):

@@ -1,11 +1,44 @@
-from edc_constants.constants import DONT_KNOW, NONE, OTHER
+from edc_constants.constants import (
+    COMMUNITY,
+    DONT_KNOW,
+    NONE,
+    NOT_APPLICABLE,
+    OTHER,
+    PRIVATE,
+)
 
 list_data = {
+    "edc_he.education": [
+        ("illiterate", "Illiterate"),
+        ("primary_incomplete", "Primary incomplete"),
+        ("primary_complete", "Primary complete"),
+        ("secondary_incomplete", "Secondary incomplete"),
+        ("secondary_complete", "Secondary complete"),
+        (
+            "tertiary",
+            "University/college/post-secondary (diploma or certificate)/ technical training",
+        ),
+        (OTHER, "Other, specify ..."),
+        (DONT_KNOW, "Don’t know"),
+        (NOT_APPLICABLE, "Not applcable"),
+    ],
+    "edc_he.employmenttype": [
+        ("1", "Chief executives, managers, senior officials and legislators"),
+        ("2", "Professionals, technicians and associate professionals"),
+        ("4", "Clerks"),
+        ("5", "Service workers and shop sale workers"),
+        ("6", "Skilled agricultural and fishery workers"),
+        ("7", "Unskilled agricultural and fishery workers"),
+        ("8", "Craft and related workers"),
+        ("9", "Plant and machine operators and assemblers"),
+        ("10", "Elementary occupations"),
+        (OTHER, "Other, specify ..."),
+        (DONT_KNOW, "Don’t know"),
+        (NOT_APPLICABLE, "Not applicable"),
+    ],
     "edc_he.insurancetypes": [
-        ("private", "Private/work-place/voluntary health insurance"),
-        ("nhif", "NHIF (National Health Insurance Fund)"),
-        ("chf", "CHF (Community Health Insurance Fund)"),
-        ("club", "Patient support group / club"),
+        (PRIVATE, "Private/work-place/voluntary health insurance"),
+        (COMMUNITY, "Community-based health insurance"),
         (NONE, "None"),
         (DONT_KNOW, "Don’t know"),
         (OTHER, "Other, specify"),

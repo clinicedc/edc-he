@@ -3,6 +3,7 @@ from edc_constants.constants import (
     DWTA,
     MONTHLY,
     NOT_APPLICABLE,
+    OPTION_RETIRED,
     OTHER,
     PRIMARY,
     SECONDARY,
@@ -44,48 +45,6 @@ RELATIONSHIP_CHOICES = (
     (NOT_APPLICABLE, "Not applicable"),
 )
 
-ETHNICITY_CHOICES = (
-    ("baganda", "Baganda"),
-    ("banyakole", "Banyakole"),
-    ("basoga", "Basoga"),
-    ("bakiga", "Bakiga"),
-    ("iteso", "Iteso"),
-    ("langi", "Langi"),
-    ("acholi", "Acholi"),
-    ("bagisu", "Bagisu"),
-    ("lugbara", "Lugbara"),
-    ("banyoro", "Banyoro"),
-    ("bakhonzo", "Bakhonzo"),
-    ("batoro", "Batoro"),
-    ("alur", "Alur"),
-    (OTHER, "Other, specify ..."),
-)
-
-RELIGION_CHOICES = (
-    ("Catholic", "Catholic"),
-    ("Protestant", "Protestant"),
-    ("Muslim", "Muslim"),
-    ("Pentecostal", "Pentecostal"),
-    ("Seventh day Adventist", "Seventh day Adventist"),
-    ("No religion", "No religion"),
-    (OTHER, "Other, specify ..."),
-)
-
-EDUCATION_CHOICES = (
-    ("illiterate", "Illiterate"),
-    ("primary_incomplete", "Primary incomplete"),
-    ("primary_complete", "Primary complete"),
-    ("secondary_incomplete", "Secondary incomplete"),
-    ("secondary_complete", "Secondary complete"),
-    (
-        "tertiary",
-        "University/college/post-secondary (diploma or certificate)/ technical training",
-    ),
-    (OTHER, "Other, specify ..."),
-    (DONT_KNOW, "Don’t know"),
-    (NOT_APPLICABLE, "Not applcable"),
-)
-
 EMPLOYMENT_STATUS_CHOICES = (
     ("1", "Full time employed"),
     ("2", "Regular part time employed "),
@@ -97,21 +56,6 @@ EMPLOYMENT_STATUS_CHOICES = (
     ("8", "Unemployed (unable to work)"),
     (DONT_KNOW, "Don’t know"),
     (NOT_APPLICABLE, "Not applcable"),
-)
-
-EMPLOYMENT_CHOICES = (
-    ("1", "Legislators, administrators, and managers"),
-    ("2", "Professionals"),
-    ("3", "Technicians and associate professionals"),
-    ("4", "Clerks"),
-    ("5", "Service workers and shop sale workers"),
-    ("6", "Skilled agricultural and fishery workers"),
-    ("7", "Unskilled agricultural and fishery workers"),
-    ("8", "Craft and related workers"),
-    ("9", "Plant and machine operators and assemblers"),
-    ("10", "Elementary occupations"),
-    (DONT_KNOW, "Don’t know"),
-    (NOT_APPLICABLE, "Not applicable"),
 )
 
 
@@ -213,9 +157,9 @@ EXTERNAL_WALL_MATERIALS_CHOICES = (
     ("1", "Thatch, Straw"),
     ("2", "Mud and poles"),
     ("3", "Timber"),
-    ("4", "Un-burnt bricks"),
-    ("5", "Burnt bricks with mud"),
-    ("6", "Burnt bricks with cement"),
+    (OPTION_RETIRED, "Un-burnt bricks"),
+    ("5", "Bricks with mud"),
+    ("6", "Bricks with cement"),
     ("7", "Cement blocks"),
     ("8", "Stone"),
     (OTHER, "Other, specify ..."),

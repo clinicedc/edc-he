@@ -16,7 +16,7 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
     fieldsets = (
         (None, {"fields": ("subject_visit", "report_datetime")}),
         (
-            "Household",
+            "Household members",
             {
                 "description": format_html(
                     "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
@@ -41,9 +41,9 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
             {
                 "description": format_html(
                     "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
-                    "<p>By <B>HEAD OF THE HOUSEHOLD</B> we mean the main decision maker "
-                    "in the HOUSEHOLD. The HEAD can be either male or female. If two "
-                    "people are equal decision-makers, take the older person</p>"
+                    "<p>By <B>HEAD OF THE HOUSEHOLD</B> we mean the <u>main decision "
+                    "maker</u> in the HOUSEHOLD. The HEAD can be either male or female. If "
+                    "two people are equal decision-makers, take the older person</p>"
                 ),
                 "fields": (
                     "hoh",
@@ -51,17 +51,65 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
                     "relationship_to_hoh_other",
                     "hoh_gender",
                     "hoh_age",
+                ),
+            },
+        ),
+        (
+            "Household head: Religion",
+            {
+                "description": "",
+                "fields": (
                     "hoh_religion",
                     "hoh_religion_other",
+                ),
+            },
+        ),
+        (
+            "Household head: Ethnicity",
+            {
+                "description": "",
+                "fields": (
                     "hoh_ethnicity",
                     "hoh_ethnicity_other",
+                ),
+            },
+        ),
+        (
+            "Household head: Education",
+            {
+                "description": "",
+                "fields": (
                     "hoh_education",
                     "hoh_education_other",
-                    "hoh_employment",
+                ),
+            },
+        ),
+        (
+            "Household head: Employment",
+            {
+                "description": "",
+                "fields": (
+                    "hoh_employment_status",
                     "hoh_employment_type",
                     "hoh_employment_type_other",
+                ),
+            },
+        ),
+        (
+            "Household head: Marital status",
+            {
+                "description": "",
+                "fields": (
                     "hoh_marital_status",
                     "hoh_marital_status_other",
+                ),
+            },
+        ),
+        (
+            "Household head: Insurance",
+            {
+                "description": "",
+                "fields": (
                     "hoh_insurance",
                     "hoh_insurance_other",
                 ),
@@ -78,7 +126,7 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
         "hoh_religion": admin.VERTICAL,
         "hoh_ethnicity": admin.VERTICAL,
         "hoh_education": admin.VERTICAL,
-        "hoh_employment": admin.VERTICAL,
+        "hoh_employment_status": admin.VERTICAL,
         "hoh_employment_type": admin.VERTICAL,
         "hoh_marital_status": admin.VERTICAL,
         "crf_status": admin.VERTICAL,
