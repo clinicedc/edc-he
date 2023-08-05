@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from django_audit_fields.admin import audit_fieldset_tuple
+from edc_constants.constants import NOT_APPLICABLE
 from edc_crf.admin import crf_status_fieldset_tuple
 
 
@@ -20,10 +21,10 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
             {
                 "description": format_html(
                     "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
-                    "<p><B>HOUSEHOLD</B>: A person or persons (people/ members) who share "
-                    "the same kitchen (pot), live together, and run the household "
+                    "<p>By a <B>HOUSEHOLD</B> we mean a person or persons (people/ members) "
+                    "who share the same kitchen (pot), live together, and run the household "
                     "expenditure from the same income is known as a household.</P>"
-                    "<P><B>HOUSEHOLD MEMBER</B>: A household member should be identified on "
+                    "<P>By a <B>HOUSEHOLD MEMBER</B> we mean a person identified on "
                     "the basis that they shared a place of living together most of time for "
                     "the past one year.</P><P><B>Note:</B> When it is difficult to demarcate "
                     "'most of the time', living together for the past six months or more "
@@ -37,25 +38,36 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
             },
         ),
         (
-            "Household head",
+            "Household head: Gender and age",
             {
-                "description": format_html(
-                    "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
-                    "<p>By <B>HEAD OF THE HOUSEHOLD</B> we mean the <u>main decision "
-                    "maker</u> in the HOUSEHOLD. The HEAD can be either male or female. If "
-                    "two people are equal decision-makers, take the older person</p>"
-                ),
+                "description": "",
                 "fields": (
                     "hoh",
-                    "relationship_to_hoh",
-                    "relationship_to_hoh_other",
                     "hoh_gender",
                     "hoh_age",
                 ),
             },
         ),
         (
-            "Household head: Religion",
+            "Head of household",
+            {
+                "description": format_html(
+                    "<H5><B><font color='darkorange'>Note to interviewer</font></B></H5>"
+                    "If the PATIENT is the head of household, skip to the bottom of this form "
+                    "and click SAVE or SAVE NEXT, otherwise continue."
+                    "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
+                    "<p>By <B>HEAD OF THE HOUSEHOLD</B> we mean the <u>main decision "
+                    "maker</u> in the HOUSEHOLD. The HEAD can be either male or female. If "
+                    "two people are equal decision-makers, take the older person</p>"
+                ),
+                "fields": (
+                    "relationship_to_hoh",
+                    "relationship_to_hoh_other",
+                ),
+            },
+        ),
+        (
+            "Head of household: Religion",
             {
                 "description": "",
                 "fields": (
@@ -65,7 +77,7 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
             },
         ),
         (
-            "Household head: Ethnicity",
+            "Head of household: Ethnicity",
             {
                 "description": "",
                 "fields": (
@@ -75,7 +87,7 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
             },
         ),
         (
-            "Household head: Education",
+            "Head of household: Education",
             {
                 "description": "",
                 "fields": (
@@ -85,7 +97,7 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
             },
         ),
         (
-            "Household head: Employment",
+            "Head of household: Employment",
             {
                 "description": "",
                 "fields": (
@@ -96,7 +108,7 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
             },
         ),
         (
-            "Household head: Marital status",
+            "Head of household: Marital status",
             {
                 "description": "",
                 "fields": (
@@ -106,7 +118,7 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
             },
         ),
         (
-            "Household head: Insurance",
+            "Head of household: Insurance",
             {
                 "description": "",
                 "fields": (
@@ -133,3 +145,20 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
     }
 
     filter_horizontal = ["hoh_insurance"]
+
+    def get_changeform_initial_data(self, request):
+        defaults = super().get_changeform_initial_data(request)
+        for fld in self.model._meta.get_fields():
+            if fld.name in self.filter_horizontal:
+                qs = fld.related_model.objects.filter(name=NOT_APPLICABLE)
+                defaults.update({fld.name: qs})
+            elif fld.name in self.radio_fields:
+                if fld.related_model:
+                    try:
+                        value = fld.related_model.objects.get(name=NOT_APPLICABLE)
+                    except AttributeError as e:
+                        if "related_model" not in str(e):
+                            raise
+                    else:
+                        defaults.update({fld.name: value})
+        return defaults
