@@ -59,6 +59,7 @@ list_data = {
         ("african-inland-church", "African Inland Church"),
         (NONE, "No religion"),
         (OTHER, "Other, specify"),
+        (NOT_APPLICABLE, "Not applicable"),
     ],
     "edc_he.ethnicities": [
         ("msukuma", "Msukuma"),
@@ -73,5 +74,6 @@ list_data = {
         ("mhindi", "Mhindi"),
         ("mwarabu", "Mwarabu"),
         (OTHER, "Other, specify"),
+        (NOT_APPLICABLE, "Not applicable"),
     ],
 }

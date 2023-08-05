@@ -15,6 +15,21 @@ class HouseholdHeadModelMixin(models.Model):
         choices=YES_NO,
     )
 
+    hoh_gender = models.CharField(
+        verbose_name="Is the household head female or male?",
+        max_length=15,
+        choices=GENDER,
+        help_text="Note: if you are the household head, indicate your gender",
+    )
+
+    hoh_age = models.IntegerField(
+        verbose_name="How old is the household head?",
+        validators=[MinValueValidator(18), MaxValueValidator(110)],
+        help_text=(
+            "In years. Note: if you are the household head, indicate your age as of today"
+        ),
+    )
+
     relationship_to_hoh = models.CharField(
         verbose_name="What is your relationship to the household head?",
         max_length=25,
@@ -27,18 +42,6 @@ class HouseholdHeadModelMixin(models.Model):
         verbose_name="If OTHER relationship, specify ...",
     )
 
-    hoh_gender = models.CharField(
-        verbose_name="Is the household head female or male?",
-        max_length=15,
-        choices=GENDER,
-    )
-
-    hoh_age = models.IntegerField(
-        verbose_name="How old is the household head?",
-        validators=[MinValueValidator(18), MaxValueValidator(110)],
-        help_text="In years",
-    )
-
     hoh_religion = models.ForeignKey(
         "edc_he.Religions",
         verbose_name="How would you describe the household head’s religious orientation?",
@@ -46,6 +49,7 @@ class HouseholdHeadModelMixin(models.Model):
         on_delete=PROTECT,
         null=True,
         blank=False,
+        help_text="Not applicable if patient is head of household",
     )
 
     hoh_religion_other = OtherCharField(
@@ -59,6 +63,7 @@ class HouseholdHeadModelMixin(models.Model):
         on_delete=PROTECT,
         null=True,
         blank=False,
+        help_text="Not applicable if patient is head of household",
     )
 
     hoh_ethnicity_other = OtherCharField(
@@ -72,6 +77,7 @@ class HouseholdHeadModelMixin(models.Model):
         on_delete=PROTECT,
         null=True,
         blank=False,
+        help_text="Not applicable if patient is head of household",
     )
 
     hoh_education_other = OtherCharField(
@@ -82,6 +88,8 @@ class HouseholdHeadModelMixin(models.Model):
         verbose_name="Household head’s employment status",
         max_length=25,
         choices=EMPLOYMENT_STATUS_CHOICES,
+        default=NOT_APPLICABLE,
+        help_text="Not applicable if patient is head of household",
     )
 
     hoh_employment_type = models.ForeignKey(
@@ -91,6 +99,7 @@ class HouseholdHeadModelMixin(models.Model):
         on_delete=PROTECT,
         null=True,
         blank=False,
+        help_text="Not applicable if patient is head of household",
     )
 
     hoh_employment_type_other = OtherCharField(
@@ -102,6 +111,8 @@ class HouseholdHeadModelMixin(models.Model):
         verbose_name="Household head’s marital status",
         max_length=25,
         choices=MARITAL_CHOICES,
+        default=NOT_APPLICABLE,
+        help_text="Not applicable if patient is head of household",
     )
 
     hoh_marital_status_other = OtherCharField(
@@ -112,6 +123,7 @@ class HouseholdHeadModelMixin(models.Model):
         "edc_he.insurancetypes",
         verbose_name="Household head’s health insurance and ‘club’ status ",
         related_name="+",
+        help_text="Not applicable if patient is head of household",
     )
 
     hoh_insurance_other = OtherCharField(
