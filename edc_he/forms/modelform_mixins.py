@@ -1,18 +1,18 @@
+from django import forms
+from django.core.exceptions import ObjectDoesNotExist
 from edc_constants.constants import YES
-from edc_crf.utils import raise_if_crf_does_not_exist
-from edc_dx_review.utils import raise_if_clinical_review_does_not_exist
 
-from ..models import (
-    HealthEconomicsAssets,
-    HealthEconomicsHouseholdHead,
-    HealthEconomicsIncome,
-    HealthEconomicsProperty,
+from ..utils import (
+    get_assets_model_cls,
+    get_household_head_model_cls,
+    get_income_model_cls,
+    get_patient_model_cls,
+    get_property_model_cls,
 )
 
 
 class HealthEconomicsModelFormMixin:
     def clean(self):
-        raise_if_clinical_review_does_not_exist(self.cleaned_data.get("subject_visit"))
         self.raise_if_he_household_head_required()
         self.raise_if_he_patient_required()
         self.raise_if_he_assets_required()
@@ -21,43 +21,61 @@ class HealthEconomicsModelFormMixin:
 
     @property
     def household_head(self):
-        return HealthEconomicsHouseholdHead.objects.get(
+        return get_household_head_model_cls().objects.get(
             subject_visit__subject_identifier=self.subject_identifier
         )
 
+    @property
+    def is_hoh(self):
+        return self.household_head.hoh == YES
+
     def raise_if_he_household_head_required(self):
-        if self._meta.model != HealthEconomicsHouseholdHead:
-            raise_if_crf_does_not_exist(
-                self.cleaned_data.get("subject_visit"),
-                model="intecomm_subject.healtheconomicshouseholdhead",
-            )
+        if self._meta.model != get_household_head_model_cls():
+            try:
+                self.household_head
+            except ObjectDoesNotExist:
+                raise forms.ValidationError(
+                    f"Complete {get_household_head_model_cls()._meta.verbose_name} CRF first."
+                )
 
     def raise_if_he_patient_required(self):
-        if self.household_head.hoh != YES and self._meta.model in [
-            HealthEconomicsAssets,
-            HealthEconomicsIncome,
-            HealthEconomicsProperty,
+        if not self.is_hoh and self._meta.model in [
+            get_assets_model_cls(),
+            get_income_model_cls(),
+            get_property_model_cls(),
         ]:
-            raise_if_crf_does_not_exist(
-                self.cleaned_data.get("subject_visit"),
-                model="intecomm_subject.healtheconomicspatient",
-            )
+            try:
+                get_patient_model_cls().objects.get(
+                    subject_visit__subject_identifier=self.subject_identifier
+                )
+            except ObjectDoesNotExist:
+                raise forms.ValidationError(
+                    f"Complete {get_patient_model_cls()._meta.verbose_name} CRF first."
+                )
 
     def raise_if_he_assets_required(self):
         if self._meta.model in [
-            HealthEconomicsIncome,
-            HealthEconomicsProperty,
+            get_income_model_cls(),
+            get_property_model_cls(),
         ]:
-            raise_if_crf_does_not_exist(
-                self.cleaned_data.get("subject_visit"),
-                model="intecomm_subject.healtheconomicsassets",
-            )
+            try:
+                get_assets_model_cls().objects.get(
+                    subject_visit__subject_identifier=self.subject_identifier
+                )
+            except ObjectDoesNotExist:
+                raise forms.ValidationError(
+                    f"Complete {get_assets_model_cls()._meta.verbose_name} CRF first."
+                )
 
     def raise_if_he_property_required(self):
         if self._meta.model in [
-            HealthEconomicsIncome,
+            get_income_model_cls(),
         ]:
-            raise_if_crf_does_not_exist(
-                self.cleaned_data.get("subject_visit"),
-                model="intecomm_subject.healtheconomicsproperty",
-            )
+            try:
+                get_property_model_cls().objects.get(
+                    subject_visit__subject_identifier=self.subject_identifier
+                )
+            except ObjectDoesNotExist:
+                raise forms.ValidationError(
+                    f"Complete {get_property_model_cls()._meta.verbose_name} CRF first."
+                )
