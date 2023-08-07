@@ -1,6 +1,6 @@
 from django.apps import apps as django_apps
 from django.core.exceptions import ObjectDoesNotExist
-from edc_constants.constants import YES
+from edc_constants.constants import NO
 from edc_metadata.metadata_rules import PredicateCollection
 
 
@@ -54,7 +54,7 @@ class Predicates(PredicateCollection):
             if not self.patient_model_cls.objects.filter(
                 subject_visit__subject_identifier=visit.subject_identifier
             ).exists():
-                required = hoh_obj.hoh == YES
+                required = hoh_obj.hoh == NO
         return required
 
     def assets_required(self, visit, **kwargs):

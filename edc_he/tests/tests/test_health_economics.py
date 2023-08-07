@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 from django import forms
-from django.test import TestCase
+from django.test import TestCase, tag
 from edc_constants.constants import COMPLETE, FEMALE, NO, NOT_APPLICABLE, OTHER, YES
+from edc_metadata import NOT_REQUIRED, REQUIRED, site_metadata_rules
+from edc_metadata.tests import CrfTestHelper
 from edc_utils import get_utcnow
 from edc_utils.test_case_mixins.longitudinal_test_case_mixin import (
     LongitudinalTestCaseMixin,
@@ -18,6 +20,8 @@ from edc_he.models import (
     InsuranceTypes,
     Religions,
 )
+from edc_he.rule_groups import HealthEconomicsRuleGroup as BaseHealthEconomicsRuleGroup
+from edc_he.rule_groups import Predicates
 
 from ..visit_schedule import visit_schedule
 
@@ -33,18 +37,30 @@ def get_m2m_qs(model_cls, name: str = None):
 
 def get_obj(model_cls, name: str = None):
     if name:
-        qs = model_cls.objects.get(name=name)
+        obj = model_cls.objects.get(name=name)
     else:
-        qs = model_cls.objects.all()[0]
-    return qs
+        obj = model_cls.objects.all()[0]
+    return obj
 
 
-class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, TestCase):
+class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, CrfTestHelper, TestCase):
     visit_schedule = visit_schedule
 
     def setUp(self) -> None:
         self.subject_identifier = self.enroll()
         self.create_visits(self.subject_identifier)
+
+    @classmethod
+    def setUpTestData(cls):
+        super().setUpTestData()
+
+        class HealthEconomicsRuleGroup(BaseHealthEconomicsRuleGroup):
+            class Meta:
+                app_label = "edc_he"
+                source_model = "edc_visit_tracking.subjectvisit"
+                predicates = Predicates()
+
+        site_metadata_rules.register(HealthEconomicsRuleGroup)
 
     def get_cleaned_data(self, **kwargs) -> dict:
         cleaned_data = dict(
@@ -57,14 +73,14 @@ class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, TestCase):
             relationship_to_hoh_other=None,
             hoh_gender=FEMALE,
             hoh_age=25,
-            hoh_religion=get_m2m_qs(Religions),
+            hoh_religion=get_obj(Religions),
             hoh_religion_other=None,
-            hoh_ethnicity=get_m2m_qs(Ethnicities),
+            hoh_ethnicity=get_obj(Ethnicities),
             hoh_ethnicity_other=None,
-            hoh_education=get_m2m_qs(Education),
+            hoh_education=get_obj(Education),
             hoh_education_other=None,
             hoh_employment_status="",
-            hoh_employment_type=get_m2m_qs(EmploymentType),
+            hoh_employment_type=get_obj(EmploymentType),
             hoh_employment_type_other=None,
             hoh_marital_status=OTHER,
             hoh_marital_status_other="blah",
@@ -101,7 +117,7 @@ class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, TestCase):
             hoh_ethnicity=get_obj(Ethnicities, NOT_APPLICABLE),
             hoh_education=get_obj(Education, NOT_APPLICABLE),
             hoh_employment_type=get_obj(EmploymentType, NOT_APPLICABLE),
-            hoh_insurance=get_m2m_qs(Ethnicities, NOT_APPLICABLE),
+            hoh_insurance=get_m2m_qs(InsuranceTypes, NOT_APPLICABLE),
         )
         cleaned_data = self.get_cleaned_data(
             hoh=YES,
@@ -159,7 +175,7 @@ class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, TestCase):
             hoh_ethnicity=get_obj(Ethnicities),
             hoh_education=get_obj(Education),
             hoh_employment_type=get_obj(EmploymentType),
-            hoh_insurance=get_m2m_qs(Ethnicities),
+            hoh_insurance=get_m2m_qs(InsuranceTypes),
         )
 
         cleaned_data.update(hoh=NO, relationship_to_hoh=WIFE_HUSBAND, **applicable_opts)
@@ -203,7 +219,7 @@ class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, TestCase):
             hoh_ethnicity=get_obj(Ethnicities),
             hoh_education=get_obj(Education),
             hoh_employment_type=get_obj(EmploymentType),
-            hoh_insurance=get_m2m_qs(Ethnicities),
+            hoh_insurance=get_m2m_qs(InsuranceTypes),
         )
         cleaned_data = self.get_cleaned_data()
         cleaned_data.update(
@@ -239,3 +255,28 @@ class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, TestCase):
             "This field is required",
             str(form_validator._errors.get("hoh_religion_other")),
         )
+
+    def test_patient_required_if_patient_is_not_hoh(self):
+        cleaned_data = self.get_cleaned_data(
+            hoh=NO,
+            relationship_to_hoh=WIFE_HUSBAND,
+        )
+        del cleaned_data["hoh_insurance"]
+        hoh_obj = HealthEconomicsHouseholdHead.objects.create(**cleaned_data)
+        hoh_obj.hoh_insurance.add(get_obj(InsuranceTypes))
+
+        qs = self.crf_metadata_obj("edc_he.healtheconomicspatient", REQUIRED, "1000")
+        self.assertTrue(qs.exists())
+
+    @tag("1")
+    def test_patient_required_if_patient_is_hoh(self):
+        cleaned_data = self.get_cleaned_data(
+            hoh=YES,
+            relationship_to_hoh=NOT_APPLICABLE,
+        )
+        del cleaned_data["hoh_insurance"]
+        hoh_obj = HealthEconomicsHouseholdHead.objects.create(**cleaned_data)
+        hoh_obj.hoh_insurance.add(get_obj(InsuranceTypes))
+
+        qs = self.crf_metadata_obj("edc_he.healtheconomicspatient", NOT_REQUIRED, "1000")
+        self.assertTrue(qs.exists())

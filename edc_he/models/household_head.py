@@ -1,6 +1,10 @@
 from django.conf import settings
 from django.db import models
-from edc_crf.model_mixins import CrfModelMixin, SingletonCrfModelMixin
+from edc_crf.model_mixins import (
+    CrfModelMixin,
+    CrfStatusModelMixin,
+    SingletonCrfModelMixin,
+)
 from edc_model.models import BaseUuidModel
 
 from ..model_mixins import HouseholdHeadModelMixin, HouseholdModelMixin
@@ -11,6 +15,7 @@ class HealthEconomicsHouseholdHead(
     HouseholdHeadModelMixin,
     HouseholdModelMixin,
     CrfModelMixin,
+    CrfStatusModelMixin,
     BaseUuidModel,
 ):
     subject_visit = models.OneToOneField(
