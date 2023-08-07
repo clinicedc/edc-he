@@ -8,11 +8,10 @@ class HealthEconomicsPropertyFormValidator(
     FormValidator,
 ):
     def clean(self):
-        self.applicable_if(YES, field="land_owner", field_applicable="land_value_known")
-        self.required_if(YES, field="land_value_known", field_required="land_value")
-        self.applicable_if(
-            YES, field="land_additional", field_applicable="land_additional_known"
+        self.required_if(YES, field="land_owner", field_required="land_value")
+        self.required_if(YES, field="land_owner", field_required="land_surface_area")
+        self.applicable_if_true(
+            self.cleaned_data.get("land_surface_area"),
+            field_applicable="land_surface_area_units",
         )
-        self.required_if(
-            YES, field="land_additional_known", field_required="land_additional_value"
-        )
+        self.required_if(YES, field="land_additional", field_required="land_additional_value")

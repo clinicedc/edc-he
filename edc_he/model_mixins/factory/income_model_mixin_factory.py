@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from edc_constants.choices import YES_NO_DONT_KNOW_DWTA
 from edc_constants.constants import NOT_APPLICABLE
@@ -22,10 +23,10 @@ default_field_data = {
         "Interest, dividends",
         "(for example, from savings account or fixed deposits)?",
     ),
-    "internal_remittance": (
+    "internal_remit": (
         "Money transfers from family members or friends residing inside the country"
     ),
-    "external_remittance": (
+    "external_remit": (
         "Money transfers from family members or friends residing outside the country"
     ),
     "more_sources": "Do you have additional sources of income not included above?",
@@ -64,8 +65,10 @@ def income_model_mixin_factory(field_data: dict[str, str] | None = None):
                         "Estimated <u>total amount of income</u> from this source over the "
                         "time period from above"
                     ),
+                    validators=[MinValueValidator(1), MaxValueValidator(999999999)],
                     null=True,
                     blank=True,
+                    help_text="Use cash equivalent in local currency",
                 ),
             }
         )

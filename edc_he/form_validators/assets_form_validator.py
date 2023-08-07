@@ -1,7 +1,15 @@
+from edc_constants.constants import YES
 from edc_crf.crf_form_validator_mixins import CrfFormValidatorMixin
 from edc_form_validators import FormValidator
 
-from ..constants import ALL_WINDOWS_SCREENED, SOME_WINDOWS_SCREENED
+from ..constants import (
+    ALL_WINDOWS_SCREENED,
+    FAMILY_OWNED,
+    JOINT_OWNED,
+    NON_FAMILY_OWNED,
+    OWNER,
+    SOME_WINDOWS_SCREENED,
+)
 
 
 class HealthEconomicsAssetsFormValidator(
@@ -9,6 +17,15 @@ class HealthEconomicsAssetsFormValidator(
     FormValidator,
 ):
     def clean(self):
+        self.applicable_if(
+            OWNER,
+            FAMILY_OWNED,
+            NON_FAMILY_OWNED,
+            JOINT_OWNED,
+            field="residence_ownership",
+            field_applicable="dwelling_value_known",
+        )
+        self.required_if(YES, field="dwelling_value_known", field_required="dwelling_value")
         self.validate_other_specify(field="water_source")
         self.validate_other_specify(field="toilet")
         self.validate_other_specify(field="roof_material")

@@ -2,8 +2,10 @@ from __future__ import annotations
 
 from django.db import models
 from edc_constants.choices import YES_NO
+from edc_constants.constants import NO
 
 default_field_data = {
+    "solar_panels": "Solar panels",
     "radio": "Radio",
     "television": "Television",
     "mobile_phone": "Mobile phone",
@@ -38,6 +40,7 @@ def assets_model_mixin_factory(field_data: dict[str, str] | None = None):
                     verbose_name=prompt,
                     max_length=15,
                     choices=YES_NO,
+                    default=NO,
                 ),
             }
         )
