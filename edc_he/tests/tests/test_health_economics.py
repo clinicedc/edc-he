@@ -23,6 +23,7 @@ from edc_he.models import (
 from edc_he.rule_groups import HealthEconomicsRuleGroup as BaseHealthEconomicsRuleGroup
 from edc_he.rule_groups import Predicates
 
+from ...utils import get_patient_model
 from ..visit_schedule import visit_schedule
 
 
@@ -265,7 +266,7 @@ class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, CrfTestHelper
         hoh_obj = HealthEconomicsHouseholdHead.objects.create(**cleaned_data)
         hoh_obj.hoh_insurance.add(get_obj(InsuranceTypes))
 
-        qs = self.crf_metadata_obj("edc_he.healtheconomicspatient", REQUIRED, "1000")
+        qs = self.crf_metadata_obj(get_patient_model(), REQUIRED, "1000")
         self.assertTrue(qs.exists())
 
     @tag("1")
@@ -278,5 +279,5 @@ class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, CrfTestHelper
         hoh_obj = HealthEconomicsHouseholdHead.objects.create(**cleaned_data)
         hoh_obj.hoh_insurance.add(get_obj(InsuranceTypes))
 
-        qs = self.crf_metadata_obj("edc_he.healtheconomicspatient", NOT_REQUIRED, "1000")
+        qs = self.crf_metadata_obj(get_patient_model(), NOT_REQUIRED, "1000")
         self.assertTrue(qs.exists())

@@ -3,12 +3,20 @@ from edc_visit_schedule.schedule import Schedule
 from edc_visit_schedule.visit import Crf, FormsCollection, Visit
 from edc_visit_schedule.visit_schedule import VisitSchedule
 
+from edc_he.utils import (
+    get_assets_model,
+    get_household_head_model,
+    get_income_model,
+    get_patient_model,
+    get_property_model,
+)
+
 crfs = FormsCollection(
-    Crf(show_order=10, model="edc_he.healtheconomicshouseholdhead", required=True),
-    Crf(show_order=20, model="edc_he.healtheconomicspatient", required=True),
-    Crf(show_order=30, model="edc_he.healtheconomicsassets", required=True),
-    Crf(show_order=40, model="edc_he.healtheconomicsincome", required=True),
-    Crf(show_order=50, model="edc_he.healtheconomicsproperty", required=True),
+    Crf(show_order=10, model=get_household_head_model(), required=True),
+    Crf(show_order=20, model=get_patient_model(), required=True),
+    Crf(show_order=30, model=get_assets_model(), required=True),
+    Crf(show_order=40, model=get_income_model(), required=True),
+    Crf(show_order=50, model=get_property_model(), required=True),
 )
 
 visit0 = Visit(
