@@ -26,10 +26,10 @@ class HealthEconomicsPropertyModelAdminMixin:
                 ),
                 "fields": (
                     "land_owner",
-                    "land_value_known",
                     "land_value",
+                    "land_surface_area",
+                    "land_surface_area_units",
                     "land_additional",
-                    "land_additional_known",
                     "land_additional_value",
                 ),
             },
@@ -40,8 +40,7 @@ class HealthEconomicsPropertyModelAdminMixin:
 
     radio_fields = {
         "land_owner": admin.VERTICAL,
-        "land_value_known": admin.VERTICAL,
         "land_additional": admin.VERTICAL,
-        "land_additional_known": admin.VERTICAL,
+        "land_surface_area_units": admin.VERTICAL,
         "crf_status": admin.VERTICAL,
     }

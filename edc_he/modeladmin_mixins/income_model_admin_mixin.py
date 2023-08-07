@@ -13,8 +13,8 @@ def get_income_fieldsets_tuple() -> list[tuple]:
         ("pension", "Pension, etc."),
         ("ngo_assistance", "NGO assistance"),
         ("interest", "Interest and dividends"),
-        ("internal_remittance", "Money transfers (domestic)"),
-        ("external_remittance", "Remittances (from outside the country)"),
+        ("internal_remit", "Money transfers (domestic)"),
+        ("external_remit", "Remittances (from outside the country)"),
         ("more_sources", "Other sources of income"),
     ]
     for fld, label in sources:
@@ -23,7 +23,7 @@ def get_income_fieldsets_tuple() -> list[tuple]:
             f"{fld}_value_known",
             f"{fld}_value",
         ]
-        if fld == "external_remittance":
+        if fld == "external_remit":
             fields.extend(["external_remit_currency", "external_remit_currency_other"])
         if fld == "more_sources":
             fields.insert(1, "more_sources_other")
@@ -112,10 +112,10 @@ class HealthEconomicsIncomeModelAdminMixin:
         "ngo_assistance_value_known": admin.VERTICAL,
         "interest": admin.VERTICAL,
         "interest_value_known": admin.VERTICAL,
-        "internal_remittance": admin.VERTICAL,
-        "internal_remittance_value_known": admin.VERTICAL,
-        "external_remittance": admin.VERTICAL,
-        "external_remittance_value_known": admin.VERTICAL,
+        "internal_remit": admin.VERTICAL,
+        "internal_remit_value_known": admin.VERTICAL,
+        "external_remit": admin.VERTICAL,
+        "external_remit_value_known": admin.VERTICAL,
         "external_remit_currency": admin.VERTICAL,
         "more_sources": admin.VERTICAL,
         "more_sources_value_known": admin.VERTICAL,

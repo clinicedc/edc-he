@@ -15,7 +15,11 @@ from edc_constants.constants import (
 from .constants import (
     ALL_WINDOWS_SCREENED,
     BROTHER_SISTER,
+    FAMILY_OWNED,
     GRANDCHILD,
+    JOINT_OWNED,
+    NON_FAMILY_OWNED,
+    OWNER,
     PARENT,
     PARENTINLAW,
     SOME_WINDOWS_SCREENED,
@@ -73,12 +77,11 @@ MARITAL_CHOICES = (
 
 RESIDENCE_OWNERSHIP_CHOICES = (
     ("renter", "Rent"),
-    ("owner", "Own themselves"),
-    ("family_owned", "Owned by someone else in family"),
-    ("nonfamily_owned", "Owned by someone else other than family member"),
-    ("joint_owned", "Owned together with someone"),
+    (OWNER, "Own themselves"),
+    (FAMILY_OWNED, "Owned by someone else in family"),
+    (NON_FAMILY_OWNED, "Owned by someone else other than family member"),
+    (JOINT_OWNED, "Owned together with someone"),
 )
-
 
 WATER_SOURCE_CHOICES = (
     ("piped_into_plot", "Piped into dwelling/yard plot"),
@@ -199,8 +202,14 @@ FLOOR_MATERIALS_CHOICES = (
     (OTHER, "Other, specify ..."),
 )
 
+LAND_AREA_UNITS = (
+    ("hectares", "hectares"),
+    ("acres", "acres"),
+    ("sq_meters", "sq. meters"),
+    (NOT_APPLICABLE, "Not applicable"),
+)
 LIGHTING_CHOICES = (
-    ("1", "Electricity (e.g., hydroelectric or solar)"),
+    ("1", "Electricity"),
     ("2", "Paraffin, kerosene or gas lantern "),
     ("3", "Firewood"),
     ("4", "Candle"),

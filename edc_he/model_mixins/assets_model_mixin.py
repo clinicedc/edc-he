@@ -1,11 +1,11 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from edc_constants.choices import YES_NO, YES_NO_DONT_KNOW_DWTA
+from edc_constants.choices import YES_NO, YES_NO_DONT_KNOW_DWTA_NA
+from edc_constants.constants import NOT_APPLICABLE, QUESTION_RETIRED
 from edc_model_fields.fields import OtherCharField
 
 from ..choices import (
     COOKING_FUEL_CHOICES,
-    EAVES_CHOICES,
     EXTERNAL_WALL_MATERIALS_CHOICES,
     FLOOR_MATERIALS_CHOICES,
     LIGHTING_CHOICES,
@@ -15,8 +15,6 @@ from ..choices import (
     WATER_OBTAIN_CHOICES,
     WATER_SOURCE_CHOICES,
     WINDOW_MATERIAL_CHOICES,
-    WINDOW_SCREENING_CHOICES,
-    WINDOW_SCREENING_TYPE_CHOICES,
 )
 
 
@@ -36,7 +34,8 @@ class AssetsModelMixin(models.Model):
             "approximate value?"
         ),
         max_length=25,
-        choices=YES_NO_DONT_KNOW_DWTA,
+        choices=YES_NO_DONT_KNOW_DWTA_NA,
+        default=NOT_APPLICABLE,
         help_text="in local currency",
     )
 
@@ -53,17 +52,17 @@ class AssetsModelMixin(models.Model):
             "How many rooms does your dwelling have in total, without counting "
             "the bathrooms/ toilets or hallways/passageways?"
         ),
-        validators=[MinValueValidator(0), MaxValueValidator(20)],
+        validators=[MinValueValidator(1), MaxValueValidator(30)],
     )
 
     bedrooms = models.IntegerField(
         verbose_name="How many rooms are used for sleeping in your dwelling?",
-        validators=[MinValueValidator(0), MaxValueValidator(10)],
+        validators=[MinValueValidator(0), MaxValueValidator(30)],
     )
 
     beds = models.IntegerField(
         verbose_name="How many beds does your dwelling have in total?",
-        validators=[MinValueValidator(0), MaxValueValidator(10)],
+        validators=[MinValueValidator(0), MaxValueValidator(30)],
     )
 
     water_source = models.CharField(
@@ -103,7 +102,7 @@ class AssetsModelMixin(models.Model):
     eaves = models.CharField(
         verbose_name="Are the eaves open, partially or fully closed?",
         max_length=25,
-        choices=EAVES_CHOICES,
+        default=QUESTION_RETIRED,
     )
 
     external_wall_material = models.CharField(
@@ -129,13 +128,13 @@ class AssetsModelMixin(models.Model):
     window_screens = models.CharField(
         verbose_name="What is the main screening material of external windows?",
         max_length=25,
-        choices=WINDOW_SCREENING_CHOICES,
+        default=QUESTION_RETIRED,
     )
 
     window_screen_type = models.CharField(
         verbose_name="Type of screening on external windows",
         max_length=25,
-        choices=WINDOW_SCREENING_TYPE_CHOICES,
+        default=QUESTION_RETIRED,
     )
 
     floor_material = models.CharField(
