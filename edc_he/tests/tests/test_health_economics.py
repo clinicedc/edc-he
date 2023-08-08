@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from django import forms
-from django.test import TestCase, tag
+from django.test import TestCase
 from edc_constants.constants import COMPLETE, FEMALE, NO, NOT_APPLICABLE, OTHER, YES
 from edc_metadata import NOT_REQUIRED, REQUIRED, site_metadata_rules
 from edc_metadata.tests import CrfTestHelper
@@ -269,7 +269,6 @@ class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, CrfTestHelper
         qs = self.crf_metadata_obj(get_patient_model(), REQUIRED, "1000")
         self.assertTrue(qs.exists())
 
-    @tag("1")
     def test_patient_required_if_patient_is_hoh(self):
         cleaned_data = self.get_cleaned_data(
             hoh=YES,
