@@ -1,5 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
-from edc_constants.constants import NO
+from edc_constants.constants import YES
 from edc_metadata.metadata_rules import PredicateCollection
 
 from ..utils import (
@@ -41,7 +41,7 @@ class Predicates(PredicateCollection):
                 .objects.filter(subject_visit__subject_identifier=visit.subject_identifier)
                 .exists()
             ):
-                required = hoh_obj.hoh == NO
+                required = hoh_obj.hoh == YES
         return required
 
     @staticmethod

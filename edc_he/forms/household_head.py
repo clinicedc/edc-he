@@ -3,6 +3,7 @@ from django.utils.html import format_html
 from edc_consent.utils import get_consent_model_cls
 from edc_constants.constants import YES
 from edc_crf.modelform_mixins import CrfModelFormMixin, CrfSingletonModelFormMixin
+from edc_dx_review.form_mixins import ClinicalReviewBaselineRequiredModelFormMixin
 from edc_sites import get_sites_by_country
 from edc_utils import age
 from intecomm_sites import all_sites
@@ -13,52 +14,65 @@ from ..models import HealthEconomicsHouseholdHead
 
 
 class HealthEconomicsHouseholdHeadForm(
-    CrfSingletonModelFormMixin, CrfModelFormMixin, forms.ModelForm
+    CrfSingletonModelFormMixin,
+    ClinicalReviewBaselineRequiredModelFormMixin,
+    CrfModelFormMixin,
+    forms.ModelForm,
 ):
     form_validator_cls = HealthEconomicsHouseholdHeadFormValidator
 
     def clean(self):
-        self.raise_if_singleton_exists()
-        return super().clean()
+        cleaned_data = super().clean()
+        self.clean_after_clean_fields_hoh_gender(cleaned_data)
+        self.clean_after_clean_fields_hoh_age(cleaned_data)
+        self.clean_after_clean_fields_hoh_insurance(cleaned_data)
+        return cleaned_data
 
-    def clean_hoh_gender(self):
-        hoh = self.cleaned_data.get("hoh")
-        hoh_gender = self.cleaned_data.get("hoh_gender")
+    def clean_after_clean_fields_hoh_gender(self, cleaned_data: dict):
+        hoh = cleaned_data.get("hoh")
+        hoh_gender = cleaned_data.get("hoh_gender")
         if hoh and hoh == YES and hoh_gender and hoh_gender != self.subject_consent.gender:
             raise forms.ValidationError(
-                "Mismatch. Subject is the head of household and "
-                f"is {self.subject_consent.get_gender_display().lower()}."
+                {
+                    "hoh_gender": "Mismatch. Subject is the head of household and "
+                    f"is {self.subject_consent.get_gender_display().lower()}."
+                }
             )
         return hoh_gender
 
-    def clean_hoh_age(self):
-        hoh = self.cleaned_data.get("hoh")
-        hoh_age = self.cleaned_data.get("hoh_age")
+    def clean_after_clean_fields_hoh_age(self, cleaned_data: dict):
+        hoh = cleaned_data.get("hoh")
+        hoh_age = cleaned_data.get("hoh_age")
         if hoh and hoh == YES and hoh_age:
             if (
                 hoh_age
-                != age(
-                    self.subject_consent.dob, self.cleaned_data.get("report_datetime")
-                ).years
+                != age(self.subject_consent.dob, cleaned_data.get("report_datetime")).years
             ):
                 age_in_years = age(
-                    self.subject_consent.dob, self.cleaned_data.get("report_datetime")
+                    self.subject_consent.dob, cleaned_data.get("report_datetime")
                 ).years
                 raise forms.ValidationError(
-                    "Mismatch. Subject is the head of household and "
-                    f"is {age_in_years} as of this report date."
+                    {
+                        "hoh_age": "Mismatch. Subject is the head of household and "
+                        f"is {age_in_years} as of this report date."
+                    }
                 )
         return hoh_age
 
-    def clean_hoh_insurance(self):
-        hoh_insurance = self.cleaned_data.get("hoh_insurance")
+    def clean_after_clean_fields_hoh_insurance(self, cleaned_data: dict):
+        hoh_insurance = cleaned_data.get("hoh_insurance")
         for obj in hoh_insurance.all():
             uganda_sites = get_sites_by_country(country="uganda", all_sites=all_sites)
             if obj.name in [NHIF, CHF] and self.related_visit.site_id in [
                 s.site_id for s in uganda_sites
             ]:
                 raise forms.ValidationError(
-                    f"Invalid select for your country (Uganda). Got `{obj.display_name}`."
+                    {
+                        "hoh_insurance": (
+                            "Invalid select for your country (Uganda). "
+                            f"Got `{obj.display_name}`."
+                        )
+                    }
                 )
 
         return hoh_insurance

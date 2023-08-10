@@ -37,7 +37,6 @@ class HealthEconomicsPatientModelAdminMixin:
     )
 
     radio_fields = {
-        "pat_citizen": admin.VERTICAL,
         "pat_education": admin.VERTICAL,
         "pat_employment_status": admin.VERTICAL,
         "pat_employment_type": admin.VERTICAL,

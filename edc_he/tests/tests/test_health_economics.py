@@ -2,7 +2,15 @@ from __future__ import annotations
 
 from django import forms
 from django.test import TestCase
-from edc_constants.constants import COMPLETE, FEMALE, NO, NOT_APPLICABLE, OTHER, YES
+from edc_constants.constants import (
+    COMPLETE,
+    FEMALE,
+    MALE,
+    NO,
+    NOT_APPLICABLE,
+    OTHER,
+    YES,
+)
 from edc_metadata import NOT_REQUIRED, REQUIRED, site_metadata_rules
 from edc_metadata.tests import CrfTestHelper
 from edc_utils import get_utcnow
@@ -120,11 +128,43 @@ class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, CrfTestHelper
             hoh_employment_type=get_obj(EmploymentType, NOT_APPLICABLE),
             hoh_insurance=get_m2m_qs(InsuranceTypes, NOT_APPLICABLE),
         )
-        cleaned_data = self.get_cleaned_data(
-            hoh=YES,
-            relationship_to_hoh=None,
-            **not_applicable_opts,
+        cleaned_data = self.get_cleaned_data(hoh=YES, **not_applicable_opts)
+        form_validator = HealthEconomicsHouseholdHeadFormValidator(
+            cleaned_data=cleaned_data, **opts
         )
+        with self.assertRaises(forms.ValidationError):
+            form_validator.validate()
+        self.assertIn("hoh_gender", form_validator._errors)
+        self.assertIn(
+            "This field is not applicable",
+            str(form_validator._errors.get("hoh_gender")),
+        )
+
+        cleaned_data.update(hoh_gender=NOT_APPLICABLE, hoh=20)
+        form_validator = HealthEconomicsHouseholdHeadFormValidator(
+            cleaned_data=cleaned_data, **opts
+        )
+        with self.assertRaises(forms.ValidationError):
+            form_validator.validate()
+        self.assertIn("hoh_age", form_validator._errors)
+        self.assertIn(
+            "This field is not required",
+            str(form_validator._errors.get("hoh_age")),
+        )
+
+        cleaned_data.update(hoh_age=0)
+        form_validator = HealthEconomicsHouseholdHeadFormValidator(
+            cleaned_data=cleaned_data, **opts
+        )
+        with self.assertRaises(forms.ValidationError):
+            form_validator.validate()
+        self.assertIn("hoh_age", form_validator._errors)
+        self.assertIn(
+            "This field is not required",
+            str(form_validator._errors.get("hoh_age")),
+        )
+
+        cleaned_data.update(hoh_age=None, relationship_to_hoh=WIFE_HUSBAND)
         form_validator = HealthEconomicsHouseholdHeadFormValidator(
             cleaned_data=cleaned_data, **opts
         )
@@ -136,11 +176,33 @@ class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, CrfTestHelper
             str(form_validator._errors.get("relationship_to_hoh")),
         )
 
-        cleaned_data = self.get_cleaned_data(
-            hoh=YES,
-            relationship_to_hoh=NOT_APPLICABLE,
-            **not_applicable_opts,
+        cleaned_data.update(relationship_to_hoh=NOT_APPLICABLE)
+        form_validator = HealthEconomicsHouseholdHeadFormValidator(
+            cleaned_data=cleaned_data, **opts
         )
+        with self.assertRaises(forms.ValidationError):
+            form_validator.validate()
+        self.assertIn("hoh_employment_status", form_validator._errors)
+        self.assertIn(
+            "This field is not applicable",
+            str(form_validator._errors.get("hoh_employment_status")),
+        )
+
+        cleaned_data.update(
+            hoh_employment_status=NOT_APPLICABLE, hoh_marital_status_other=None
+        )
+        form_validator = HealthEconomicsHouseholdHeadFormValidator(
+            cleaned_data=cleaned_data, **opts
+        )
+        with self.assertRaises(forms.ValidationError):
+            form_validator.validate()
+        self.assertIn("hoh_marital_status", form_validator._errors)
+        self.assertIn(
+            "This field is not applicable",
+            str(form_validator._errors.get("hoh_marital_status")),
+        )
+
+        cleaned_data.update(hoh_marital_status=NOT_APPLICABLE)
         form_validator = HealthEconomicsHouseholdHeadFormValidator(
             cleaned_data=cleaned_data, **opts
         )
@@ -148,28 +210,6 @@ class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, CrfTestHelper
             form_validator.validate()
         except forms.ValidationError as e:
             self.fail(f"ValidationError unexpectedly raised. Got {e}")
-
-        cleaned_data.update(hoh=NO, relationship_to_hoh=None)
-        form_validator = HealthEconomicsHouseholdHeadFormValidator(
-            cleaned_data=cleaned_data, **opts
-        )
-        with self.assertRaises(forms.ValidationError):
-            form_validator.validate()
-        self.assertIn("relationship_to_hoh", form_validator._errors)
-        self.assertIn(
-            "This field is applicable", str(form_validator._errors.get("relationship_to_hoh"))
-        )
-
-        cleaned_data.update(hoh=NO, relationship_to_hoh=NOT_APPLICABLE)
-        form_validator = HealthEconomicsHouseholdHeadFormValidator(
-            cleaned_data=cleaned_data, **opts
-        )
-        with self.assertRaises(forms.ValidationError):
-            form_validator.validate()
-        self.assertIn("relationship_to_hoh", form_validator._errors)
-        self.assertIn(
-            "This field is applicable", str(form_validator._errors.get("relationship_to_hoh"))
-        )
 
         applicable_opts = dict(
             hoh_religion=get_obj(Religions),
@@ -179,7 +219,43 @@ class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, CrfTestHelper
             hoh_insurance=get_m2m_qs(InsuranceTypes),
         )
 
-        cleaned_data.update(hoh=NO, relationship_to_hoh=WIFE_HUSBAND, **applicable_opts)
+        cleaned_data.update(
+            hoh=NO,
+            hoh_gender=MALE,
+            hoh_age=75,
+            relationship_to_hoh=WIFE_HUSBAND,
+            hoh_employment_status=NOT_APPLICABLE,
+            **applicable_opts,
+        )
+        # hoh_employment_status
+        cleaned_data.update(hoh_employment_status=NOT_APPLICABLE)
+        form_validator = HealthEconomicsHouseholdHeadFormValidator(
+            cleaned_data=cleaned_data, **opts
+        )
+        with self.assertRaises(forms.ValidationError):
+            form_validator.validate()
+        self.assertIn("hoh_employment_status", form_validator._errors)
+        self.assertIn(
+            "This field is applicable",
+            str(form_validator._errors.get("hoh_employment_status")),
+        )
+        cleaned_data.update(hoh_employment_status="1")
+
+        # hoh_marital_status
+        cleaned_data.update(hoh_marital_status=NOT_APPLICABLE)
+        form_validator = HealthEconomicsHouseholdHeadFormValidator(
+            cleaned_data=cleaned_data, **opts
+        )
+        with self.assertRaises(forms.ValidationError):
+            form_validator.validate()
+        self.assertIn("hoh_marital_status", form_validator._errors)
+        self.assertIn(
+            "This field is applicable",
+            str(form_validator._errors.get("hoh_marital_status")),
+        )
+        cleaned_data.update(hoh_marital_status="1")
+
+        # ok
         form_validator = HealthEconomicsHouseholdHeadFormValidator(
             cleaned_data=cleaned_data, **opts
         )
@@ -188,20 +264,16 @@ class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, CrfTestHelper
         except forms.ValidationError as e:
             self.fail(f"ValidationError unexpectedly raised. Got {e}")
 
-        cleaned_data.update(hoh=NO, relationship_to_hoh=OTHER, **applicable_opts)
+        # check other specify
+        cleaned_data.update(relationship_to_hoh=OTHER)
         form_validator = HealthEconomicsHouseholdHeadFormValidator(
             cleaned_data=cleaned_data, **opts
         )
         with self.assertRaises(forms.ValidationError):
             form_validator.validate()
         self.assertIn("relationship_to_hoh_other", form_validator._errors)
+        cleaned_data.update(relationship_to_hoh_other="blah")
 
-        cleaned_data.update(
-            hoh=NO,
-            relationship_to_hoh=OTHER,
-            relationship_to_hoh_other="blah",
-            **applicable_opts,
-        )
         form_validator = HealthEconomicsHouseholdHeadFormValidator(
             cleaned_data=cleaned_data, **opts
         )
@@ -266,7 +338,7 @@ class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, CrfTestHelper
         hoh_obj = HealthEconomicsHouseholdHead.objects.create(**cleaned_data)
         hoh_obj.hoh_insurance.add(get_obj(InsuranceTypes))
 
-        qs = self.crf_metadata_obj(get_patient_model(), REQUIRED, "1000")
+        qs = self.crf_metadata_obj(get_patient_model(), NOT_REQUIRED, "1000")
         self.assertTrue(qs.exists())
 
     def test_patient_required_if_patient_is_hoh(self):
@@ -278,5 +350,5 @@ class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, CrfTestHelper
         hoh_obj = HealthEconomicsHouseholdHead.objects.create(**cleaned_data)
         hoh_obj.hoh_insurance.add(get_obj(InsuranceTypes))
 
-        qs = self.crf_metadata_obj(get_patient_model(), NOT_REQUIRED, "1000")
+        qs = self.crf_metadata_obj(get_patient_model(), REQUIRED, "1000")
         self.assertTrue(qs.exists())
