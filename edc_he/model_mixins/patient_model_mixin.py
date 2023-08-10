@@ -1,19 +1,12 @@
 from django.db import models
 from django.db.models import PROTECT
-from edc_constants.choices import YES_NO
+from edc_constants.constants import QUESTION_RETIRED
 from edc_model_fields.fields import OtherCharField
 
 from ..choices import EMPLOYMENT_STATUS_CHOICES, MARITAL_CHOICES
 
 
 class PatientModelMixin(models.Model):
-    pat_citizen = models.CharField(
-        verbose_name="Is the patient a citizen of this country?",
-        max_length=15,
-        choices=YES_NO,
-        null=True,
-    )
-
     pat_religion = models.ForeignKey(
         "edc_he.religions",
         verbose_name="How would you describe your religious orientation?",
@@ -96,24 +89,32 @@ class PatientModelMixin(models.Model):
     pat_ethnicity_old = models.CharField(
         verbose_name="What is your ethnic background?",
         max_length=25,
+        default=QUESTION_RETIRED,
+        editable=False,
     )
 
     # not used
     pat_employment_type_old = models.CharField(
         verbose_name="What is your type of employment?",
         max_length=25,
+        default=QUESTION_RETIRED,
+        editable=False,
     )
 
     # not used
     pat_education_old = models.CharField(
         verbose_name="Highest level of education completed?",
         max_length=25,
+        default=QUESTION_RETIRED,
+        editable=False,
     )
 
     # not used
     pat_religion_old = models.CharField(
         verbose_name="How would you describe your religious orientation?",
         max_length=25,
+        default=QUESTION_RETIRED,
+        editable=False,
     )
 
     class Meta:

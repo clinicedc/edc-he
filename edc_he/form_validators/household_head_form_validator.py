@@ -21,7 +21,13 @@ class HealthEconomicsHouseholdHeadFormValidator(
                 },
                 INVALID_ERROR,
             )
-
+        self.applicable_if(NO, field="hoh", field_applicable="hoh_gender")
+        self.required_if(
+            NO,
+            field="hoh",
+            field_required="hoh_age",
+            field_required_evaluate_as_int=True,
+        )
         self.applicable_if(NO, field="hoh", field_applicable="relationship_to_hoh")
         self.validate_other_specify(field="relationship_to_hoh")
         self.applicable_if(NO, field="hoh", field_applicable="hoh_religion")
@@ -30,8 +36,11 @@ class HealthEconomicsHouseholdHeadFormValidator(
         self.validate_other_specify(field="hoh_ethnicity")
         self.applicable_if(NO, field="hoh", field_applicable="hoh_education")
         self.validate_other_specify(field="hoh_education")
+        self.applicable_if(NO, field="hoh", field_applicable="hoh_employment_status")
+        self.validate_other_specify(field="hoh_employment_status")
         self.applicable_if(NO, field="hoh", field_applicable="hoh_employment_type")
         self.validate_other_specify(field="hoh_employment_type")
+        self.applicable_if(NO, field="hoh", field_applicable="hoh_marital_status")
         self.validate_other_specify(field="hoh_marital_status")
         self.m2m_applicable_if(NO, field="hoh", m2m_field="hoh_insurance")
         self.m2m_single_selection_if(DONT_KNOW, NONE, m2m_field="hoh_insurance")
