@@ -59,7 +59,7 @@ EMPLOYMENT_STATUS_CHOICES = (
     ("7", "Unemployed (able to work)"),
     ("8", "Unemployed (unable to work)"),
     (DONT_KNOW, "Don’t know"),
-    (NOT_APPLICABLE, "Not applcable"),
+    (NOT_APPLICABLE, "Not applicable"),
 )
 
 

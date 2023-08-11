@@ -20,7 +20,7 @@ list_data = {
         ),
         (OTHER, "Other, specify ..."),
         (DONT_KNOW, "Don’t know"),
-        (NOT_APPLICABLE, "Not applcable"),
+        (NOT_APPLICABLE, "Not applicable"),
     ],
     "edc_he.employmenttype": [
         ("1", "Chief executives, managers, senior officials and legislators"),
