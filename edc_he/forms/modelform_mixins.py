@@ -25,10 +25,6 @@ class HealthEconomicsModelFormMixin:
             subject_visit__subject_identifier=self.subject_identifier
         )
 
-    @property
-    def is_hoh(self):
-        return self.household_head.hoh == YES
-
     def raise_if_he_household_head_required(self):
         if self._meta.model != get_household_head_model_cls():
             try:
@@ -39,7 +35,12 @@ class HealthEconomicsModelFormMixin:
                 )
 
     def raise_if_he_patient_required(self):
-        if not self.is_hoh and self._meta.model in [
+        """Raise if patient is the head of household and the Patient
+        form/instance has not yet been completed.
+
+        Patient is HoH if self.household_head.hoh == YES.
+        """
+        if self.household_head.hoh == YES and self._meta.model in [
             get_assets_model_cls(),
             get_income_model_cls(),
             get_property_model_cls(),

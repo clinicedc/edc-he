@@ -4,11 +4,8 @@ from edc_consent.utils import get_consent_model_cls
 from edc_constants.constants import YES
 from edc_crf.modelform_mixins import CrfModelFormMixin, CrfSingletonModelFormMixin
 from edc_dx_review.form_mixins import ClinicalReviewBaselineRequiredModelFormMixin
-from edc_sites import get_sites_by_country
 from edc_utils import age
-from intecomm_sites import all_sites
 
-from ..constants import CHF, NHIF
 from ..form_validators import HealthEconomicsHouseholdHeadFormValidator
 from ..models import HealthEconomicsHouseholdHead
 
@@ -25,7 +22,6 @@ class HealthEconomicsHouseholdHeadForm(
         cleaned_data = super().clean()
         self.clean_after_clean_fields_hoh_gender(cleaned_data)
         self.clean_after_clean_fields_hoh_age(cleaned_data)
-        self.clean_after_clean_fields_hoh_insurance(cleaned_data)
         return cleaned_data
 
     def clean_after_clean_fields_hoh_gender(self, cleaned_data: dict):
@@ -58,24 +54,6 @@ class HealthEconomicsHouseholdHeadForm(
                     }
                 )
         return hoh_age
-
-    def clean_after_clean_fields_hoh_insurance(self, cleaned_data: dict):
-        hoh_insurance = cleaned_data.get("hoh_insurance")
-        for obj in hoh_insurance.all():
-            uganda_sites = get_sites_by_country(country="uganda", all_sites=all_sites)
-            if obj.name in [NHIF, CHF] and self.related_visit.site_id in [
-                s.site_id for s in uganda_sites
-            ]:
-                raise forms.ValidationError(
-                    {
-                        "hoh_insurance": (
-                            "Invalid select for your country (Uganda). "
-                            f"Got `{obj.display_name}`."
-                        )
-                    }
-                )
-
-        return hoh_insurance
 
     @property
     def subject_consent(self):
