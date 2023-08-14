@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from django import forms
+from django.forms import ALL_FIELDS
 from django.test import TestCase
 from edc_constants.constants import (
     COMPLETE,
@@ -17,6 +18,7 @@ from edc_utils import get_utcnow
 from edc_utils.test_case_mixins.longitudinal_test_case_mixin import (
     LongitudinalTestCaseMixin,
 )
+from model_bakery.baker import make_recipe
 
 from edc_he.constants import WIFE_HUSBAND
 from edc_he.form_validators import HealthEconomicsHouseholdHeadFormValidator
@@ -24,13 +26,20 @@ from edc_he.models import (
     Education,
     EmploymentType,
     Ethnicities,
+    HealthEconomicsAssets,
     HealthEconomicsHouseholdHead,
+    HealthEconomicsPatient,
+    HealthEconomicsProperty,
     InsuranceTypes,
     Religions,
 )
 from edc_he.rule_groups import HealthEconomicsRuleGroup as BaseHealthEconomicsRuleGroup
 from edc_he.rule_groups import Predicates
 
+from ...forms import HealthEconomicsAssetsForm as BaseHealthEconomicsAssetsForm
+from ...forms import HealthEconomicsIncomeForm as BaseHealthEconomicsIncomeForm
+from ...forms import HealthEconomicsPatientForm as BaseHealthEconomicsPatientForm
+from ...forms import HealthEconomicsPropertyForm as BaseHealthEconomicsPropertyForm
 from ...utils import get_patient_model
 from ..visit_schedule import visit_schedule
 
@@ -52,7 +61,27 @@ def get_obj(model_cls, name: str = None):
     return obj
 
 
-class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, CrfTestHelper, TestCase):
+class HealthEconomicsPatientForm(BaseHealthEconomicsPatientForm):
+    def validate_against_consent(self):
+        pass
+
+
+class HealthEconomicsAssetsForm(BaseHealthEconomicsAssetsForm):
+    def validate_against_consent(self):
+        pass
+
+
+class HealthEconomicsPropertyForm(BaseHealthEconomicsPropertyForm):
+    def validate_against_consent(self):
+        pass
+
+
+class HealthEconomicsIncomeForm(BaseHealthEconomicsIncomeForm):
+    def validate_against_consent(self):
+        pass
+
+
+class HealthEconomicsTests(LongitudinalTestCaseMixin, CrfTestHelper, TestCase):
     visit_schedule = visit_schedule
 
     def setUp(self) -> None:
@@ -72,6 +101,7 @@ class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, CrfTestHelper
         site_metadata_rules.register(HealthEconomicsRuleGroup)
 
     def get_cleaned_data(self, **kwargs) -> dict:
+        """Cleaned data for HouseholdHead"""
         cleaned_data = dict(
             subject_visit=self.subject_visit_baseline,
             report_datetime=get_utcnow(),
@@ -341,6 +371,10 @@ class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, CrfTestHelper
         qs = self.crf_metadata_obj(get_patient_model(), NOT_REQUIRED, "1000")
         self.assertTrue(qs.exists())
 
+        form = HealthEconomicsAssetsForm(data=cleaned_data)
+        form.is_valid()
+        self.assertIsNone(form._errors.get(ALL_FIELDS, None))
+
     def test_patient_required_if_patient_is_hoh(self):
         cleaned_data = self.get_cleaned_data(
             hoh=YES,
@@ -352,3 +386,82 @@ class HealthEconomicsHouseholdHeadTests(LongitudinalTestCaseMixin, CrfTestHelper
 
         qs = self.crf_metadata_obj(get_patient_model(), REQUIRED, "1000")
         self.assertTrue(qs.exists())
+
+    def test_patient_required_before_assets_if_patient_is_hoh(self):
+        cleaned_data = self.get_cleaned_data(
+            hoh=YES,
+            relationship_to_hoh=NOT_APPLICABLE,
+        )
+        del cleaned_data["hoh_insurance"]
+        hoh_obj = HealthEconomicsHouseholdHead.objects.create(**cleaned_data)
+        hoh_obj.hoh_insurance.add(get_obj(InsuranceTypes))
+
+        form = HealthEconomicsAssetsForm(data=cleaned_data)
+        form.is_valid()
+        msg = f"Complete {HealthEconomicsPatient._meta.verbose_name} CRF first"
+        self.assertIn(msg, str(form._errors.get(ALL_FIELDS, "")))
+
+    def test_patient_not_required_before_assets_if_patient_is_not_hoh(self):
+        cleaned_data = self.get_cleaned_data(
+            hoh=NO,
+            relationship_to_hoh=WIFE_HUSBAND,
+        )
+        del cleaned_data["hoh_insurance"]
+        hoh_obj = HealthEconomicsHouseholdHead.objects.create(**cleaned_data)
+        hoh_obj.hoh_insurance.add(get_obj(InsuranceTypes))
+
+        form = HealthEconomicsAssetsForm(data=cleaned_data)
+        form.is_valid()
+        msg = f"Complete {HealthEconomicsPatient._meta.verbose_name} CRF first"
+        self.assertNotIn(msg, str(form._errors.get(ALL_FIELDS, "")))
+
+    def test_assets_required_before_property_and_income(self):
+        cleaned_data = self.get_cleaned_data(
+            hoh=NO,
+            relationship_to_hoh=WIFE_HUSBAND,
+        )
+        del cleaned_data["hoh_insurance"]
+        hoh_obj = HealthEconomicsHouseholdHead.objects.create(**cleaned_data)
+        hoh_obj.hoh_insurance.add(get_obj(InsuranceTypes))
+
+        form = HealthEconomicsPropertyForm(data=cleaned_data)
+        form.is_valid()
+        msg = f"Complete {HealthEconomicsAssets._meta.verbose_name} CRF first"
+        self.assertIn(msg, str(form._errors.get(ALL_FIELDS, "")))
+
+        form = HealthEconomicsIncomeForm(data=cleaned_data)
+        form.is_valid()
+        self.assertIn(msg, str(form._errors.get(ALL_FIELDS, "")))
+
+        make_recipe("edc_he.healtheconomicsassets", subject_visit=hoh_obj.subject_visit)
+
+        form = HealthEconomicsPropertyForm(data=cleaned_data)
+        form.is_valid()
+        self.assertIsNone(form._errors.get(ALL_FIELDS, None))
+
+        msg = f"Complete {HealthEconomicsProperty._meta.verbose_name} CRF first"
+        form = HealthEconomicsIncomeForm(data=cleaned_data)
+        form.is_valid()
+        self.assertIn(msg, str(form._errors.get(ALL_FIELDS, "")))
+
+    def test_property_required_before_income(self):
+        cleaned_data = self.get_cleaned_data(
+            hoh=NO,
+            relationship_to_hoh=WIFE_HUSBAND,
+        )
+        del cleaned_data["hoh_insurance"]
+        hoh_obj = HealthEconomicsHouseholdHead.objects.create(**cleaned_data)
+        hoh_obj.hoh_insurance.add(get_obj(InsuranceTypes))
+
+        make_recipe("edc_he.healtheconomicsassets", subject_visit=hoh_obj.subject_visit)
+
+        msg = f"Complete {HealthEconomicsProperty._meta.verbose_name} CRF first"
+        form = HealthEconomicsIncomeForm(data=cleaned_data)
+        form.is_valid()
+        self.assertIn(msg, str(form._errors.get(ALL_FIELDS, "")))
+
+        make_recipe("edc_he.healtheconomicsproperty", subject_visit=hoh_obj.subject_visit)
+
+        form = HealthEconomicsIncomeForm(data=cleaned_data)
+        form.is_valid()
+        self.assertIsNone(form._errors.get(ALL_FIELDS, None))
