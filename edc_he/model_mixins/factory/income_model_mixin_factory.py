@@ -2,34 +2,35 @@ from __future__ import annotations
 
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from edc_constants.choices import YES_NO_DONT_KNOW_DWTA
 from edc_constants.constants import NOT_APPLICABLE
 
 from ...choices import INCOME_TIME_ESTIMATE_CHOICES
 
 default_field_data = {
-    "wages": "Income from wages, salary from job",
-    "selling": "Earnings from selling, trading or hawking products?",
-    "rental_income": "Income from rental of property?",
+    "wages": _("Income from wages, salary from job"),
+    "selling": _("Earnings from selling, trading or hawking products?"),
+    "rental_income": _("Income from rental of property?"),
     "pension": (
-        (
+        _(
             "State old-age (veteran's/civil service) pension*, contributory pension "
             "fund, provident fund or social security benefit?"
         ),
-        "Pensions by work",
+        _("Pensions by work"),
     ),
-    "ngo_assistance": "Assistance from nongovernmental organization",
+    "ngo_assistance": _("Assistance from nongovernmental organization"),
     "interest": (
-        "Interest, dividends",
-        "(for example, from savings account or fixed deposits)?",
+        _("Interest, dividends"),
+        _("(for example, from savings account or fixed deposits)?"),
     ),
-    "internal_remit": (
+    "internal_remit": _(
         "Money transfers from family members or friends residing inside the country"
     ),
-    "external_remit": (
+    "external_remit": _(
         "Money transfers from family members or friends residing outside the country"
     ),
-    "more_sources": "Do you have additional sources of income not included above?",
+    "more_sources": _("Do you have additional sources of income not included above?"),
 }
 
 
@@ -55,20 +56,20 @@ def income_model_mixin_factory(field_data: dict[str, str] | None = None):
                     help_text=help_text,
                 ),
                 f"{field_name}_value_known": models.CharField(
-                    verbose_name="Over which <u>time period</u> are you able to estimate?",
+                    verbose_name=_("Over which <u>time period</u> are you able to estimate?"),
                     max_length=15,
                     choices=INCOME_TIME_ESTIMATE_CHOICES,
                     default=NOT_APPLICABLE,
                 ),
                 f"{field_name}_value": models.IntegerField(
-                    verbose_name=(
+                    verbose_name=_(
                         "Estimated <u>total amount of income</u> from this source over the "
                         "time period from above"
                     ),
                     validators=[MinValueValidator(1), MaxValueValidator(999999999)],
                     null=True,
                     blank=True,
-                    help_text="Use cash equivalent in local currency",
+                    help_text=_("Use cash equivalent in local currency"),
                 ),
             }
         )

@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from django.utils.translation import gettext_lazy as _
 from django_audit_fields.admin import audit_fieldset_tuple
 from edc_crf.admin import crf_status_fieldset_tuple
 
@@ -7,14 +8,15 @@ from edc_crf.admin import crf_status_fieldset_tuple
 class HealthEconomicsAssetsModelAdminMixin:
     form = None
 
-    additional_instructions = [
+    additional_instructions = _(
         "We want to learn about the household and we use these questions "
         "to get an understanding of wealth and opportunities in the community. "
-    ]
+    )
+
     fieldsets = (
         (None, {"fields": ("subject_visit", "report_datetime")}),
         (
-            "Household assets",
+            _("Household assets"),
             {
                 "fields": (
                     "residence_ownership",
@@ -45,12 +47,15 @@ class HealthEconomicsAssetsModelAdminMixin:
             },
         ),
         (
-            "Household assets (continued)",
+            _("Household assets (continued)"),
             {
                 "description": format_html(
-                    "Does your household or anyone in your household have the following "
-                    "in working order? <BR>Note: If a household owns one of the assets below "
-                    "but the asset is not in working order then it should be marked as 'No'"
+                    _(
+                        "Does your household or anyone in your household have the following "
+                        "in working order? <BR>Note: If a household owns one of the assets "
+                        "below but the asset is not in working order then it should be marked "
+                        "as 'No'"
+                    )
                 ),
                 "fields": (
                     "radio",

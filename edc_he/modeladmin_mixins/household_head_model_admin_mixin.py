@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from django.utils.translation import gettext_lazy as _
 from django_audit_fields.admin import audit_fieldset_tuple
 from edc_constants.constants import NOT_APPLICABLE
 from edc_crf.admin import crf_status_fieldset_tuple
@@ -14,22 +15,36 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
         "to get an understanding of wealth and opportunities in the community.</p>"
     )
 
+    household_description = _(
+        "we mean a person or persons (people/ members) "
+        "who share the same kitchen (pot), live together, and run the household "
+        "expenditure from the same income is known as a household"
+    )
+    household_member_description = _(
+        "we mean a person identified on "
+        "the basis that they shared a place of living together most of time for "
+        "the past one year"
+    )
+
+    household_description_extra = _(
+        "When it is difficult to demarcate "
+        "'most of the time', living together for the past six months or more "
+        "should be used to find out whether or not the person is a "
+        "household member"
+    )
+
     fieldsets = (
         (None, {"fields": ("subject_visit", "report_datetime")}),
         (
             "Household members",
             {
                 "description": format_html(
-                    "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
-                    "<p>By a <B>HOUSEHOLD</B> we mean a person or persons (people/ members) "
-                    "who share the same kitchen (pot), live together, and run the household "
-                    "expenditure from the same income is known as a household.</P>"
-                    "<P>By a <B>HOUSEHOLD MEMBER</B> we mean a person identified on "
-                    "the basis that they shared a place of living together most of time for "
-                    "the past one year.</P><P><B>Note:</B> When it is difficult to demarcate "
-                    "'most of the time', living together for the past six months or more "
-                    "should be used to find out whether or not the person is a "
-                    "household member.</p>"
+                    _(
+                        "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
+                        f"<p>By a <B>HOUSEHOLD</B> {household_description}.</P>"
+                        f"<P>By a <B>HOUSEHOLD MEMBER</B> {household_member_description}."
+                        f"</P><P><B>{_('Note')}:</B> {household_description_extra}.</p>"
+                    )
                 ),
                 "fields": (
                     "hh_count",
