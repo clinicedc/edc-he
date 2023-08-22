@@ -1,27 +1,28 @@
 from __future__ import annotations
 
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from edc_constants.choices import YES_NO
 from edc_constants.constants import NO
 
 default_field_data = {
-    "solar_panels": "Solar panels",
-    "radio": "Radio",
-    "television": "Television",
-    "mobile_phone": "Mobile phone",
-    "computer": "Computer",
-    "telephone": "Non-mobile telephone",
-    "fridge": "Fridge",
-    "generator": "Generator",
-    "iron": "Flat iron",
-    "bicycle": "Bicycle",
-    "motorcycle": "Motorcycle/scooter (PikiPiki/Boda Boda)",
-    "dala_dala": "Dala Dala",
-    "car": "Car",
-    "motorboat": "Boat with a motor",
-    "large_livestock": "Large Livestock (e.g. cows, bulls, other cattle, horses, donkeys)",
-    "small_animals": "Small animals (goats, sheep, chickens or other poultry, etc)",
-    "shop": "A business or shop",
+    "solar_panels": _("Solar panels"),
+    "radio": _("Radio"),
+    "television": _("Television"),
+    "mobile_phone": _("Mobile phone"),
+    "computer": _("Computer"),
+    "telephone": _("Non-mobile telephone"),
+    "fridge": _("Fridge"),
+    "generator": _("Generator"),
+    "iron": _("Flat iron"),
+    "bicycle": _("Bicycle"),
+    "motorcycle": _("Motorcycle/scooter (PikiPiki/Boda Boda)"),
+    "dala_dala": _("Dala Dala"),
+    "car": _("Car"),
+    "motorboat": _("Boat with a motor"),
+    "large_livestock": _("Large Livestock (e.g. cows, bulls, other cattle, horses, donkeys)"),
+    "small_animals": _("Small animals (goats, sheep, chickens or other poultry, etc)"),
+    "shop": _("A business or shop"),
 }
 
 

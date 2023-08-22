@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from django.utils.translation import gettext_lazy as _
 from django_audit_fields.admin import audit_fieldset_tuple
 from edc_crf.admin import crf_status_fieldset_tuple
 
@@ -7,15 +8,15 @@ from edc_crf.admin import crf_status_fieldset_tuple
 def get_income_fieldsets_tuple() -> list[tuple]:
     fieldsets = []
     sources = [
-        ("wages", "Wages / Salary"),
-        ("selling", "Selling, trading or hawking"),
-        ("rental_income", "Rental income"),
-        ("pension", "Pension, etc."),
-        ("ngo_assistance", "NGO assistance"),
-        ("interest", "Interest and dividends"),
-        ("internal_remit", "Money transfers (domestic)"),
-        ("external_remit", "Remittances (from outside the country)"),
-        ("more_sources", "Other sources of income"),
+        ("wages", _("Wages / Salary")),
+        ("selling", _("Selling, trading or hawking")),
+        ("rental_income", _("Rental income")),
+        ("pension", _("Pension, etc.")),
+        ("ngo_assistance", _("NGO assistance")),
+        ("interest", _("Interest and dividends")),
+        ("internal_remit", _("Money transfers (domestic)")),
+        ("external_remit", _("Remittances (from outside the country)")),
+        ("more_sources", _("Other sources of income")),
     ]
     for fld, label in sources:
         fields = [
@@ -33,8 +34,10 @@ def get_income_fieldsets_tuple() -> list[tuple]:
                 label,
                 {
                     "description": format_html(
-                        "Estimate the total amount of income from this source "
-                        "for the <b>household</b> over the time period indicated"
+                        _(
+                            "Estimate the total amount of income from this source "
+                            "for the <b>household</b> over the time period indicated"
+                        )
                     ),
                     "fields": tuple(fields),
                 },
@@ -47,19 +50,21 @@ class HealthEconomicsIncomeModelAdminMixin:
     form = None
 
     additional_instructions = format_html(
-        "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
-        "<P>We want to learn about the household and we use these questions "
-        "to get an understanding of wealth and opportunities in the community.</P>"
-        "<p>Now, I will ask about <b>income for the household</b> from paid work or "
-        "other sources.</p><p>I know it may be difficult to calculate those figures, "
-        "but please do try to give amounts as accurately as possible. Remember "
-        "that <b>all information will be kept strictly confidential</b>. This "
-        "information is important to assess overall health and well-being of "
-        "people in your household, compared to other similar households.</p><p>"
-        "I am now going to read you a list of possible sources of income. "
-        "Thinking over the last 12 months, can you tell me what the average "
-        "earnings of the household have been per week or per month or per year? "
-        "Please tell me whichever time period that is easier for you.</p>"
+        _(
+            "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
+            "<P>We want to learn about the household and we use these questions "
+            "to get an understanding of wealth and opportunities in the community.</P>"
+            "<p>Now, I will ask about <b>income for the household</b> from paid work or "
+            "other sources.</p><p>I know it may be difficult to calculate those figures, "
+            "but please do try to give amounts as accurately as possible. Remember "
+            "that <b>all information will be kept strictly confidential</b>. This "
+            "information is important to assess overall health and well-being of "
+            "people in your household, compared to other similar households.</p><p>"
+            "I am now going to read you a list of possible sources of income. "
+            "Thinking over the last 12 months, can you tell me what the average "
+            "earnings of the household have been per week or per month or per year? "
+            "Please tell me whichever time period that is easier for you.</p>"
+        )
     )
     fieldsets = (
         (None, {"fields": ("subject_visit", "report_datetime")}),
@@ -79,15 +84,17 @@ class HealthEconomicsIncomeModelAdminMixin:
             "Debt / Loans",
             {
                 "description": format_html(
-                    "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
-                    "<p>Now, I will ask about the total current debt/loans for the household. "
-                    "I know it may be difficult to calculate this, but please do try to "
-                    "give amounts as accurately as possible. Remember that all information "
-                    "will be kept strictly confidential. <B>It is not possible to offer "
-                    "any help for your debts through this project</B>, but this information "
-                    "will contribute to research and is important to assess the overall "
-                    "health and well-being of people in your household, compared to other "
-                    "similar households.</p>"
+                    _(
+                        "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
+                        "<p>Now, I will ask about the total current debt/loans for the "
+                        "household. I know it may be difficult to calculate this, but please "
+                        "do try to give amounts as accurately as possible. Remember that "
+                        "all information will be kept strictly confidential. <B>It is not "
+                        "possible to offer any help for your debts through this project</B>, "
+                        "but this information will contribute to research and is important "
+                        "to assess the overall health and well-being of people in your "
+                        "household, compared to other similar households.</p>"
+                    )
                 ),
                 "fields": (
                     "household_debt",
