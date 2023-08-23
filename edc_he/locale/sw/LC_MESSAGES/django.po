@@ -21,15 +21,15 @@ msgstr ""
 
 #: edc_he/choices.py:33
 msgid "Primary Certificate"
-msgstr ""
+msgstr "Cheti cha shule ya msingi"
 
 #: edc_he/choices.py:34
 msgid "Secondary Certificate"
-msgstr ""
+msgstr "Cheti cha shule ya sekondari"
 
 #: edc_he/choices.py:35
 msgid "post-Secondary/Tertiary/College"
-msgstr ""
+msgstr "Shule ya baada ya Sekondari/Shule ya juu/Chuo kikuu"
 
 #: edc_he/choices.py:36 edc_he/choices.py:48 edc_he/choices.py:74
 #: edc_he/choices.py:108 edc_he/choices.py:141 edc_he/choices.py:152
@@ -939,7 +939,7 @@ msgstr ""
 
 #: edc_he/model_mixins/income_model_mixin.py:12
 msgid "In what currency do you receive remittances?"
-msgstr ""
+msgstr "Je, unapokea pesa kutoka nje kwa sarafu gani?"
 
 #: edc_he/model_mixins/income_model_mixin.py:20
 #, fuzzy
@@ -989,7 +989,7 @@ msgstr "Je! ni takriban kiasi gani cha deni au mkopo huu?"
 
 #: edc_he/model_mixins/income_model_mixin.py:83
 msgid "In local currency"
-msgstr ""
+msgstr "Fedha za ndani"
 
 #: edc_he/model_mixins/patient_model_mixin.py:13
 #: edc_he/model_mixins/patient_model_mixin.py:115
@@ -1033,7 +1033,7 @@ msgstr ""
 
 #: edc_he/model_mixins/property_model_mixin.py:12
 msgid "Do you own any land."
-msgstr ""
+msgstr "Je, unamiliki ardhi yoyote"
 
 #: edc_he/model_mixins/property_model_mixin.py:19
 #: edc_he/model_mixins/property_model_mixin.py:57
