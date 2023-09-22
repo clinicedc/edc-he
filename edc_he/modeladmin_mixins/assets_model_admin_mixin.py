@@ -25,11 +25,6 @@ class HealthEconomicsAssetsModelAdminMixin:
                     "rooms",
                     "bedrooms",
                     "beds",
-                    "water_source",
-                    "water_source_other",
-                    "water_obtain_time",
-                    "toilet",
-                    "toilet_other",
                     "roof_material",
                     "roof_material_other",
                     "external_wall_material",
@@ -43,6 +38,18 @@ class HealthEconomicsAssetsModelAdminMixin:
                     "lighting_source_other",
                     "cooking_fuel",
                     "cooking_fuel_other",
+                )
+            },
+        ),
+        (
+            _("Drinking water and sanitation"),
+            {
+                "fields": (
+                    "water_source",
+                    "water_source_other",
+                    "water_obtain_time",
+                    "toilet",
+                    "toilet_other",
                 )
             },
         ),
