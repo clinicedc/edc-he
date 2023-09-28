@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-21 21:58-0500\n"
+"POT-Creation-Date: 2023-09-27 21:08-0500\n"
 "PO-Revision-Date: 2023-08-21 21:51-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1077,11 +1077,15 @@ msgstr ""
 msgid "Household assets"
 msgstr ""
 
-#: edc_he/modeladmin_mixins/assets_model_admin_mixin.py:50
+#: edc_he/modeladmin_mixins/assets_model_admin_mixin.py:45
+msgid "Drinking water and sanitation"
+msgstr ""
+
+#: edc_he/modeladmin_mixins/assets_model_admin_mixin.py:57
 msgid "Household assets (continued)"
 msgstr ""
 
-#: edc_he/modeladmin_mixins/assets_model_admin_mixin.py:54
+#: edc_he/modeladmin_mixins/assets_model_admin_mixin.py:61
 msgid ""
 "Does your household or anyone in your household have the following in "
 "working order? <BR>Note: If a household owns one of the assets below but the "
