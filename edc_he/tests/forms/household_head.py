@@ -6,7 +6,8 @@ from edc_crf.modelform_mixins import CrfModelFormMixin, CrfSingletonModelFormMix
 from edc_dx_review.form_mixins import ClinicalReviewBaselineRequiredModelFormMixin
 from edc_utils import age
 
-from ..form_validators import HealthEconomicsHouseholdHeadFormValidator
+from edc_he.form_validators import HealthEconomicsHouseholdHeadFormValidator
+
 from ..models import HealthEconomicsHouseholdHead
 
 

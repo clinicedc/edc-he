@@ -5,7 +5,7 @@ from edc_form_validators.form_validator import FormValidator
 
 from edc_he.form_validators import SimpleFormValidatorMixin
 
-from .models import HealthEconomics
+from ..models import HealthEconomics
 
 
 class HealthEconomicsFormValidator(

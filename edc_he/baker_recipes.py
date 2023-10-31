@@ -1,7 +1,7 @@
 from faker import Faker
 from model_bakery.recipe import Recipe
 
-from .models import HealthEconomicsAssets, HealthEconomicsProperty
+from .tests.models import HealthEconomicsAssets, HealthEconomicsProperty
 
 fake = Faker()
 
