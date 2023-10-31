@@ -1,6 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
 from edc_constants.constants import YES
-from edc_metadata.metadata_rules import PredicateCollection
 
 from ..utils import (
     get_assets_model_cls,
@@ -11,10 +10,7 @@ from ..utils import (
 )
 
 
-class Predicates(PredicateCollection):
-    app_label = "edc_he"
-    visit_model = "edc_visit_tracking.subjectvisit"
-
+class Predicates:
     @staticmethod
     def get_household_head(visit):
         try:

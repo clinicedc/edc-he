@@ -3,15 +3,7 @@ from __future__ import annotations
 from django import forms
 from django.forms import ALL_FIELDS
 from django.test import TestCase
-from edc_constants.constants import (
-    COMPLETE,
-    FEMALE,
-    MALE,
-    NO,
-    NOT_APPLICABLE,
-    OTHER,
-    YES,
-)
+from edc_constants.constants import FEMALE, MALE, NO, NOT_APPLICABLE, OTHER, YES
 from edc_metadata import NOT_REQUIRED, REQUIRED
 from edc_metadata.metadata_rules import site_metadata_rules
 from edc_metadata.tests import CrfTestHelper
@@ -27,21 +19,23 @@ from edc_he.models import (
     Education,
     EmploymentType,
     Ethnicities,
-    HealthEconomicsAssets,
-    HealthEconomicsHouseholdHead,
-    HealthEconomicsPatient,
-    HealthEconomicsProperty,
     InsuranceTypes,
     Religions,
 )
 from edc_he.rule_groups import HealthEconomicsRuleGroup as BaseHealthEconomicsRuleGroup
 from edc_he.rule_groups import Predicates
+from edc_he.utils import get_patient_model
 
-from ...forms import HealthEconomicsAssetsForm as BaseHealthEconomicsAssetsForm
-from ...forms import HealthEconomicsIncomeForm as BaseHealthEconomicsIncomeForm
-from ...forms import HealthEconomicsPatientForm as BaseHealthEconomicsPatientForm
-from ...forms import HealthEconomicsPropertyForm as BaseHealthEconomicsPropertyForm
-from ...utils import get_patient_model
+from ..forms import HealthEconomicsAssetsForm as BaseHealthEconomicsAssetsForm
+from ..forms import HealthEconomicsIncomeForm as BaseHealthEconomicsIncomeForm
+from ..forms import HealthEconomicsPatientForm as BaseHealthEconomicsPatientForm
+from ..forms import HealthEconomicsPropertyForm as BaseHealthEconomicsPropertyForm
+from ..models import (
+    HealthEconomicsAssets,
+    HealthEconomicsHouseholdHead,
+    HealthEconomicsPatient,
+    HealthEconomicsProperty,
+)
 from ..visit_schedule import visit_schedule
 
 
@@ -126,8 +120,6 @@ class HealthEconomicsTests(LongitudinalTestCaseMixin, CrfTestHelper, TestCase):
             hoh_marital_status_other="blah",
             hoh_insurance=get_m2m_qs(InsuranceTypes),
             hoh_insurance_other=None,
-            crf_status=COMPLETE,
-            crf_status_comments="",
         )
         cleaned_data.update(**kwargs)
         return cleaned_data
