@@ -13,3 +13,10 @@ SOME_WINDOWS_SCREENED = "2"
 SON_DAUGHTER = "SON_DAUGHTER"
 SON_DAUGHTERINLAW = "SON_DAUGHTERINLAW"
 WIFE_HUSBAND = "WIFE_HUSBAND"
+
+# units of measure
+ACRES = "acres"
+DECIMALS = "decimals"
+HECTARES = "hectares"
+SQ_FEET = "sq_feet"
+SQ_METERS = "sq_meters"
