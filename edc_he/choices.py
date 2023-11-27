@@ -14,10 +14,13 @@ from edc_constants.constants import (
 )
 
 from .constants import (
+    ACRES,
     ALL_WINDOWS_SCREENED,
     BROTHER_SISTER,
+    DECIMALS,
     FAMILY_OWNED,
     GRANDCHILD,
+    HECTARES,
     JOINT_OWNED,
     NON_FAMILY_OWNED,
     OWNER,
@@ -26,6 +29,8 @@ from .constants import (
     SOME_WINDOWS_SCREENED,
     SON_DAUGHTER,
     SON_DAUGHTERINLAW,
+    SQ_FEET,
+    SQ_METERS,
     WIFE_HUSBAND,
 )
 
@@ -205,9 +210,11 @@ FLOOR_MATERIALS_CHOICES = (
 )
 
 LAND_AREA_UNITS = (
-    ("hectares", _("hectares")),
-    ("acres", _("acres")),
-    ("sq_meters", _("sq. meters")),
+    (HECTARES, _("hectares")),
+    (ACRES, _("acres")),
+    (DECIMALS, _("decimals (1 decimal = hundredth of an acre)")),
+    (SQ_FEET, _("sq. feet (length * width)")),
+    (SQ_METERS, _("sq. meters (length * width)")),
     (NOT_APPLICABLE, _("Not applicable")),
 )
 LIGHTING_CHOICES = (

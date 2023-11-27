@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from decimal import Decimal
+
 from django import forms
 from django.forms import ALL_FIELDS
 from django.test import TestCase
@@ -13,7 +15,7 @@ from edc_utils.test_case_mixins.longitudinal_test_case_mixin import (
 )
 from model_bakery.baker import make_recipe
 
-from edc_he.constants import WIFE_HUSBAND
+from edc_he.constants import ACRES, WIFE_HUSBAND
 from edc_he.form_validators import HealthEconomicsHouseholdHeadFormValidator
 from edc_he.models import (
     Education,
@@ -26,6 +28,7 @@ from edc_he.rule_groups import HealthEconomicsRuleGroup as BaseHealthEconomicsRu
 from edc_he.rule_groups import Predicates
 from edc_he.utils import get_patient_model
 
+from ...calculators import InvalidAreaUnitsError
 from ..forms import HealthEconomicsAssetsForm as BaseHealthEconomicsAssetsForm
 from ..forms import HealthEconomicsIncomeForm as BaseHealthEconomicsIncomeForm
 from ..forms import HealthEconomicsPatientForm as BaseHealthEconomicsPatientForm
@@ -458,3 +461,46 @@ class HealthEconomicsTests(LongitudinalTestCaseMixin, CrfTestHelper, TestCase):
         form = HealthEconomicsIncomeForm(data=cleaned_data)
         form.is_valid()
         self.assertIsNone(form._errors.get(ALL_FIELDS, None))
+
+    def test_calculated_land_surface_area(self):
+        cleaned_data = self.get_cleaned_data(
+            hoh=NO,
+            relationship_to_hoh=WIFE_HUSBAND,
+        )
+        del cleaned_data["hoh_insurance"]
+        hoh_obj = HealthEconomicsHouseholdHead.objects.create(**cleaned_data)
+        hoh_obj.hoh_insurance.add(get_obj(InsuranceTypes))
+
+        make_recipe("edc_he.healtheconomicsassets", subject_visit=hoh_obj.subject_visit)
+
+        obj = make_recipe(
+            "edc_he.healtheconomicsproperty", subject_visit=hoh_obj.subject_visit
+        )
+        self.assertIsNone(obj.calculated_land_surface_area)
+
+        obj.land_surface_area = 1
+        obj.land_surface_area_units = None
+        obj.save()
+        self.assertIsNone(obj.calculated_land_surface_area)
+
+        obj.land_surface_area = None
+        obj.land_surface_area_units = ACRES
+        obj.save()
+        self.assertIsNone(obj.calculated_land_surface_area)
+
+        obj.land_surface_area = 1
+        obj.land_surface_area_units = "sq_xxx"
+        with self.assertRaises(InvalidAreaUnitsError):
+            obj.save()
+        self.assertIsNone(obj.calculated_land_surface_area)
+
+        obj.land_surface_area = 1
+        obj.land_surface_area_units = ACRES
+        obj.save()
+        obj.refresh_from_db()
+        self.assertEqual(obj.calculated_land_surface_area, Decimal("4046.86"))
+
+        obj.land_surface_area = 1
+        obj.land_surface_area_units = None
+        obj.save()
+        self.assertIsNone(obj.calculated_land_surface_area)
