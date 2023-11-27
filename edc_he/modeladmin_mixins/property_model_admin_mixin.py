@@ -37,9 +37,19 @@ class HealthEconomicsPropertyModelAdminMixin:
                 ),
             },
         ),
+        (
+            "Calculated values",
+            {
+                "description": "To be calculated (or recalculated) when this form is saved",
+                "classes": ("collapse",),
+                "fields": ("calculated_land_surface_area",),
+            },
+        ),
         crf_status_fieldset_tuple,
         audit_fieldset_tuple,
     )
+
+    readonly_fields = ("calculated_land_surface_area",)
 
     radio_fields = {
         "land_owner": admin.VERTICAL,
