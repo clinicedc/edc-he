@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-27 21:08-0500\n"
+"POT-Creation-Date: 2023-11-28 17:02+0000\n"
 "PO-Revision-Date: 2023-08-21 21:51-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,522 +19,530 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: PO File Editor https://pofile.net/free-po-editor\n"
 
-#: edc_he/choices.py:33
+#: edc_he/choices.py:38
 msgid "Primary Certificate"
 msgstr "Cheti cha shule ya msingi"
 
-#: edc_he/choices.py:34
+#: edc_he/choices.py:39
 msgid "Secondary Certificate"
 msgstr "Cheti cha shule ya sekondari"
 
-#: edc_he/choices.py:35
+#: edc_he/choices.py:40
 msgid "post-Secondary/Tertiary/College"
 msgstr "Shule ya baada ya Sekondari/Shule ya juu/Chuo kikuu"
 
-#: edc_he/choices.py:36 edc_he/choices.py:48 edc_he/choices.py:74
-#: edc_he/choices.py:108 edc_he/choices.py:141 edc_he/choices.py:152
-#: edc_he/choices.py:170 edc_he/choices.py:180 edc_he/choices.py:204
-#: edc_he/choices.py:218 edc_he/choices.py:229 edc_he/choices.py:262
+#: edc_he/choices.py:41 edc_he/choices.py:53 edc_he/choices.py:79
+#: edc_he/choices.py:113 edc_he/choices.py:146 edc_he/choices.py:157
+#: edc_he/choices.py:175 edc_he/choices.py:185 edc_he/choices.py:209
+#: edc_he/choices.py:225 edc_he/choices.py:236 edc_he/choices.py:269
 msgid "Other, specify ..."
 msgstr "Nyingine, taja ..."
 
-#: edc_he/choices.py:37
+#: edc_he/choices.py:42
 msgid "Not applicable, never went to school"
 msgstr ""
 
-#: edc_he/choices.py:41
+#: edc_he/choices.py:46
 msgid "Wife/Husband"
 msgstr "Mke/Mume"
 
-#: edc_he/choices.py:42
+#: edc_he/choices.py:47
 msgid "Son/Daughter"
 msgstr "mtoto wa kiume/kike"
 
-#: edc_he/choices.py:43
+#: edc_he/choices.py:48
 msgid "Son/Daughter-in-law"
 msgstr "mkwe wa kike/kiume"
 
-#: edc_he/choices.py:44
+#: edc_he/choices.py:49
 msgid "Grandchild"
 msgstr "Mjukuu"
 
-#: edc_he/choices.py:45
+#: edc_he/choices.py:50
 msgid "Parent"
 msgstr "Mzazi"
 
-#: edc_he/choices.py:46
+#: edc_he/choices.py:51
 msgid "Parent-in-law"
 msgstr "Mkwe"
 
-#: edc_he/choices.py:47
+#: edc_he/choices.py:52
 msgid "Brother/Sister"
 msgstr "Kaka/Dada"
 
-#: edc_he/choices.py:49 edc_he/choices.py:63 edc_he/choices.py:75
-#: edc_he/choices.py:116 edc_he/choices.py:236 edc_he/choices.py:263
+#: edc_he/choices.py:54 edc_he/choices.py:68 edc_he/choices.py:80
+#: edc_he/choices.py:121 edc_he/choices.py:243 edc_he/choices.py:270
 msgid "Don't know"
 msgstr "Sijui"
 
-#: edc_he/choices.py:50 edc_he/choices.py:64 edc_he/choices.py:76
-#: edc_he/choices.py:194 edc_he/choices.py:211 edc_he/choices.py:238
+#: edc_he/choices.py:55 edc_he/choices.py:69 edc_he/choices.py:81
+#: edc_he/choices.py:199 edc_he/choices.py:218 edc_he/choices.py:245
 msgid "Not applicable"
 msgstr "Haihusiki"
 
-#: edc_he/choices.py:54
+#: edc_he/choices.py:59
 msgid "Full time employed"
 msgstr "Ajira ya kudumu"
 
-#: edc_he/choices.py:55
+#: edc_he/choices.py:60
 msgid "Regular part time employed "
 msgstr "Ajira ya muda"
 
-#: edc_he/choices.py:56
+#: edc_he/choices.py:61
 #, fuzzy
 #| msgid "Full time employed"
 msgid "Self employed "
 msgstr "Ajira ya kudumu"
 
-#: edc_he/choices.py:57
+#: edc_he/choices.py:62
 msgid "Irregular/ occasional/ day worker employment"
 msgstr "Ajira ya mara moja moja / ya mara kwa mara /ya siku"
 
-#: edc_he/choices.py:58
+#: edc_he/choices.py:63
 msgid "Non-paid/ voluntary role "
 msgstr "Isiyo na malipo / kujitolea"
 
-#: edc_he/choices.py:59
+#: edc_he/choices.py:64
 msgid "Student"
 msgstr "mwanafunzi"
 
-#: edc_he/choices.py:60
+#: edc_he/choices.py:65
 msgid "Homemaker"
 msgstr "Mama/baba wa nyumbani"
 
-#: edc_he/choices.py:61
+#: edc_he/choices.py:66
 msgid "Unemployed (able to work)"
 msgstr "Hajaajiriwa (Anaweza kufanya kazi)"
 
-#: edc_he/choices.py:62
+#: edc_he/choices.py:67
 msgid "Unemployed (unable to work)"
 msgstr "Hajaajiriwa (Hawezi kufanya kazi)"
 
-#: edc_he/choices.py:69
+#: edc_he/choices.py:74
 msgid "Never Married (but not co-habiting)"
 msgstr "Sijawahi kuolewa/kuoa (wala kuishi kinyumba"
 
-#: edc_he/choices.py:70
+#: edc_he/choices.py:75
 msgid "Co-habiting"
 msgstr "Ninaishi kinyumba"
 
-#: edc_he/choices.py:71
+#: edc_he/choices.py:76
 msgid "Currently Married"
 msgstr "Kwa Sasa Ameolewa/kaoa"
 
-#: edc_he/choices.py:72
+#: edc_he/choices.py:77
 msgid "Separated/Divorced"
 msgstr "Kutengana/Talaka"
 
-#: edc_he/choices.py:73
+#: edc_he/choices.py:78
 msgid "Widowed"
 msgstr "Mjane"
 
-#: edc_he/choices.py:81
+#: edc_he/choices.py:86
 msgid "Rent"
 msgstr "Kupanga"
 
-#: edc_he/choices.py:82
+#: edc_he/choices.py:87
 msgid "Own themselves"
 msgstr "Wanamiliki wenyewe"
 
-#: edc_he/choices.py:83
+#: edc_he/choices.py:88
 msgid "Owned by someone else in family"
 msgstr "Inamilikiwa na mtu mwingine katika familia"
 
-#: edc_he/choices.py:84
+#: edc_he/choices.py:89
 msgid "Owned by someone else other than family member"
 msgstr "Inamilikiwa na mtu mwingine ambaye siyo mwanafamilia"
 
-#: edc_he/choices.py:85
+#: edc_he/choices.py:90
 msgid "Owned together with someone"
 msgstr "Inamilikiwa pamoja na mtu mwingine"
 
-#: edc_he/choices.py:89
+#: edc_he/choices.py:94
 msgid "Piped into dwelling/yard plot"
 msgstr "Bomba ndani ya makazi/ uwanja"
 
-#: edc_he/choices.py:90
+#: edc_he/choices.py:95
 msgid "Piped to neighbour"
 msgstr "Bomba kwa jirani"
 
-#: edc_he/choices.py:91
+#: edc_he/choices.py:96
 msgid "Public tap/standpipe"
 msgstr "Bomba la umma/bomba la kusimama"
 
-#: edc_he/choices.py:92
+#: edc_he/choices.py:97
 msgid "Tube well or borehole"
 msgstr "kisima"
 
-#: edc_he/choices.py:93
+#: edc_he/choices.py:98
 msgid "Protected dug well"
 msgstr "Kisima kilichojengewa"
 
-#: edc_he/choices.py:94
+#: edc_he/choices.py:99
 msgid "Protected spring"
 msgstr "Chemchemi iliyojengewa"
 
-#: edc_he/choices.py:95
+#: edc_he/choices.py:100
 msgid "Rainwater"
 msgstr "Maji ya mvua"
 
-#: edc_he/choices.py:100
+#: edc_he/choices.py:105
 msgid "Unprotected dug well"
 msgstr "Kisima kilichochimbwa bila kujengewa"
 
-#: edc_he/choices.py:101
+#: edc_he/choices.py:106
 msgid "Unprotected spring"
 msgstr "chemchemi isiyojengewa"
 
-#: edc_he/choices.py:102
+#: edc_he/choices.py:107
 msgid "Tanker truck/cart with small tank"
 msgstr "magari ya maji tanki kubwa/ndogo"
 
-#: edc_he/choices.py:103
+#: edc_he/choices.py:108
 msgid "Surface water (river etc.)"
 msgstr "Maji ya ardhini (mto, dimbwi n.k.)"
 
-#: edc_he/choices.py:113
+#: edc_he/choices.py:118
 msgid "Water on premises (includes water piped to a neighbour)"
 msgstr "Maji la nyumbani (pamoja na bomba la maji kwa jirani"
 
-#: edc_he/choices.py:114
+#: edc_he/choices.py:119
 msgid "Less than 30 minutes"
 msgstr "Chini ya dakika 30"
 
-#: edc_he/choices.py:115
+#: edc_he/choices.py:120
 msgid "30 minutes or longer"
 msgstr "Dakika 30 au zaidi"
 
-#: edc_he/choices.py:121
+#: edc_he/choices.py:126
 msgid "1. Flush/pour flush to piped sewer system – private"
 msgstr "Choo binafsi cha kuflashi ambacho kimeunganishwa na mfumo wa maji taka"
 
-#: edc_he/choices.py:122
+#: edc_he/choices.py:127
 msgid "2. Flush/pour flush to septic tank – private "
 msgstr ""
 "Choo binafsi cha kuflashi ambacho kimeunganishwa na tenki/ shimo la maji taka"
 
-#: edc_he/choices.py:123
+#: edc_he/choices.py:128
 msgid "3. Flush/pour flush to pit latrine – private"
 msgstr ""
 "choo binafsi cha kuflash ambacho kinachomwaga maji kwenye shimo la choo"
 
-#: edc_he/choices.py:124
+#: edc_he/choices.py:129
 msgid "4. Ventilated improved pit (VIP) latrine – private "
 msgstr "Choo imara chenye hewa safi"
 
-#: edc_he/choices.py:125
+#: edc_he/choices.py:130
 msgid "5. Pit latrine with slab – private"
 msgstr "Choo binafsi cha shimo lililoboreshwa la uingizaji hewa (VIP)"
 
-#: edc_he/choices.py:126
+#: edc_he/choices.py:131
 msgid "6. Composting toilet – private"
 msgstr "Choo binafsi cha kutengeneza mbolea"
 
-#: edc_he/choices.py:127
+#: edc_he/choices.py:132
 msgid "7. EcoSan – private"
 msgstr "Choo binafsi cha EcoScan"
 
-#: edc_he/choices.py:128
+#: edc_he/choices.py:133
 msgid "8. Flush/pour flush to piped sewer system – shared"
 msgstr ""
 "Choo cha pamoja cha kuflashi ambacho kimeunganishwa na mfumo wa maji taka "
 
-#: edc_he/choices.py:129
+#: edc_he/choices.py:134
 msgid "9. Flush/pour flush to septic tank – shared"
 msgstr ""
 "Choo cha pamoja  cha kuflashi ambacho kimeunganishwa na tenki/ shimo la maji "
 "taka"
 
-#: edc_he/choices.py:130
+#: edc_he/choices.py:135
 msgid "10. Flush/pour flush to pit latrine – shared"
 msgstr ""
 "Choo cha pamoja cha kuflash ambacho kinachomwaga maji kwenye shimo la choo"
 
-#: edc_he/choices.py:131
+#: edc_he/choices.py:136
 msgid "11. Ventilated improved pit (VIP) latrine – shared"
 msgstr "Choo imara chenye hewa safi"
 
-#: edc_he/choices.py:132
+#: edc_he/choices.py:137
 msgid "12. Pit latrine with slab – shared"
 msgstr "Choo pamoja cha shimo kilichofunikwa "
 
-#: edc_he/choices.py:133
+#: edc_he/choices.py:138
 msgid "13. Composting toilet – shared"
 msgstr "Choo cha pamoja cha kutengeneza mbolea"
 
-#: edc_he/choices.py:134
+#: edc_he/choices.py:139
 msgid "14. EcoSan – shared"
 msgstr "Choo cha pamoja cha EcoScan"
 
-#: edc_he/choices.py:135
+#: edc_he/choices.py:140
 msgid "15. Flush/pour flush not to sewer/septic tank/pit latrine"
 msgstr "Choo cha kuflash kisichokuwa na mfumo maalum wa"
 
-#: edc_he/choices.py:136
+#: edc_he/choices.py:141
 msgid "16. Pit latrine with slab (non-washable)"
 msgstr "Shimo la choo chenye bamba (isiyooshwa)"
 
-#: edc_he/choices.py:137
+#: edc_he/choices.py:142
 msgid "17. Pit latrine without slab/open pit"
 msgstr "Shimo la choo bila bamba/shimo wazi"
 
-#: edc_he/choices.py:138
+#: edc_he/choices.py:143
 msgid "18. Bucket"
 msgstr "ndoo"
 
-#: edc_he/choices.py:139
+#: edc_he/choices.py:144
 msgid "19. Hanging toilet/hanging latrine"
 msgstr "Choo cha kuning'inia/choo cha kuning'inia"
 
-#: edc_he/choices.py:140
+#: edc_he/choices.py:145
 msgid "20. Open defecation (no facility/bush/field)"
 msgstr "Kujisaidia hadharani "
 
-#: edc_he/choices.py:145 edc_he/choices.py:162
+#: edc_he/choices.py:150 edc_he/choices.py:167
 msgid "Thatch, Straw"
 msgstr "Nyasi, makuti"
 
-#: edc_he/choices.py:146 edc_he/choices.py:163
+#: edc_he/choices.py:151 edc_he/choices.py:168
 msgid "Mud and poles"
 msgstr "Matope na nguzo"
 
-#: edc_he/choices.py:147
+#: edc_he/choices.py:152
 msgid "Tin"
 msgstr "Makopo"
 
-#: edc_he/choices.py:148 edc_he/choices.py:176 edc_he/choices.py:226
+#: edc_he/choices.py:153 edc_he/choices.py:181 edc_he/choices.py:233
 msgid "Wood"
 msgstr "Mbao"
 
-#: edc_he/choices.py:149
+#: edc_he/choices.py:154
 msgid "Iron sheet"
 msgstr "Mabati"
 
-#: edc_he/choices.py:150
+#: edc_he/choices.py:155
 msgid "Tiles "
 msgstr "Vigae"
 
-#: edc_he/choices.py:151 edc_he/choices.py:202
+#: edc_he/choices.py:156 edc_he/choices.py:207
 msgid "Cement"
 msgstr "Saruji"
 
-#: edc_he/choices.py:156
+#: edc_he/choices.py:161
 msgid "All eaves closed"
 msgstr ""
 
-#: edc_he/choices.py:157
+#: edc_he/choices.py:162
 msgid "All eaves open"
 msgstr ""
 
-#: edc_he/choices.py:158
+#: edc_he/choices.py:163
 msgid "Partially closed"
 msgstr ""
 
-#: edc_he/choices.py:164
+#: edc_he/choices.py:169
 msgid "Timber"
 msgstr "mbao"
 
-#: edc_he/choices.py:165
+#: edc_he/choices.py:170
 msgid "Un-burnt bricks"
 msgstr ""
 
-#: edc_he/choices.py:166
+#: edc_he/choices.py:171
 msgid "Bricks with mud"
 msgstr "matofali kuchoma ya tope"
 
-#: edc_he/choices.py:167
+#: edc_he/choices.py:172
 msgid "Bricks with cement"
 msgstr "matofali ya kuchoma ya saruji"
 
-#: edc_he/choices.py:168
+#: edc_he/choices.py:173
 msgid "Cement blocks"
 msgstr "tofali za saruji"
 
-#: edc_he/choices.py:169
+#: edc_he/choices.py:174
 msgid "Stone"
 msgstr "mawe"
 
-#: edc_he/choices.py:174
+#: edc_he/choices.py:179
 msgid "Glass"
 msgstr "kioo"
 
-#: edc_he/choices.py:175
+#: edc_he/choices.py:180
 msgid "Bags"
 msgstr "mifuko"
 
-#: edc_he/choices.py:177
+#: edc_he/choices.py:182
 msgid "Iron/metal"
 msgstr "chuma"
 
-#: edc_he/choices.py:178
+#: edc_he/choices.py:183
 msgid "Screens"
 msgstr "nyavu"
 
-#: edc_he/choices.py:179 edc_he/choices.py:193
+#: edc_he/choices.py:184 edc_he/choices.py:198
 msgid "No windows"
 msgstr "hakuna madirisha"
 
-#: edc_he/choices.py:184
+#: edc_he/choices.py:189
 msgid "All windows screened"
 msgstr ""
 
-#: edc_he/choices.py:185 edc_he/choices.py:192
+#: edc_he/choices.py:190 edc_he/choices.py:197
 msgid "No windows screened"
 msgstr ""
 
-#: edc_he/choices.py:186
+#: edc_he/choices.py:191
 msgid "Some windows screened"
 msgstr ""
 
-#: edc_he/choices.py:190
+#: edc_he/choices.py:195
 msgid "Wire mesh"
 msgstr ""
 
-#: edc_he/choices.py:191
+#: edc_he/choices.py:196
 msgid "Old bednet"
 msgstr ""
 
-#: edc_he/choices.py:198
+#: edc_he/choices.py:203
 msgid "Earth, sand"
 msgstr "mchanga"
 
-#: edc_he/choices.py:199
+#: edc_he/choices.py:204
 msgid "Dung, wood, planks, palm, bamboo"
 msgstr "Kinyesi cha Wanyama,mbao, mitende, mianzi"
 
-#: edc_he/choices.py:200
+#: edc_he/choices.py:205
 msgid "Parquet, polished wood, vinyl, asphalt strips"
 msgstr "sakafu ya vipande vya mbao, mbao"
 
-#: edc_he/choices.py:201
+#: edc_he/choices.py:206
 msgid "Ceramic tiles"
 msgstr "marumaru/tailizi"
 
-#: edc_he/choices.py:203
+#: edc_he/choices.py:208
 msgid "Carpet"
 msgstr "zulia"
 
-#: edc_he/choices.py:208
+#: edc_he/choices.py:213
 msgid "hectares"
 msgstr ""
 
-#: edc_he/choices.py:209
+#: edc_he/choices.py:214
 msgid "acres"
 msgstr "Ekari"
 
-#: edc_he/choices.py:210
-msgid "sq. meters"
-msgstr "Mita za mraba"
+#: edc_he/choices.py:215
+msgid "decimals (1 decimal = hundredth of an acre)"
+msgstr ""
 
-#: edc_he/choices.py:214 edc_he/choices.py:222
+#: edc_he/choices.py:216
+msgid "sq. feet (length * width)"
+msgstr ""
+
+#: edc_he/choices.py:217
+msgid "sq. meters (length * width)"
+msgstr ""
+
+#: edc_he/choices.py:221 edc_he/choices.py:229
 msgid "Electricity"
 msgstr "Umeme"
 
-#: edc_he/choices.py:215
+#: edc_he/choices.py:222
 msgid "Paraffin, kerosene or gas lantern "
 msgstr "Taa ya chemli inayotumia mafuta ya taa au gesi "
 
-#: edc_he/choices.py:216
+#: edc_he/choices.py:223
 msgid "Firewood"
 msgstr "kuni"
 
-#: edc_he/choices.py:217
+#: edc_he/choices.py:224
 msgid "Candle"
 msgstr "mshumaa"
 
-#: edc_he/choices.py:223
+#: edc_he/choices.py:230
 msgid "LPG/natural gas/biogas"
 msgstr "LPG/gesi asilia/biogesi"
 
-#: edc_he/choices.py:224
+#: edc_he/choices.py:231
 msgid "Kerosene"
 msgstr "mafuta ya taa"
 
-#: edc_he/choices.py:225
+#: edc_he/choices.py:232
 msgid "Charcoal"
 msgstr "mkaa"
 
-#: edc_he/choices.py:227
+#: edc_he/choices.py:234
 msgid "Coal/lignite, straw/shrubs/grass. agricultural crop, animal dung"
 msgstr ""
 "Makaa ya mawe/lignite, majani/vichaka/nyasi. mazao ya kilimo, samadi ya "
 "wanyama"
 
-#: edc_he/choices.py:228
+#: edc_he/choices.py:235
 msgid "No food cooked in the household"
 msgstr "Hakuna chakula kinachopikwa katika kaya"
 
-#: edc_he/choices.py:233
+#: edc_he/choices.py:240
 msgid "as weekly income"
 msgstr ""
 
-#: edc_he/choices.py:234
+#: edc_he/choices.py:241
 msgid "as monthly income"
 msgstr ""
 
-#: edc_he/choices.py:235
+#: edc_he/choices.py:242
 msgid "as yearly income"
 msgstr ""
 
-#: edc_he/choices.py:237 edc_he/choices.py:247 edc_he/choices.py:256
+#: edc_he/choices.py:244 edc_he/choices.py:254 edc_he/choices.py:263
 msgid "Don't want to answer"
 msgstr "Sitaki kujibu"
 
-#: edc_he/choices.py:242
+#: edc_he/choices.py:249
 msgid "Very good"
 msgstr "nzuri sana"
 
-#: edc_he/choices.py:243
+#: edc_he/choices.py:250
 msgid "Good"
 msgstr "nzuri"
 
-#: edc_he/choices.py:244
+#: edc_he/choices.py:251
 msgid "Moderate"
 msgstr ""
 
-#: edc_he/choices.py:245
+#: edc_he/choices.py:252
 msgid "Bad"
 msgstr "mbaya"
 
-#: edc_he/choices.py:246
+#: edc_he/choices.py:253
 msgid "Very bad"
 msgstr "mbaya sana"
 
-#: edc_he/choices.py:251
+#: edc_he/choices.py:258
 msgid "Among most wealthy"
 msgstr ""
 
-#: edc_he/choices.py:252
+#: edc_he/choices.py:259
 msgid "Above average "
 msgstr ""
 
-#: edc_he/choices.py:253
+#: edc_he/choices.py:260
 msgid "Average wealth"
 msgstr ""
 
-#: edc_he/choices.py:254
+#: edc_he/choices.py:261
 msgid "Below average"
 msgstr ""
 
-#: edc_he/choices.py:255
+#: edc_he/choices.py:262
 msgid "Among least wealthy"
 msgstr ""
 
-#: edc_he/choices.py:260
+#: edc_he/choices.py:267
 msgid "USD"
 msgstr ""
 
-#: edc_he/choices.py:261
+#: edc_he/choices.py:268
 msgid "GBP"
 msgstr ""
 
@@ -799,10 +807,10 @@ msgid ""
 msgstr ""
 
 #: edc_he/model_mixins/factory/income_model_mixin_factory.py:72
-#: edc_he/model_mixins/property_model_mixin.py:22
 #: edc_he/model_mixins/property_model_mixin.py:30
-#: edc_he/model_mixins/property_model_mixin.py:60
-#: edc_he/model_mixins/property_model_mixin.py:68
+#: edc_he/model_mixins/property_model_mixin.py:38
+#: edc_he/model_mixins/property_model_mixin.py:69
+#: edc_he/model_mixins/property_model_mixin.py:77
 msgid "Use cash equivalent in local currency"
 msgstr ""
 
@@ -1031,35 +1039,35 @@ msgstr "Je unabima ya afya ya aina gani?"
 msgid "If OTHER health insurance status, specify ..."
 msgstr ""
 
-#: edc_he/model_mixins/property_model_mixin.py:12
+#: edc_he/model_mixins/property_model_mixin.py:20
 msgid "Do you own any land."
 msgstr "Je, unamiliki ardhi yoyote"
 
-#: edc_he/model_mixins/property_model_mixin.py:19
-#: edc_he/model_mixins/property_model_mixin.py:57
+#: edc_he/model_mixins/property_model_mixin.py:27
+#: edc_he/model_mixins/property_model_mixin.py:66
 #, fuzzy
 #| msgid "About how much is it worth?"
 msgid "Do you know about how much is this worth in total?"
 msgstr "kuhusu ni thamani gani"
 
-#: edc_he/model_mixins/property_model_mixin.py:26
-#: edc_he/model_mixins/property_model_mixin.py:64
+#: edc_he/model_mixins/property_model_mixin.py:34
+#: edc_he/model_mixins/property_model_mixin.py:73
 #, fuzzy
 #| msgid "About how much is it worth?"
 msgid "About how much is this worth in total?"
 msgstr "kuhusu ni thamani gani"
 
-#: edc_he/model_mixins/property_model_mixin.py:34
+#: edc_he/model_mixins/property_model_mixin.py:42
 msgid "Surface area"
 msgstr ""
 
-#: edc_he/model_mixins/property_model_mixin.py:41
+#: edc_he/model_mixins/property_model_mixin.py:51
 #, fuzzy
 #| msgid "Surface water (river etc.)"
 msgid "Surface area (units)"
 msgstr "Maji ya ardhini (mto, dimbwi n.k.)"
 
-#: edc_he/model_mixins/property_model_mixin.py:50
+#: edc_he/model_mixins/property_model_mixin.py:59
 msgid "Do you own any other property other than your primary dwelling?"
 msgstr ""
 
@@ -1202,3 +1210,29 @@ msgid ""
 "not share this with any persons outside of the survey team. <B><U>There is "
 "no need to give details or show me any of the items.</U></B></P>"
 msgstr ""
+
+#: edc_he/tests/models/assets.py:20 edc_he/tests/models/assets.py:21
+msgid "Health Economics: Assets"
+msgstr ""
+
+#: edc_he/tests/models/household_head.py:20
+#: edc_he/tests/models/household_head.py:21
+#, fuzzy
+#| msgid "No food cooked in the household"
+msgid "Health Economics: Household head"
+msgstr "Hakuna chakula kinachopikwa katika kaya"
+
+#: edc_he/tests/models/income.py:19 edc_he/tests/models/income.py:20
+msgid "Health Economics: Income"
+msgstr ""
+
+#: edc_he/tests/models/patient.py:19 edc_he/tests/models/patient.py:20
+msgid "Health Economics: Patient"
+msgstr ""
+
+#: edc_he/tests/models/property.py:19 edc_he/tests/models/property.py:20
+msgid "Health Economics: Property"
+msgstr ""
+
+#~ msgid "sq. meters"
+#~ msgstr "Mita za mraba"
