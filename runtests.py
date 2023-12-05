@@ -39,6 +39,7 @@ DEFAULT_SETTINGS = DefaultTestSettings(
         "edc_device.apps.AppConfig",
         "edc_dashboard.apps.AppConfig",
         "edc_facility.apps.AppConfig",
+        "edc_form_runners.apps.AppConfig",
         "edc_lab.apps.AppConfig",
         "edc_list_data.apps.AppConfig",
         "edc_metadata.apps.AppConfig",
