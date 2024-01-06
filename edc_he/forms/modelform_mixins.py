@@ -22,7 +22,7 @@ class HealthEconomicsModelFormMixin:
     @property
     def household_head(self):
         return get_household_head_model_cls().objects.get(
-            subject_visit__subject_identifier=self.subject_identifier
+            subject_visit__subject_identifier=self.get_subject_identifier()
         )
 
     def raise_if_he_household_head_required(self):
@@ -47,7 +47,7 @@ class HealthEconomicsModelFormMixin:
         ]:
             try:
                 get_patient_model_cls().objects.get(
-                    subject_visit__subject_identifier=self.subject_identifier
+                    subject_visit__subject_identifier=self.get_subject_identifier()
                 )
             except ObjectDoesNotExist:
                 raise forms.ValidationError(
@@ -61,7 +61,7 @@ class HealthEconomicsModelFormMixin:
         ]:
             try:
                 get_assets_model_cls().objects.get(
-                    subject_visit__subject_identifier=self.subject_identifier
+                    subject_visit__subject_identifier=self.get_subject_identifier()
                 )
             except ObjectDoesNotExist:
                 raise forms.ValidationError(
@@ -74,7 +74,7 @@ class HealthEconomicsModelFormMixin:
         ]:
             try:
                 get_property_model_cls().objects.get(
-                    subject_visit__subject_identifier=self.subject_identifier
+                    subject_visit__subject_identifier=self.get_subject_identifier()
                 )
             except ObjectDoesNotExist:
                 raise forms.ValidationError(
