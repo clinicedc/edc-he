@@ -15,6 +15,7 @@ from edc_utils.test_case_mixins.longitudinal_test_case_mixin import (
 )
 from model_bakery.baker import make_recipe
 
+from edc_he.calculators import InvalidAreaUnitsError
 from edc_he.constants import ACRES, WIFE_HUSBAND
 from edc_he.form_validators import HealthEconomicsHouseholdHeadFormValidator
 from edc_he.models import (
@@ -28,11 +29,12 @@ from edc_he.rule_groups import HealthEconomicsRuleGroup as BaseHealthEconomicsRu
 from edc_he.rule_groups import Predicates
 from edc_he.utils import get_patient_model
 
-from ...calculators import InvalidAreaUnitsError
+from ..consents import consent_v1
 from ..forms import HealthEconomicsAssetsForm as BaseHealthEconomicsAssetsForm
 from ..forms import HealthEconomicsIncomeForm as BaseHealthEconomicsIncomeForm
 from ..forms import HealthEconomicsPatientForm as BaseHealthEconomicsPatientForm
 from ..forms import HealthEconomicsPropertyForm as BaseHealthEconomicsPropertyForm
+from ..helper import Helper
 from ..models import (
     HealthEconomicsAssets,
     HealthEconomicsHouseholdHead,
@@ -81,7 +83,9 @@ class HealthEconomicsIncomeForm(BaseHealthEconomicsIncomeForm):
 
 @override_settings(SITE_ID=10)
 class HealthEconomicsTests(LongitudinalTestCaseMixin, CrfTestHelper, TestCase):
+    consent_definition = consent_v1
     visit_schedule = visit_schedule
+    helper_cls = Helper
 
     def setUp(self) -> None:
         self.subject_identifier = self.enroll()

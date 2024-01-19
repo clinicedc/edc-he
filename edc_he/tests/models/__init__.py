@@ -4,3 +4,5 @@ from .household_head import HealthEconomicsHouseholdHead
 from .income import HealthEconomicsIncome
 from .patient import HealthEconomicsPatient
 from .property import HealthEconomicsProperty
+from .subject_consent import SubjectConsent
+from .subject_screening import SubjectScreening
