@@ -6,6 +6,7 @@ from edc_utils import get_utcnow
 
 from ...form_validators import SimpleFormValidatorMixin
 from ..forms import HealthEconomicsForm as BaseHealthEconomicsForm
+from ..helper import Helper
 from ..models import HealthEconomics
 
 
@@ -28,6 +29,7 @@ class HealthEconomicsForm(BaseHealthEconomicsForm):
 
 class TestHe(FormValidatorTestCaseMixin, TestCase):
     form_validator_cls = HealthEconomicsFormValidator
+    helper_cls = Helper
 
     def test_form_validator_education(self):
         cleaned_data = {
