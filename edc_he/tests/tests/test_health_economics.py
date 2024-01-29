@@ -4,7 +4,7 @@ from decimal import Decimal
 
 from django import forms
 from django.forms import ALL_FIELDS
-from django.test import TestCase, override_settings
+from django.test import TestCase
 from edc_constants.constants import FEMALE, MALE, NO, NOT_APPLICABLE, OTHER, YES
 from edc_metadata import NOT_REQUIRED, REQUIRED
 from edc_metadata.metadata_rules import site_metadata_rules
@@ -81,7 +81,6 @@ class HealthEconomicsIncomeForm(BaseHealthEconomicsIncomeForm):
         pass
 
 
-@override_settings(SITE_ID=10)
 class HealthEconomicsTests(LongitudinalTestCaseMixin, CrfTestHelper, TestCase):
     consent_definition = consent_v1
     visit_schedule = visit_schedule
