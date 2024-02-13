@@ -89,8 +89,8 @@ The metadata rules may also be declared locally
 .. |pypi| image:: https://img.shields.io/pypi/v/edc-he.svg
     :target: https://pypi.python.org/pypi/edc-he
 
-.. |actions| image:: https://github.com/clinicedc/edc-he/workflows/build/badge.svg?branch=develop
-  :target: https://github.com/clinicedc/edc-he/actions?query=workflow:build
+.. |actions| image:: https://github.com/clinicedc/edc-he/actions/workflows/build.yml/badge.svg
+  :target: https://github.com/clinicedc/edc-he/actions/workflows/build.yml
 
 .. |codecov| image:: https://codecov.io/gh/clinicedc/edc-he/branch/develop/graph/badge.svg
   :target: https://codecov.io/gh/clinicedc/edc-he
