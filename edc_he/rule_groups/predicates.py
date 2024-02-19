@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from django.core.exceptions import ObjectDoesNotExist
 from edc_constants.constants import YES
 
@@ -11,6 +13,10 @@ from ..utils import (
 
 
 class Predicates:
+
+    def is_required_by_date(self, visit) -> bool:
+        return True
+
     @staticmethod
     def get_household_head(visit):
         try:
@@ -21,10 +27,10 @@ class Predicates:
             obj = None
         return obj
 
-    @staticmethod
-    def household_head_required(visit, **kwargs) -> bool:
+    def household_head_required(self, visit, **kwargs) -> bool:
         return (
-            not get_household_head_model_cls()
+            self.is_required_by_date(visit)
+            and not get_household_head_model_cls()
             .objects.filter(subject_visit__subject_identifier=visit.subject_identifier)
             .exists()
         )
@@ -37,29 +43,30 @@ class Predicates:
                 .objects.filter(subject_visit__subject_identifier=visit.subject_identifier)
                 .exists()
             ):
-                required = hoh_obj.hoh == YES
+                required = hoh_obj.hoh == YES and self.is_required_by_date(visit)
+
         return required
 
-    @staticmethod
-    def assets_required(visit, **kwargs) -> bool:
+    def assets_required(self, visit, **kwargs) -> bool:
         return (
-            not get_assets_model_cls()
+            self.is_required_by_date(visit)
+            and not get_assets_model_cls()
             .objects.filter(subject_visit__subject_identifier=visit.subject_identifier)
             .exists()
         )
 
-    @staticmethod
-    def property_required(visit, **kwargs) -> bool:
+    def property_required(self, visit, **kwargs) -> bool:
         return (
-            not get_property_model_cls()
+            self.is_required_by_date(visit)
+            and not get_property_model_cls()
             .objects.filter(subject_visit__subject_identifier=visit.subject_identifier)
             .exists()
         )
 
-    @staticmethod
-    def income_required(visit, **kwargs) -> bool:
+    def income_required(self, visit, **kwargs) -> bool:
         return (
-            not get_income_model_cls()
+            self.is_required_by_date(visit)
+            and not get_income_model_cls()
             .objects.filter(subject_visit__subject_identifier=visit.subject_identifier)
             .exists()
         )
