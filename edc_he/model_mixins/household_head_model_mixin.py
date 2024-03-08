@@ -46,7 +46,7 @@ class HouseholdHeadModelMixin(models.Model):
 
     hoh_religion = models.ForeignKey(
         "edc_he.Religions",
-        verbose_name=_("How would you describe the household head’s religious orientation?"),
+        verbose_name=_("How would you describe the household head's religious orientation?"),
         related_name="+",
         on_delete=PROTECT,
         null=True,
@@ -60,7 +60,7 @@ class HouseholdHeadModelMixin(models.Model):
 
     hoh_ethnicity = models.ForeignKey(
         "edc_he.ethnicities",
-        verbose_name=_("What is the household head’s ethnic background?"),
+        verbose_name=_("What is the household head's ethnic background?"),
         related_name="+",
         on_delete=PROTECT,
         null=True,
@@ -87,7 +87,7 @@ class HouseholdHeadModelMixin(models.Model):
     )
 
     hoh_employment_status = models.CharField(
-        verbose_name=_("Household head’s employment status"),
+        verbose_name=_("Household head's employment status"),
         max_length=25,
         choices=EMPLOYMENT_STATUS_CHOICES,
         default=NOT_APPLICABLE,
@@ -99,7 +99,7 @@ class HouseholdHeadModelMixin(models.Model):
 
     hoh_employment_type = models.ForeignKey(
         "edc_he.employmenttype",
-        verbose_name=_("Household head’s type of employment"),
+        verbose_name=_("Household head's type of employment"),
         related_name="+",
         on_delete=PROTECT,
         null=True,
@@ -113,7 +113,7 @@ class HouseholdHeadModelMixin(models.Model):
     )
 
     hoh_marital_status = models.CharField(
-        verbose_name=_("Household head’s marital status"),
+        verbose_name=_("Household head's marital status"),
         max_length=25,
         choices=MARITAL_CHOICES,
         default=NOT_APPLICABLE,
@@ -126,7 +126,7 @@ class HouseholdHeadModelMixin(models.Model):
 
     hoh_insurance = models.ManyToManyField(
         "edc_he.insurancetypes",
-        verbose_name=_("Household head’s health insurance and ‘club’ status "),
+        verbose_name=_("Household head's health insurance and 'club' status "),
         related_name="+",
         help_text=_("Not applicable if patient is head of household"),
     )
@@ -137,7 +137,7 @@ class HouseholdHeadModelMixin(models.Model):
 
     # not used
     hoh_religion_old = models.CharField(
-        verbose_name=_("How would you describe the household head’s religious orientation?"),
+        verbose_name=_("How would you describe the household head's religious orientation?"),
         max_length=25,
         default=QUESTION_RETIRED,
         editable=False,
@@ -145,7 +145,7 @@ class HouseholdHeadModelMixin(models.Model):
 
     # not used
     hoh_employment_type_old = models.CharField(
-        verbose_name=_("Household head’s type of employment"),
+        verbose_name=_("Household head's type of employment"),
         max_length=25,
         default=QUESTION_RETIRED,
         editable=False,
@@ -161,7 +161,7 @@ class HouseholdHeadModelMixin(models.Model):
 
     # not used
     hoh_ethnicity_old = models.CharField(
-        verbose_name=_("What is the household head’s ethnic background?"),
+        verbose_name=_("What is the household head's ethnic background?"),
         max_length=25,
         default=QUESTION_RETIRED,
         editable=False,

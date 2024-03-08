@@ -14,7 +14,7 @@ from ..utils import (
 
 class Predicates:
 
-    def is_required_by_date(self, visit) -> bool:
+    def is_required_by_date(self, visit, **kwargs) -> bool:
         return True
 
     @staticmethod
