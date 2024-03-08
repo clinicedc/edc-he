@@ -19,7 +19,7 @@ list_data = {
             "University/college/post-secondary (diploma or certificate)/ technical training",
         ),
         (OTHER, "Other, specify ..."),
-        (DONT_KNOW, "Don’t know"),
+        (DONT_KNOW, "Don't know"),
         (NOT_APPLICABLE, "Not applicable"),
     ],
     "edc_he.employmenttype": [
@@ -33,14 +33,14 @@ list_data = {
         ("9", "Plant and machine operators and assemblers"),
         ("10", "Elementary occupations"),
         (OTHER, "Other, specify ..."),
-        (DONT_KNOW, "Don’t know"),
+        (DONT_KNOW, "Don't know"),
         (NOT_APPLICABLE, "Not applicable"),
     ],
     "edc_he.insurancetypes": [
         (PRIVATE, "Private/work-place/voluntary health insurance"),
         (COMMUNITY, "Community-based health insurance"),
         (NONE, "None"),
-        (DONT_KNOW, "Don’t know"),
+        (DONT_KNOW, "Don't know"),
         (OTHER, "Other, specify"),
     ],
     "edc_he.nationalities": [

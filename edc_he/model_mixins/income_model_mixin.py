@@ -33,7 +33,7 @@ class IncomeModelMixin(income_model_mixin_factory(), models.Model):
     external_dependents = models.IntegerField(
         verbose_name=_(
             "Outside of this household, how many other people depend on this "
-            "household’s income?"
+            "household's income?"
         ),
         validators=[MinValueValidator(0), MaxValueValidator(15)],
         help_text=_(
@@ -59,7 +59,7 @@ class IncomeModelMixin(income_model_mixin_factory(), models.Model):
 
     financial_status_compare = models.CharField(
         verbose_name=_(
-            "How would you rate your household’s financial situation compared with others in "
+            "How would you rate your household's financial situation compared with others in "
             "your community?"
         ),
         max_length=25,
