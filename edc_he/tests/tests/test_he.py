@@ -4,7 +4,8 @@ from edc_form_validators import FormValidatorTestCaseMixin
 from edc_form_validators.form_validator import FormValidator
 from edc_utils import get_utcnow
 
-from ...form_validators import SimpleFormValidatorMixin
+from edc_he.form_validators import SimpleFormValidatorMixin
+
 from ..forms import HealthEconomicsForm as BaseHealthEconomicsForm
 from ..helper import Helper
 from ..models import HealthEconomics

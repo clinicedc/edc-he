@@ -8,7 +8,7 @@ from django.test import TestCase
 from edc_constants.constants import FEMALE, MALE, NO, NOT_APPLICABLE, OTHER, YES
 from edc_metadata import NOT_REQUIRED, REQUIRED
 from edc_metadata.metadata_rules import site_metadata_rules
-from edc_metadata.tests import CrfTestHelper
+from edc_metadata.tests.crf_test_helper import CrfTestHelper
 from edc_utils import get_utcnow
 from edc_utils.test_case_mixins.longitudinal_test_case_mixin import (
     LongitudinalTestCaseMixin,
