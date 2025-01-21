@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 from edc_consent.utils import get_consent_model_cls
 from edc_constants.constants import YES
 from edc_crf.modelform_mixins import CrfModelFormMixin, CrfSingletonModelFormMixin
@@ -67,26 +68,30 @@ class HealthEconomicsHouseholdHeadForm(
         fields = "__all__"
         help_texts = {
             "hoh_employment_type": format_html(
-                '<div class="form-row"><OL><LI><b>Chief executives, managers, senior '
-                "officials and legislators</b> </li>"
-                "<LI><b>Professionals, technicians and associate professionals</b>  (e.g. "
-                "science/engineering professionals, architects, nurses, doctors, teachers, "
-                "technicians, construction/mining supervisors, etc.)</li>"
-                "<LI><b>Clerks</b> (e.g. clerical support workers, receptionist, secretary, "
-                "postman/woman etc.) </li>"
-                "<LI><b>Service workers and shop sale workers</b> (e.g. shop sales, cooks, "
-                "waiter/bartenders, hairdressers, caretakers, street food/stall salespersons, "
-                "childcare workers, teachers aides, healthcare/personal care "
-                "assistants etc.) </li>"
-                "<LI><b>Large-scale agricultural, forestry and fishery workers</b> </li>"
-                "<LI><b>Subsistence farmers, fishers, etc.</b></li>"
-                "<LI><b>Craft and related workers</b> (e.g. builders, plumbers, painters, "
-                "mechanics, craftsmen, potters, welders, etc.) </li>"
-                "<LI><b>Plant and machine operators and assemblers, drivers</b> (e.g. "
-                "factory/plant operators, miners, truck/bus drivers, taxi drivers, "
-                "train drivers, etc.) </li>"
-                "<LI><b>Elementary occupations</b> (e.g. cleaners, farm pickers/labourers, "
-                "rickshaw drivers, builder assistants, hawkers, shoe shiners, street car "
-                "cleaners, garbage collectors, street sweepers, etc.) </li></ol></div>"
+                "{}",
+                mark_safe(
+                    '<div class="form-row"><OL><LI><b>Chief executives, managers, senior '
+                    "officials and legislators</b> </li>"
+                    "<LI><b>Professionals, technicians and associate professionals</b>  (e.g. "
+                    "science/engineering professionals, architects, nurses, doctors, "
+                    "teachers, technicians, construction/mining supervisors, etc.)</li>"
+                    "<LI><b>Clerks</b> (e.g. clerical support workers, receptionist, "
+                    "secretary, postman/woman etc.) </li>"
+                    "<LI><b>Service workers and shop sale workers</b> (e.g. shop sales, "
+                    "cooks, waiter/bartenders, hairdressers, caretakers, street food/stall "
+                    "salespersons, childcare workers, teachers aides, healthcare/personal "
+                    "care assistants etc.) </li>"
+                    "<LI><b>Large-scale agricultural, forestry and fishery workers</b> </li>"
+                    "<LI><b>Subsistence farmers, fishers, etc.</b></li>"
+                    "<LI><b>Craft and related workers</b> (e.g. builders, plumbers, painters, "
+                    "mechanics, craftsmen, potters, welders, etc.) </li>"
+                    "<LI><b>Plant and machine operators and assemblers, drivers</b> (e.g. "
+                    "factory/plant operators, miners, truck/bus drivers, taxi drivers, "
+                    "train drivers, etc.) </li>"
+                    "<LI><b>Elementary occupations</b> (e.g. cleaners, farm pickers/"
+                    "labourers, rickshaw drivers, builder assistants, hawkers, shoe shiners, "
+                    "street car cleaners, garbage collectors, street sweepers, etc.) "
+                    "</li></ol></div>"
+                ),  # nosec B703, B308
             )
         }
