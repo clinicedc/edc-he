@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django_audit_fields.admin import audit_fieldset_tuple
 from edc_constants.constants import NOT_APPLICABLE
@@ -10,9 +11,12 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
     form = None
 
     additional_instructions = format_html(
-        "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
-        "<p>We want to learn about the household and we use these questions "
-        "to get an understanding of wealth and opportunities in the community.</p>"
+        "{}",
+        mark_safe(
+            "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
+            "<p>We want to learn about the household and we use these questions "
+            "to get an understanding of wealth and opportunities in the community.</p>"
+        ),  # nosec B703, B308
     )
 
     household_description = _(

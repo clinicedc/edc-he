@@ -57,12 +57,15 @@ class HealthEconomicsAssetsModelAdminMixin:
             _("Household assets (continued)"),
             {
                 "description": format_html(
+                    "{}? <BR>{}",
                     _(
                         "Does your household or anyone in your household have the following "
-                        "in working order? <BR>Note: If a household owns one of the assets "
-                        "below but the asset is not in working order then it should be marked "
-                        "as 'No'"
-                    )
+                        "in working order"
+                    ),
+                    _(
+                        "Note: If a household owns one of the assets below but the asset "
+                        "is not in working order then it should be marked as 'No'",
+                    ),
                 ),
                 "fields": (
                     "radio",
