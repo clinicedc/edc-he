@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django_audit_fields.admin import audit_fieldset_tuple
+from django_dev.django.template.loader import render_to_string
 from edc_crf.admin import crf_status_fieldset_tuple
 
 
@@ -18,14 +20,10 @@ class HealthEconomicsPropertyModelAdminMixin:
             "Property",
             {
                 "description": format_html(
-                    _(
-                        "<H5><B><font color='orange'>Interviewer to read</font></B></H5><p>"
-                        "I would now like to know if you own any <B>land or other "
-                        "property</B> – and the approximate value (amount). I know this "
-                        "is sensitive information and will not share this with any persons "
-                        "outside of the survey team. <B><U>There is no need to give details "
-                        "or show me any of the items.</U></B></P>"
-                    )
+                    "{html}",
+                    html=mark_safe(
+                        render_to_string("edc_he/property/description.html"),
+                    ),  # nosec #B703 # B308
                 ),
                 "fields": (
                     "land_owner",

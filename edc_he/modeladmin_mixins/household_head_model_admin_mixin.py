@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.template.loader import render_to_string
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
@@ -11,8 +12,8 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
     form = None
 
     additional_instructions = format_html(
-        "{}",
-        mark_safe(
+        "{html}",
+        html=mark_safe(
             "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
             "<p>We want to learn about the household and we use these questions "
             "to get an understanding of wealth and opportunities in the community.</p>"
@@ -43,12 +44,17 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
             "Household members",
             {
                 "description": format_html(
-                    _(
-                        "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
-                        f"<p>By a <B>HOUSEHOLD</B> {household_description}.</P>"
-                        f"<P>By a <B>HOUSEHOLD MEMBER</B> {household_member_description}."
-                        f"</P><P><B>{_('Note')}:</B> {household_description_extra}.</p>"
-                    )
+                    "{html}",
+                    html=mark_safe(
+                        render_to_string(
+                            "edc_he/household_head/household_members_description.html",
+                            context=dict(
+                                household_description=household_description,
+                                household_member_description=household_member_description,
+                                household_description_extra=household_description_extra,
+                            ),
+                        )
+                    ),  # nosec B703, B308
                 ),
                 "fields": (
                     "hh_count",
@@ -71,13 +77,12 @@ class HealthEconomicsHouseholdHeadModelAdminMixin:
             "Head of household",
             {
                 "description": format_html(
-                    "<H5><B><font color='darkorange'>Note to interviewer</font></B></H5>"
-                    "If the PATIENT is the head of household, skip to the bottom of this form "
-                    "and click SAVE or SAVE NEXT, otherwise continue."
-                    "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
-                    "<p>By <B>HEAD OF THE HOUSEHOLD</B> we mean the <u>main decision "
-                    "maker</u> in the HOUSEHOLD. The HEAD can be either male or female. If "
-                    "two people are equal decision-makers, take the older person</p>"
+                    "{html}",
+                    html=mark_safe(
+                        render_to_string(
+                            "edc_he/household_head/household_head_description.html"
+                        )
+                    ),  # nosec B703, B308
                 ),
                 "fields": (
                     "relationship_to_hoh",

@@ -1,5 +1,7 @@
 from django.contrib import admin
+from django.template.loader import render_to_string
 from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django_audit_fields.admin import audit_fieldset_tuple
 from edc_crf.admin import crf_status_fieldset_tuple
@@ -34,10 +36,13 @@ def get_income_fieldsets_tuple() -> list[tuple]:
                 label,
                 {
                     "description": format_html(
-                        _(
-                            "Estimate the total amount of income from this source "
-                            "for the <b>household</b> over the time period indicated"
-                        )
+                        "{html}",
+                        html=mark_safe(
+                            _(
+                                "Estimate the total amount of income from this source "
+                                "for the <b>household</b> over the time period indicated"
+                            )
+                        ),  # nosec B703, B308
                     ),
                     "fields": tuple(fields),
                 },
@@ -50,22 +55,12 @@ class HealthEconomicsIncomeModelAdminMixin:
     form = None
 
     additional_instructions = format_html(
-        _(
-            "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
-            "<P>We want to learn about the household and we use these questions "
-            "to get an understanding of wealth and opportunities in the community.</P>"
-            "<p>Now, I will ask about <b>income for the household</b> from paid work or "
-            "other sources.</p><p>I know it may be difficult to calculate those figures, "
-            "but please do try to give amounts as accurately as possible. Remember "
-            "that <b>all information will be kept strictly confidential</b>. This "
-            "information is important to assess overall health and well-being of "
-            "people in your household, compared to other similar households.</p><p>"
-            "I am now going to read you a list of possible sources of income. "
-            "Thinking over the last 12 months, can you tell me what the average "
-            "earnings of the household have been per week or per month or per year? "
-            "Please tell me whichever time period that is easier for you.</p>"
-        )
+        "{html}",
+        html=mark_safe(
+            render_to_string("edc_he/income/additional_instructions.html")
+        ),  # nosec B703, B308
     )
+
     fieldsets = (
         (None, {"fields": ("subject_visit", "report_datetime")}),
         *get_income_fieldsets_tuple(),
@@ -84,17 +79,10 @@ class HealthEconomicsIncomeModelAdminMixin:
             "Debt / Loans",
             {
                 "description": format_html(
-                    _(
-                        "<H5><B><font color='orange'>Interviewer to read</font></B></H5>"
-                        "<p>Now, I will ask about the total current debt/loans for the "
-                        "household. I know it may be difficult to calculate this, but please "
-                        "do try to give amounts as accurately as possible. Remember that "
-                        "all information will be kept strictly confidential. <B>It is not "
-                        "possible to offer any help for your debts through this project</B>, "
-                        "but this information will contribute to research and is important "
-                        "to assess the overall health and well-being of people in your "
-                        "household, compared to other similar households.</p>"
-                    )
+                    "{html}",
+                    html=mark_safe(
+                        render_to_string("edc_he/income/debt_loans.html")
+                    ),  # nosec B703, B308
                 ),
                 "fields": (
                     "household_debt",
