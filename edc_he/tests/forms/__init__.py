@@ -1,6 +1,0 @@
-from .assets_form import HealthEconomicsAssetsForm
-from .health_economics_form import HealthEconomicsForm
-from .household_head import HealthEconomicsHouseholdHeadForm
-from .income_form import HealthEconomicsIncomeForm
-from .patient_form import HealthEconomicsPatientForm
-from .property_form import HealthEconomicsPropertyForm
