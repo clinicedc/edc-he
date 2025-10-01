@@ -2,13 +2,13 @@ from edc_list_data.model_mixins import ListModelManager, ListModelMixin
 from edc_model.models import HistoricalRecords
 
 
-class Education(ListModelMixin):
+class EducationType(ListModelMixin):
     objects = ListModelManager()
     history = HistoricalRecords()
 
     class Meta(ListModelMixin.Meta):
-        verbose_name = "Education"
-        verbose_name_plural = "Education"
+        verbose_name = "Education type"
+        verbose_name_plural = "Education types"
 
 
 class EmploymentType(ListModelMixin):

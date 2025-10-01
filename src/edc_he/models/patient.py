@@ -14,4 +14,4 @@ class HealthEconomicsPatient(
     class Meta(CrfModelMixin.Meta, BaseUuidModel.Meta):
         verbose_name = _("Health Economics: Patient")
         verbose_name_plural = _("Health Economics: Patient")
-        indexes = CrfModelMixin.Meta.indexes + BaseUuidModel.Meta.indexes
+        indexes = (*CrfModelMixin.Meta.indexes, *BaseUuidModel.Meta.indexes)

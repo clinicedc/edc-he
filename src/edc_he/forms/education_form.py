@@ -5,19 +5,17 @@ from edc_form_validators.form_validator import FormValidator
 
 from edc_he.form_validators import SimpleFormValidatorMixin
 
-from ..models import HealthEconomics
+from ..models import Education
 
 
-class HealthEconomicsFormValidator(
-    CrfFormValidatorMixin, SimpleFormValidatorMixin, FormValidator
-):
+class EducationFormValidator(CrfFormValidatorMixin, SimpleFormValidatorMixin, FormValidator):
     def clean(self) -> None:
         self.clean_education()
 
 
-class HealthEconomicsForm(FormValidatorMixin, forms.ModelForm):
-    form_validator_cls = HealthEconomicsFormValidator
+class EducationForm(FormValidatorMixin, forms.ModelForm):
+    form_validator_cls = EducationFormValidator
 
     class Meta:
-        model = HealthEconomics
+        model = Education
         fields = "__all__"

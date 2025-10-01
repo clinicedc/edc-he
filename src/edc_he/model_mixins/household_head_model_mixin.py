@@ -73,7 +73,7 @@ class HouseholdHeadModelMixin(models.Model):
     )
 
     hoh_education = models.ForeignKey(
-        "edc_he.education",
+        "edc_he.educationtype",
         verbose_name=_("Highest level of education completed by the household head?"),
         related_name="+",
         on_delete=PROTECT,

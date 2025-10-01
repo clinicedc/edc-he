@@ -1,5 +1,5 @@
 from .assets_form import HealthEconomicsAssetsForm
-from .health_economics_form import HealthEconomicsForm
+from .education_form import EducationForm
 from .household_head import HealthEconomicsHouseholdHeadForm
 from .income_form import HealthEconomicsIncomeForm
 from .modelform_mixins import HealthEconomicsModelFormMixin

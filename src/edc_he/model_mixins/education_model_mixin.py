@@ -4,10 +4,10 @@ from edc_constants.choices import YES_NO_NA
 from edc_constants.constants import NULL_STRING
 from edc_model.models import OtherCharField
 
-from ...choices import EDUCATION_CERTIFICATES_CHOICES
+from ..choices import EDUCATION_CERTIFICATES_CHOICES
 
 
-class HealthEconomicsEducationModelMixin(models.Model):
+class EducationModelMixin(models.Model):
     education_in_years = models.IntegerField(
         verbose_name="How many years of education did you complete?",
         validators=[MinValueValidator(0), MaxValueValidator(30)],
