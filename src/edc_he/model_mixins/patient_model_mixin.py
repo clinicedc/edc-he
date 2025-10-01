@@ -35,7 +35,7 @@ class PatientModelMixin(models.Model):
     )
 
     pat_education = models.ForeignKey(
-        "edc_he.education",
+        "edc_he.educationtype",
         verbose_name=_("Highest level of education completed?"),
         related_name="+",
         on_delete=PROTECT,

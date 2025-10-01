@@ -1,9 +1,9 @@
 from .assets import HealthEconomicsAssets
-from .health_economics import HealthEconomics
+from .education import Education
 from .household_head import HealthEconomicsHouseholdHead
 from .income import HealthEconomicsIncome
 from .list_models import (
-    Education,
+    EducationType,
     EmploymentType,
     Ethnicities,
     InsuranceTypes,

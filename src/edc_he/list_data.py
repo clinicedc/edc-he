@@ -8,7 +8,7 @@ from edc_constants.constants import (
 )
 
 list_data = {
-    "edc_he.education": [
+    "edc_he.educationtype": [
         ("illiterate", "Illiterate"),
         ("primary_incomplete", "Primary incomplete"),
         ("primary_complete", "Primary complete"),
