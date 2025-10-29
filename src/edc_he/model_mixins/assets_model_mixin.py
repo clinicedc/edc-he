@@ -1,8 +1,8 @@
+from clinicedc_constants import NOT_APPLICABLE, QUESTION_RETIRED
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from edc_constants.choices import YES_NO, YES_NO_DONT_KNOW_DWTA_NA
-from edc_constants.constants import NOT_APPLICABLE, QUESTION_RETIRED
 from edc_model_fields.fields import OtherCharField
 
 from ..choices import (

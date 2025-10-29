@@ -1,5 +1,5 @@
+from clinicedc_constants import OPTION_RETIRED
 from django.contrib import admin
-from edc_constants.constants import OPTION_RETIRED
 from edc_crf.modeladmin_mixins import CrfModelAdmin
 
 from ..admin_site import edc_he_admin

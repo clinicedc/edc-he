@@ -1,5 +1,5 @@
+from clinicedc_constants import TERTIARY, YES
 from django import forms
-from edc_constants.constants import TERTIARY, YES
 
 
 class SimpleFormValidatorMixin:

@@ -1,6 +1,6 @@
+from clinicedc_constants import YES
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
-from edc_constants.constants import YES
 
 from ..utils import (
     get_assets_model_cls,

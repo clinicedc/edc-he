@@ -1,10 +1,10 @@
 from __future__ import annotations
 
+from clinicedc_constants import NOT_APPLICABLE
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext as _
 from edc_constants.choices import YES_NO_DONT_KNOW_DWTA
-from edc_constants.constants import NOT_APPLICABLE
 
 from ..choices import INCOME_TIME_ESTIMATE_CHOICES
 

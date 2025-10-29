@@ -1,9 +1,9 @@
 from __future__ import annotations
 
+from clinicedc_constants import NO
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from edc_constants.choices import YES_NO
-from edc_constants.constants import NO
 
 default_field_data = {
     "solar_panels": _("Solar panels"),
