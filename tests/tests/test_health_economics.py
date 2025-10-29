@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from decimal import Decimal
 
+from clinicedc_constants import FEMALE, MALE, NO, NOT_APPLICABLE, NULL_STRING, OTHER, YES
 from clinicedc_tests.consents import consent_v1
 from clinicedc_tests.helper import Helper
 from clinicedc_tests.sites import all_sites
@@ -10,8 +11,8 @@ from django.forms import ALL_FIELDS
 from django.test import TestCase, override_settings, tag
 from django.utils import timezone
 from edc_consent import site_consents
-from edc_constants.constants import FEMALE, MALE, NO, NOT_APPLICABLE, NULL_STRING, OTHER, YES
 from edc_facility.import_holidays import import_holidays
+from edc_list_data import site_list_data
 from edc_metadata import NOT_REQUIRED, REQUIRED
 from edc_metadata.metadata_rules import site_metadata_rules
 from edc_metadata.tests.crf_test_helper import CrfTestHelper
@@ -28,7 +29,7 @@ from edc_he.forms import HealthEconomicsIncomeForm as BaseHealthEconomicsIncomeF
 from edc_he.forms import HealthEconomicsPatientForm as BaseHealthEconomicsPatientForm
 from edc_he.forms import HealthEconomicsPropertyForm as BaseHealthEconomicsPropertyForm
 from edc_he.models import (
-    Education,
+    EducationType,
     EmploymentType,
     Ethnicities,
     HealthEconomicsAssets,
@@ -54,7 +55,7 @@ def get_m2m_qs(model_cls, name: str | None = None):
 
 
 def get_obj(model_cls, name: str | None = None):
-    return model_cls.objects.get(name=name) if name else model_cls.objects.all()[0]
+    return model_cls.objects.get(name=name) if name else model_cls.objects.all().first()
 
 
 class HealthEconomicsPatientForm(BaseHealthEconomicsPatientForm):
@@ -86,6 +87,7 @@ class HealthEconomicsTests(CrfTestHelper, TestCase):
         sites.loaded = False
         sites.register(*all_sites)
         add_or_update_django_sites()
+        site_list_data.load_data()
 
         class HealthEconomicsRuleGroup(BaseHealthEconomicsRuleGroup):
             class Meta:
@@ -124,7 +126,7 @@ class HealthEconomicsTests(CrfTestHelper, TestCase):
             hoh_religion_other=NULL_STRING,
             hoh_ethnicity=get_obj(Ethnicities),
             hoh_ethnicity_other=NULL_STRING,
-            hoh_education=get_obj(Education),
+            hoh_education=get_obj(EducationType),
             hoh_education_other=NULL_STRING,
             hoh_employment_status="1",
             hoh_employment_type=get_obj(EmploymentType),
@@ -161,7 +163,7 @@ class HealthEconomicsTests(CrfTestHelper, TestCase):
         not_applicable_opts = dict(
             hoh_religion=get_obj(Religions, NOT_APPLICABLE),
             hoh_ethnicity=get_obj(Ethnicities, NOT_APPLICABLE),
-            hoh_education=get_obj(Education, NOT_APPLICABLE),
+            hoh_education=get_obj(EducationType, NOT_APPLICABLE),
             hoh_employment_type=get_obj(EmploymentType, NOT_APPLICABLE),
             hoh_insurance=get_m2m_qs(InsuranceTypes, NOT_APPLICABLE),
         )
@@ -257,7 +259,7 @@ class HealthEconomicsTests(CrfTestHelper, TestCase):
         applicable_opts = dict(
             hoh_religion=get_obj(Religions),
             hoh_ethnicity=get_obj(Ethnicities),
-            hoh_education=get_obj(Education),
+            hoh_education=get_obj(EducationType),
             hoh_employment_type=get_obj(EmploymentType),
             hoh_insurance=get_m2m_qs(InsuranceTypes),
         )
@@ -333,7 +335,7 @@ class HealthEconomicsTests(CrfTestHelper, TestCase):
         )
         applicable_opts = dict(
             hoh_ethnicity=get_obj(Ethnicities),
-            hoh_education=get_obj(Education),
+            hoh_education=get_obj(EducationType),
             hoh_employment_type=get_obj(EmploymentType),
             hoh_insurance=get_m2m_qs(InsuranceTypes),
         )
@@ -401,10 +403,7 @@ class HealthEconomicsTests(CrfTestHelper, TestCase):
         self.assertTrue(qs.exists())
 
     def test_patient_required_before_assets_if_patient_is_hoh(self):
-        cleaned_data = self.get_cleaned_data(
-            hoh=YES,
-            relationship_to_hoh=NOT_APPLICABLE,
-        )
+        cleaned_data = self.get_cleaned_data(hoh=YES, relationship_to_hoh=NOT_APPLICABLE)
         del cleaned_data["hoh_insurance"]
         hoh_obj = HealthEconomicsHouseholdHead.objects.create(**cleaned_data)
         hoh_obj.hoh_insurance.add(get_obj(InsuranceTypes))

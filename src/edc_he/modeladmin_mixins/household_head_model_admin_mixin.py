@@ -1,10 +1,10 @@
+from clinicedc_constants import NOT_APPLICABLE
 from django.contrib import admin
 from django.template.loader import render_to_string
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django_audit_fields.admin import audit_fieldset_tuple
-from edc_constants.constants import NOT_APPLICABLE
 from edc_crf.admin import crf_status_fieldset_tuple
 
 

@@ -1,4 +1,4 @@
-from edc_constants.constants import (
+from clinicedc_constants import (
     COMMUNITY,
     DONT_KNOW,
     NONE,

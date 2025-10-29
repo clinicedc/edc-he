@@ -1,5 +1,4 @@
-from django.utils.translation import gettext_lazy as _
-from edc_constants.constants import (
+from clinicedc_constants import (
     DONT_KNOW,
     DWTA,
     MONTHLY,
@@ -12,6 +11,7 @@ from edc_constants.constants import (
     WEEKLY,
     YEARLY,
 )
+from django.utils.translation import gettext_lazy as _
 
 from .constants import (
     ACRES,

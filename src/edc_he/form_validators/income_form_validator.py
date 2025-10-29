@@ -1,4 +1,4 @@
-from edc_constants.constants import MONTHLY, WEEKLY, YEARLY, YES
+from clinicedc_constants import MONTHLY, WEEKLY, YEARLY, YES
 from edc_crf.crf_form_validator_mixins import CrfFormValidatorMixin
 from edc_form_validators import FormValidator
 

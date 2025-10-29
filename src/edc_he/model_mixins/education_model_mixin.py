@@ -1,7 +1,7 @@
+from clinicedc_constants import NULL_STRING
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from edc_constants.choices import YES_NO_NA
-from edc_constants.constants import NULL_STRING
 from edc_model.models import OtherCharField
 
 from ..choices import EDUCATION_CERTIFICATES_CHOICES

@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from clinicedc_constants import NOT_APPLICABLE, QUESTION_RETIRED
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from edc_constants.choices import YES_NO_DONT_KNOW_DWTA
-from edc_constants.constants import NOT_APPLICABLE, QUESTION_RETIRED
 
 from edc_he.calculators import convert_to_sq_meters
 from edc_he.choices import LAND_AREA_UNITS

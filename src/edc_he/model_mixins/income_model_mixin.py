@@ -1,8 +1,8 @@
+from clinicedc_constants import NULL_STRING
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from edc_constants.choices import YES_NO_DONT_KNOW, YES_NO_DONT_KNOW_DWTA
-from edc_constants.constants import NULL_STRING
 
 from ..choices import FINANCIAL_STATUS, REMITTANCE_CURRENCY_CHOICES, STATUS
 from ..model_mixin_factories import income_model_mixin_factory
