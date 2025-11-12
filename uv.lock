@@ -622,7 +622,7 @@ source = { editable = "../clinicedc-constants" }
 
 [[package]]
 name = "clinicedc-tests"
-version = "0.4.0"
+version = "1.0.0"
 source = { editable = "../clinicedc-tests" }
 dependencies = [
     { name = "coverage" },
@@ -1072,7 +1072,7 @@ wheels = [
 
 [[package]]
 name = "edc-he"
-version = "1.5.0"
+version = "1.5.1"
 source = { editable = "." }
 
 [package.dev-dependencies]
