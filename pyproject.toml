@@ -9,7 +9,7 @@ namespace = false
 
 [project]
 name = "edc-he"
-version = "1.5.1"
+version = "1.5.2"
 description = "Base django classes for health economics"
 readme = {file = "README.rst", content-type = "text/x-rst"}
 license = "GPL-3.0-or-later"
@@ -123,15 +123,12 @@ docs = [
     "sphinx-inline-tabs>=2023.4.21",
 ]
 
-test = []
-
 dev = [
-    "clinicedc>=2.1.1",
-    "clinicedc-tests>=1.0.0",
+    "clinicedc>=2.2.0",
+    "clinicedc-tests>=1.0.1",
 ]
 
 [tool.uv.sources]
 edc-he = { workspace = true }
 clinicedc = { path = "../clinicedc", editable = true }
 clinicedc-tests = { path = "../clinicedc-tests", editable = true }
-edc-test-settings = { path = "../edc-test-settings", editable = true }
