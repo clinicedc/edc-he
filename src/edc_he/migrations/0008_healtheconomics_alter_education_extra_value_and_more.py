@@ -20,10 +20,8 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("edc_he", "0007_remove_education_edc_he_educ_name_64c0c9_idx_and_more"),
-        ("meta_subject", "0228_bloodresultshba1c_hba1c_datetime_and_more"),
         ("sites", "0002_alter_domain_unique"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
@@ -275,9 +273,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="education",
             name="plural_name",
-            field=models.CharField(
-                default="", max_length=250, verbose_name="Plural name"
-            ),
+            field=models.CharField(default="", max_length=250, verbose_name="Plural name"),
         ),
         migrations.AlterField(
             model_name="employmenttype",
@@ -298,9 +294,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="employmenttype",
             name="plural_name",
-            field=models.CharField(
-                default="", max_length=250, verbose_name="Plural name"
-            ),
+            field=models.CharField(default="", max_length=250, verbose_name="Plural name"),
         ),
         migrations.AlterField(
             model_name="ethnicities",
@@ -321,9 +315,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="ethnicities",
             name="plural_name",
-            field=models.CharField(
-                default="", max_length=250, verbose_name="Plural name"
-            ),
+            field=models.CharField(default="", max_length=250, verbose_name="Plural name"),
         ),
         migrations.AlterField(
             model_name="historicaleducation",
@@ -344,9 +336,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="historicaleducation",
             name="plural_name",
-            field=models.CharField(
-                default="", max_length=250, verbose_name="Plural name"
-            ),
+            field=models.CharField(default="", max_length=250, verbose_name="Plural name"),
         ),
         migrations.AlterField(
             model_name="historicalemploymenttype",
@@ -367,9 +357,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="historicalemploymenttype",
             name="plural_name",
-            field=models.CharField(
-                default="", max_length=250, verbose_name="Plural name"
-            ),
+            field=models.CharField(default="", max_length=250, verbose_name="Plural name"),
         ),
         migrations.AlterField(
             model_name="historicalethnicities",
@@ -390,9 +378,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="historicalethnicities",
             name="plural_name",
-            field=models.CharField(
-                default="", max_length=250, verbose_name="Plural name"
-            ),
+            field=models.CharField(default="", max_length=250, verbose_name="Plural name"),
         ),
         migrations.AlterField(
             model_name="historicalinsurancetypes",
@@ -413,9 +399,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="historicalinsurancetypes",
             name="plural_name",
-            field=models.CharField(
-                default="", max_length=250, verbose_name="Plural name"
-            ),
+            field=models.CharField(default="", max_length=250, verbose_name="Plural name"),
         ),
         migrations.AlterField(
             model_name="historicalnationalities",
@@ -436,9 +420,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="historicalnationalities",
             name="plural_name",
-            field=models.CharField(
-                default="", max_length=250, verbose_name="Plural name"
-            ),
+            field=models.CharField(default="", max_length=250, verbose_name="Plural name"),
         ),
         migrations.AlterField(
             model_name="historicalreligions",
@@ -459,9 +441,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="historicalreligions",
             name="plural_name",
-            field=models.CharField(
-                default="", max_length=250, verbose_name="Plural name"
-            ),
+            field=models.CharField(default="", max_length=250, verbose_name="Plural name"),
         ),
         migrations.AlterField(
             model_name="insurancetypes",
@@ -482,9 +462,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="insurancetypes",
             name="plural_name",
-            field=models.CharField(
-                default="", max_length=250, verbose_name="Plural name"
-            ),
+            field=models.CharField(default="", max_length=250, verbose_name="Plural name"),
         ),
         migrations.AlterField(
             model_name="nationalities",
@@ -505,9 +483,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="nationalities",
             name="plural_name",
-            field=models.CharField(
-                default="", max_length=250, verbose_name="Plural name"
-            ),
+            field=models.CharField(default="", max_length=250, verbose_name="Plural name"),
         ),
         migrations.AlterField(
             model_name="religions",
@@ -528,9 +504,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="religions",
             name="plural_name",
-            field=models.CharField(
-                default="", max_length=250, verbose_name="Plural name"
-            ),
+            field=models.CharField(default="", max_length=250, verbose_name="Plural name"),
         ),
         migrations.CreateModel(
             name="HistoricalHealthEconomicsAssets",

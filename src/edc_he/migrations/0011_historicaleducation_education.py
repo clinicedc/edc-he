@@ -19,10 +19,8 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("edc_he", "0010_delete_historicaleducationtype"),
-        ("meta_subject", "0234_remove_spfq_site_remove_spfq_subject_visit_and_more"),
         ("sites", "0002_alter_domain_unique"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
