@@ -4,13 +4,8 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("edc_he", "0009_rename_education_educationtype_and_more"),
     ]
 
-    operations = [
-        migrations.DeleteModel(
-            name="HistoricalEducationType",
-        ),
-    ]
+    operations = []

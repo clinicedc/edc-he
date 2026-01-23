@@ -15,8 +15,8 @@ import edc_protocol.validators
 import edc_visit_tracking.managers
 import simple_history.models
 import uuid
-from django.conf import settings
 from django.db import migrations, models
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
@@ -1215,7 +1215,7 @@ class Migration(migrations.Migration):
                         null=True,
                         on_delete=django.db.models.deletion.DO_NOTHING,
                         related_name="+",
-                        to="meta_subject.subjectvisit",
+                        to=f"{settings.SUBJECT_VISIT_MODEL}",
                     ),
                 ),
             ],
@@ -1683,7 +1683,7 @@ class Migration(migrations.Migration):
                         null=True,
                         on_delete=django.db.models.deletion.DO_NOTHING,
                         related_name="+",
-                        to="meta_subject.subjectvisit",
+                        to=f"{settings.SUBJECT_VISIT_MODEL}",
                     ),
                 ),
             ],
@@ -2380,7 +2380,7 @@ class Migration(migrations.Migration):
                         null=True,
                         on_delete=django.db.models.deletion.DO_NOTHING,
                         related_name="+",
-                        to="meta_subject.subjectvisit",
+                        to=f"{settings.SUBJECT_VISIT_MODEL}",
                     ),
                 ),
             ],
@@ -2753,7 +2753,7 @@ class Migration(migrations.Migration):
                         null=True,
                         on_delete=django.db.models.deletion.DO_NOTHING,
                         related_name="+",
-                        to="meta_subject.subjectvisit",
+                        to=f"{settings.SUBJECT_VISIT_MODEL}",
                     ),
                 ),
             ],
@@ -3065,7 +3065,7 @@ class Migration(migrations.Migration):
                         null=True,
                         on_delete=django.db.models.deletion.DO_NOTHING,
                         related_name="+",
-                        to="meta_subject.subjectvisit",
+                        to=f"{settings.SUBJECT_VISIT_MODEL}",
                     ),
                 ),
             ],
@@ -3754,7 +3754,7 @@ class Migration(migrations.Migration):
                     "subject_visit",
                     models.OneToOneField(
                         on_delete=django.db.models.deletion.PROTECT,
-                        to="meta_subject.subjectvisit",
+                        to=f"{settings.SUBJECT_VISIT_MODEL}",
                     ),
                 ),
             ],
@@ -4220,7 +4220,7 @@ class Migration(migrations.Migration):
                     "subject_visit",
                     models.OneToOneField(
                         on_delete=django.db.models.deletion.PROTECT,
-                        to="meta_subject.subjectvisit",
+                        to=f"{settings.SUBJECT_VISIT_MODEL}",
                     ),
                 ),
             ],
@@ -4914,7 +4914,7 @@ class Migration(migrations.Migration):
                     "subject_visit",
                     models.OneToOneField(
                         on_delete=django.db.models.deletion.PROTECT,
-                        to="meta_subject.subjectvisit",
+                        to=f"{settings.SUBJECT_VISIT_MODEL}",
                     ),
                 ),
             ],
@@ -5284,7 +5284,7 @@ class Migration(migrations.Migration):
                     "subject_visit",
                     models.OneToOneField(
                         on_delete=django.db.models.deletion.PROTECT,
-                        to="meta_subject.subjectvisit",
+                        to=f"{settings.SUBJECT_VISIT_MODEL}",
                     ),
                 ),
             ],
@@ -5593,7 +5593,7 @@ class Migration(migrations.Migration):
                     "subject_visit",
                     models.OneToOneField(
                         on_delete=django.db.models.deletion.PROTECT,
-                        to="meta_subject.subjectvisit",
+                        to=f"{settings.SUBJECT_VISIT_MODEL}",
                     ),
                 ),
             ],

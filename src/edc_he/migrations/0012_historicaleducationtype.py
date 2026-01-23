@@ -8,7 +8,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("edc_he", "0011_historicaleducation_education"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
