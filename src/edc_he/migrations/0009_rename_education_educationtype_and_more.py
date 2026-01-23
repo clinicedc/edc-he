@@ -11,44 +11,44 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RenameModel(
-            old_name="Education",
-            new_name="EducationType",
-        ),
-        migrations.RenameModel(
-            old_name="HistoricalEducation",
-            new_name="HistoricalEducationType",
-        ),
-        migrations.DeleteModel(
-            name="HealthEconomics",
-        ),
-        migrations.AlterModelOptions(
-            name="educationtype",
-            options={
-                "default_permissions": (
-                    "add",
-                    "change",
-                    "delete",
-                    "view",
-                    "export",
-                    "import",
-                ),
-                "verbose_name": "Education type",
-                "verbose_name_plural": "Education types",
-            },
-        ),
-        migrations.AlterModelOptions(
-            name="historicaleducationtype",
-            options={
-                "get_latest_by": ("history_date", "history_id"),
-                "ordering": ("-history_date", "-history_id"),
-                "verbose_name": "historical Education type",
-                "verbose_name_plural": "historical Education types",
-            },
-        ),
-        migrations.RenameIndex(
-            model_name="educationtype",
-            new_name="edc_he_educ_display_73adba_idx",
-            old_name="edc_he_educ_display_66a8e9_idx",
-        ),
+            migrations.RenameModel(
+                old_name="Education",
+                new_name="EducationType",
+            ),
+            migrations.RenameModel(
+                old_name="HistoricalEducation",
+                new_name="HistoricalEducationType",
+            ),
+            migrations.DeleteModel(
+                name="HealthEconomics",
+            ),
+            migrations.AlterModelOptions(
+                name="educationtype",
+                options={
+                    "default_permissions": (
+                        "add",
+                        "change",
+                        "delete",
+                        "view",
+                        "export",
+                        "import",
+                    ),
+                    "verbose_name": "Education type",
+                    "verbose_name_plural": "Education types",
+                },
+            ),
+            migrations.AlterModelOptions(
+                name="historicaleducationtype",
+                options={
+                    "get_latest_by": ("history_date", "history_id"),
+                    "ordering": ("-history_date", "-history_id"),
+                    "verbose_name": "historical Education type",
+                    "verbose_name_plural": "historical Education types",
+                },
+            ),
+            migrations.RenameIndex(
+                model_name="educationtype",
+                new_name="edc_he_educ_display_73adba_idx",
+                old_name="edc_he_educ_display_66a8e9_idx",
+            ),
     ]
