@@ -128,7 +128,7 @@ docs = [
 ]
 
 dev = [
-    "clinicedc-tests>=1.2.0",
+    "clinicedc-tests>=1.2.2",
 ]
 
 [tool.uv.sources]
