@@ -5,6 +5,7 @@ from decimal import Decimal
 from clinicedc_constants import FEMALE, MALE, NO, NOT_APPLICABLE, NULL_STRING, OTHER, YES
 from clinicedc_tests.consents import consent_v1
 from clinicedc_tests.helper import Helper
+from clinicedc_tests.helpers import CrfTestHelper
 from clinicedc_tests.sites import all_sites
 from django import forms
 from django.forms import ALL_FIELDS
@@ -15,7 +16,6 @@ from edc_facility.import_holidays import import_holidays
 from edc_list_data import site_list_data
 from edc_metadata import NOT_REQUIRED, REQUIRED
 from edc_metadata.metadata_rules import site_metadata_rules
-from edc_metadata.tests.crf_test_helper import CrfTestHelper
 from edc_sites.site import sites
 from edc_sites.utils import add_or_update_django_sites
 from edc_visit_schedule.site_visit_schedules import site_visit_schedules
