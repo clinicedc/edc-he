@@ -1,5 +1,5 @@
 [build-system]
-requires = ["uv_build>=0.8.2,<0.9.0"]
+requires = ["uv_build>=0.8.2,<0.12.0"]
 build-backend = "uv_build"
 
 [tool.uv.build-backend]
@@ -9,12 +9,12 @@ namespace = false
 
 [project]
 name = "edc-he"
-version = "1.5.5"
+version = "2.0.0"
 description = "Base django classes for health economics"
 readme = { file = "README.rst", content-type = "text/x-rst" }
 license = "GPL-3.0-or-later"
 license-files = ["LICEN[CS]E*"]
-requires-python = ">=3.12,<3.14"
+requires-python = ">=3.12,<3.15"
 authors = [
     { name = "Erik van Widenfelt", email = "ew2789@gmail.com" },
 ]
@@ -31,12 +31,14 @@ classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Framework :: Django",
     "Framework :: Django :: 5.2",
+    "Framework :: Django :: 6.0",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
     "clinicedc>=2.9.4",
@@ -126,7 +128,7 @@ docs = [
 ]
 
 dev = [
-    "clinicedc-tests>=1.0.1",
+    "clinicedc-tests>=1.2.2",
 ]
 
 [tool.uv.sources]

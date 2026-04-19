@@ -69,9 +69,7 @@ class HealthEconomicsModelFormMixin:
                 ) from e
 
     def raise_if_he_property_required(self):
-        if self._meta.model in [
-            get_income_model_cls(),
-        ]:
+        if self._meta.model == get_income_model_cls():
             try:
                 get_property_model_cls().objects.get(
                     subject_visit__subject_identifier=self.get_subject_identifier()
